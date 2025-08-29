@@ -152,7 +152,7 @@ python app.py
 
 ### 3. 任务执行
 - 工作线程从队列获取任务
-- 调用Claude Code无头模式
+- 调用Claude Code无头模式（包含CLAUDE.md指导文件）
 - 执行搜索和文档生成
 
 ### 4. 结果处理
@@ -164,6 +164,35 @@ python app.py
 - 实时更新任务状态
 - 记录处理日志
 - 清理临时文件
+
+## 与Claude Code的集成
+
+### 无头模式执行
+
+系统通过Claude Code的无头模式执行搜索任务，确保包含完整的上下文信息：
+
+```bash
+claude -p "搜索主题：${topic}，生成格式：${formats}" \
+  --output-format json \
+  --allowed-tools "Bash,Read,Write,Glob,Grep,Task" \
+  --cwd "${base_dir}" \
+  --append-system-prompt "@CLAUDE.md"
+```
+
+### 关键特性
+
+1. **上下文包含**: 自动包含CLAUDE.md文件，确保Claude了解知识库结构和搜索策略
+2. **工具权限**: 限制使用必要的工具，保证安全性
+3. **工作目录**: 设置正确的工作目录，确保文件路径正确
+4. **输出格式**: 使用JSON格式便于程序解析结果
+
+### 搜索策略
+
+基于CLAUDE.md中定义的策略：
+- 多维度搜索：文件名、内容、标签、分类
+- 智能排序：相关性和质量评估
+- 格式生成：多格式同时输出
+- 质量保证：内容完整性和准确性检查
 
 ## 配置选项
 

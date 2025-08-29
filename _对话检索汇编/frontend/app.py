@@ -96,7 +96,8 @@ class SearchEngine:
                 f'搜索主题：{topic}，生成格式：{", ".join(formats)}',
                 '--output-format', 'json',
                 '--allowed-tools', 'Bash,Read,Write,Glob,Grep,Task',
-                '--cwd', str(self.base_dir.parent)
+                '--cwd', str(self.base_dir.parent),
+                '--append-system-prompt', '@CLAUDE.md'
             ]
             
             logger.info(f"执行Claude Code命令: {' '.join(cmd)}")
