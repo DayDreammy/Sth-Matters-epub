@@ -7,6 +7,7 @@
 
 import json
 import os
+import re
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 
@@ -35,6 +36,139 @@ class SocializationDocumentGenerator:
             return f"无法读取文件: {file_path}"
         except Exception as e:
             return f"读取文件时发生错误: {e}"
+    
+    def _markdown_to_html(self, markdown_text: str) -> str:
+        """将markdown文本转换为HTML格式"""
+        if not markdown_text:
+            return ""
+        
+        html = markdown_text
+        
+        # 处理标题 (# ## ### #### ##### ######)
+        html = re.sub(r'^# (.+)$', r'<h1>\1</h1>', html, flags=re.MULTILINE)
+        html = re.sub(r'^## (.+)$', r'<h2>\1</h2>', html, flags=re.MULTILINE)
+        html = re.sub(r'^### (.+)$', r'<h3>\1</h3>', html, flags=re.MULTILINE)
+        html = re.sub(r'^#### (.+)$', r'<h4>\1</h4>', html, flags=re.MULTILINE)
+        html = re.sub(r'^##### (.+)$', r'<h5>\1</h5>', html, flags=re.MULTILINE)
+        html = re.sub(r'^###### (.+)$', r'<h6>\1</h6>', html, flags=re.MULTILINE)
+        
+        # 处理粗体 (**text** 和 __text__)
+        html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html)
+        html = re.sub(r'__(.+?)__', r'<strong>\1</strong>', html)
+        
+        # 处理斜体 (*text* 和 _text_)
+        html = re.sub(r'\*([^*]+)\*', r'<em>\1</em>', html)
+        html = re.sub(r'_([^_]+)_', r'<em>\1</em>', html)
+        
+        # 处理链接 [text](url)
+        html = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank">\1</a>', html)
+        
+        # 处理无序列表 (- item 和 * item)
+        def process_list_items(text):
+            lines = text.split('\n')
+            in_list = False
+            result = []
+            
+            for line in lines:
+                if re.match(r'^[\s]*[-*] ', line):
+                    if not in_list:
+                        result.append('<ul>')
+                        in_list = True
+                    # 处理列表项，可能包含内部格式
+                    item_content = re.sub(r'^[\s]*[-*] ', '', line)
+                    result.append(f'<li>{item_content}</li>')
+                else:
+                    if in_list:
+                        result.append('</ul>')
+                        in_list = False
+                    result.append(line)
+            
+            if in_list:
+                result.append('</ul>')
+            
+            return '\n'.join(result)
+        
+        html = process_list_items(html)
+        
+        # 处理有序列表 (1. item)
+        def process_ordered_list_items(text):
+            lines = text.split('\n')
+            in_list = False
+            result = []
+            
+            for line in lines:
+                if re.match(r'^[\s]*\d+\. ', line):
+                    if not in_list:
+                        result.append('<ol>')
+                        in_list = True
+                    # 处理列表项
+                    item_content = re.sub(r'^[\s]*\d+\. ', '', line)
+                    result.append(f'<li>{item_content}</li>')
+                else:
+                    if in_list:
+                        result.append('</ol>')
+                        in_list = False
+                    result.append(line)
+            
+            if in_list:
+                result.append('</ol>')
+            
+            return '\n'.join(result)
+        
+        html = process_ordered_list_items(html)
+        
+        # 处理引用 (> text)
+        html = re.sub(r'^> (.+)$', r'<blockquote>\1</blockquote>', html, flags=re.MULTILINE)
+        
+        # 处理代码块 (```text```)
+        html = re.sub(r'```([^`]+)```', r'<pre><code>\1</code></pre>', html)
+        
+        # 处理行内代码 (`text`)
+        html = re.sub(r'`([^`]+)`', r'<code>\1</code>', html)
+        
+        # 处理分割线 (--- 或 ***)
+        html = re.sub(r'^[-*]{3,}$', r'<hr>', html, flags=re.MULTILINE)
+        
+        # 处理段落（将连续的非空行包装在<p>标签中）
+        def process_paragraphs(text):
+            lines = text.split('\n')
+            result = []
+            in_paragraph = False
+            current_paragraph = []
+            
+            for line in lines:
+                stripped_line = line.strip()
+                
+                # 跳过已经是HTML标签的行
+                if stripped_line.startswith('<') and stripped_line.endswith('>'):
+                    if in_paragraph:
+                        result.append('<p>' + ' '.join(current_paragraph) + '</p>')
+                        current_paragraph = []
+                        in_paragraph = False
+                    result.append(line)
+                    continue
+                
+                # 跳过空行
+                if not stripped_line:
+                    if in_paragraph:
+                        result.append('<p>' + ' '.join(current_paragraph) + '</p>')
+                        current_paragraph = []
+                        in_paragraph = False
+                    continue
+                
+                # 添加到当前段落
+                current_paragraph.append(stripped_line)
+                in_paragraph = True
+            
+            # 处理最后一个段落
+            if in_paragraph:
+                result.append('<p>' + ' '.join(current_paragraph) + '</p>')
+            
+            return '\n'.join(result)
+        
+        html = process_paragraphs(html)
+        
+        return html
     
     def _format_source_header(self, source: Dict[str, Any]) -> str:
         """格式化来源标题头部"""
@@ -286,8 +420,88 @@ class SocializationDocumentGenerator:
             background: #fafafa;
             padding: 20px;
             border-radius: 6px;
-            white-space: pre-wrap;
             font-family: inherit;
+            line-height: 1.8;
+        }
+        .original-content h1, .original-content h2, .original-content h3, 
+        .original-content h4, .original-content h5, .original-content h6 {
+            color: #333;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .original-content h1 {
+            font-size: 2em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .original-content h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+        .original-content h3 {
+            font-size: 1.25em;
+        }
+        .original-content p {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+        .original-content ul, .original-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+        .original-content li {
+            margin-bottom: 8px;
+        }
+        .original-content blockquote {
+            border-left: 4px solid #667eea;
+            margin: 16px 0;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            font-style: italic;
+        }
+        .original-content pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        .original-content code {
+            background: #e2e8f0;
+            color: #2d3748;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        .original-content pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        .original-content a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .original-content a:hover {
+            text-decoration: underline;
+        }
+        .original-content hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 24px 0;
+        }
+        .original-content strong {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        .original-content em {
+            font-style: italic;
+            color: #4a5568;
         }
         .category {
             display: inline-block;
@@ -485,8 +699,10 @@ class SocializationDocumentGenerator:
                         {content}
                     </div>""")
                 else:
+                    # 将markdown转换为HTML
+                    html_content = self._markdown_to_html(content)
                     output.append(f"""                    <div class="original-content">
-                        {content}
+                        {html_content}
                     </div>""")
                 
                 output.append("""
