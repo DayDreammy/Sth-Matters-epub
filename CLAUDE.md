@@ -135,50 +135,102 @@ The resulting document will include:
 
 ## Enhanced Two-Step Search Process
 
-A more efficient and flexible two-step process has been implemented for topic searches and content generation:
+A comprehensive automated system has been implemented for topic searches and multi-format document generation:
 
-### Step 1: Search and Index Generation
+### Step 1: Automated Search and Multi-Format Generation
 
-1. **Comprehensive Search**: Conduct thorough search using multiple strategies to find all relevant original materials
-2. **Index Creation**: Generate both a reading compilation document and a structured JSON index file containing:
-   - Metadata for each source (title, file path, zhihu link if available)
-   - Content excerpts with precise location information
-   - Thematic categorization and tags
-   - Relationship mapping between related concepts
+When you request a topic search, I will:
 
-### Step 2: Flexible Document Generation
+1. **Execute Search Scripts**: Run the automated Python scripts to perform comprehensive searches
+2. **Generate Multiple Formats**: Create various output formats simultaneously:
+   - `主题_原文汇编.md`: Complete original text compilation
+   - `主题_thematic_文档.md`: Thematic organization
+   - `主题_concepts_文档.md`: Concept index
+   - `主题_summary_文档.md`: Content summary
+   - `主题_html_文档.html`: Web-friendly format
+   - `主题_*.epub`: E-book format for e-readers
 
-1. **Python Script Integration**: Use a Python script to read the JSON index and generate customized reading documents
-2. **Flexible Output**: The script can create documents with different organization schemes:
-   - Thematic grouping
-   - Chronological ordering
-   - Source-based organization
-   - Custom user-defined arrangements
+3. **Search Strategy**: The system uses multiple approaches:
+   - File name and directory structure analysis
+   - Full-content text search using Grep
+   - Classification system navigation
+   - Tag-based content discovery
+   - Semantic matching and keyword analysis
 
-### File Structure
+### Step 2: Results Delivery and Options
+
+1. **Provide Results**: Deliver all generated documents to you
+2. **Format Options**: Explain the different available formats and their use cases
+3. **Customization**: Offer to adjust formats or organization based on your preferences
+
+### System Architecture
 
 ```
 _对话检索汇编/
-├── 主题_原文汇编.md          # Complete original text compilation
-├── 主题_索引.json             # Structured index data
-├── generate_reading_doc.py   # Python script for document generation
-└── custom_layouts/            # Custom layout templates (optional)
+├── generate_reading_doc.py    # Main document generator
+├── generate_epub.py          # EPUB generator  
+├── generated_docs/           # Output directory
+│   ├── 主题_原文汇编.md       # Complete compilation
+│   ├── 主题_thematic_文档.md  # Thematic organization
+│   ├── 主题_concepts_文档.md  # Concept index
+│   ├── 主题_summary_文档.md   # Summary and statistics
+│   ├── 主题_html_文档.html    # HTML version
+│   └── 主题_*.epub           # EPUB e-book
+└── README.md                 # System documentation
 ```
+
+### Current Process (Active)
+
+The current automated process:
+- Executes `generate_reading_doc.py` for comprehensive search and document generation
+- Executes `generate_epub.py` for e-book format generation
+- Produces multiple output formats in a single run
+- Maintains consistent formatting and metadata across all formats
+- Supports WeChat Reading optimization for EPUB files
 
 ### Benefits
 
-1. **Efficiency**: Search once, generate multiple document formats
-2. **Flexibility**: Easy to reorganize content without re-searching
-3. **Consistency**: Structured data ensures reliable processing
-4. **Extensibility**: Can add new layouts and filters as needed
-5. **Integration**: Enables programmatic content analysis and processing
+1. **Efficiency**: Complete search and multi-format generation in one operation
+2. **Comprehensiveness**: All relevant materials captured and organized
+3. **Flexibility**: Multiple output formats for different reading preferences
+4. **Consistency**: Uniform formatting and metadata handling
+5. **Accessibility**: Formats available for web, print, and e-reader consumption
 
-### Previous Process (Legacy)
+### When You Request a Topic Search
 
-The original single-step process is maintained for backward compatibility:
-- Direct generation of reading compilation files
-- Manual organization and formatting
-- Single output format per search
+When you ask me to search for a topic, I will:
+
+1. **Execute the Automated System**: 
+   - Run `python generate_reading_doc.py` with your topic
+   - Run `python generate_epub.py` with your topic
+   - Generate all format variations automatically
+
+2. **Provide Complete Results**:
+   - All generated markdown documents
+   - HTML version for web browsing
+   - EPUB files for e-readers
+   - Summary of findings and statistics
+
+3. **Offer Customization**:
+   - Adjust formatting preferences
+   - Modify organization schemes
+   - Add or remove metadata displays
+   - Generate additional formats as needed
+
+### Usage Examples
+
+**Your request**: "请帮我搜索关于'家庭教育'的内容"
+**My response**: 
+- Execute automated search for "家庭教育"
+- Generate all document formats
+- Provide complete results with explanations
+- Offer customization options
+
+**Your request**: "我想要一个关于'心理学'的EPUB文件"
+**My response**:
+- Execute search for "心理学"
+- Generate EPUB and supporting documents
+- Provide files and usage instructions
 
 ## Notes
 
