@@ -177,7 +177,7 @@ class SocializationDocumentGenerator:
         if source.get('zhihu_link'):
             header += f"**知乎链接**: [{source['title']}]({source['zhihu_link']})  \n"
         
-        header += f"**文件来源**: `{source['file_path']}`\n"
+        header += f"**文件来源**: `{os.path.basename(source['file_path'])}`\n"
         header += f"**分类**: {source['category']}\n"
         header += f"**标签**: {', '.join(source['tags'])}\n"
         header += f"**字数**: {source['word_count']}\n"
@@ -305,7 +305,7 @@ class SocializationDocumentGenerator:
             
             for source in sources:
                 output.append(f"### {source['title']}\n\n")
-                output.append(f"**文件来源**: `{source['file_path']}`\n\n")
+                output.append(f"**文件来源**: `{os.path.basename(source['file_path'])}`\n\n")
                 output.append(f"> {source['content_preview']}\n\n")
             
             output.append("---\n\n")
