@@ -291,9 +291,6 @@ class SocializationEPUBGenerator:
         <body>
             <div class="source-info">
                 <h2>{html.escape(os.path.splitext(os.path.basename(source['file_path']))[0])}</h2>
-                <p><strong>来源:</strong> {html.escape(os.path.basename(source['file_path']))}</p>
-                <p><strong>字数:</strong> {source['word_count']}</p>
-                {f'<p><strong>知乎链接:</strong> <a href="{source["zhihu_link"]}">{html.escape(source["title"])}</a></p>' if source.get('zhihu_link') else ''}
             </div>
             <div class="content">
                 {html_content}

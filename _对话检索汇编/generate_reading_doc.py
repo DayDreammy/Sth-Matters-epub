@@ -176,13 +176,6 @@ class SocializationDocumentGenerator:
         original_title = os.path.splitext(os.path.basename(source['file_path']))[0]
         
         header = f"### {original_title}\n\n"
-        header += f"**来源**: `{os.path.basename(source['file_path'])}`\n"
-        header += f"**字数**: {source['word_count']}\n"
-        
-        if source.get('zhihu_link'):
-            header += f"**知乎链接**: [{source['title']}]({source['zhihu_link']})\n"
-        
-        header += "\n"
         
         return header
     
