@@ -172,16 +172,17 @@ class SocializationDocumentGenerator:
     
     def _format_source_header(self, source: Dict[str, Any]) -> str:
         """格式化来源标题头部"""
-        header = f"### {source['title']}\n\n"
+        # 从文件路径中提取原标题（去除扩展名）
+        original_title = os.path.splitext(os.path.basename(source['file_path']))[0]
+        
+        header = f"### {original_title}\n\n"
+        header += f"**来源**: `{os.path.basename(source['file_path'])}`\n"
+        header += f"**字数**: {source['word_count']}\n"
         
         if source.get('zhihu_link'):
-            header += f"**知乎链接**: [{source['title']}]({source['zhihu_link']})  \n"
+            header += f"**知乎链接**: [{source['title']}]({source['zhihu_link']})\n"
         
-        header += f"**文件来源**: `{os.path.basename(source['file_path'])}`\n"
-        header += f"**分类**: {source['category']}\n"
-        header += f"**标签**: {', '.join(source['tags'])}\n"
-        header += f"**字数**: {source['word_count']}\n"
-        header += f"**关键概念**: {', '.join(source['key_concepts'])}\n\n"
+        header += "\n"
         
         return header
     
@@ -304,8 +305,13 @@ class SocializationDocumentGenerator:
             output.append(f"## {concept}\n\n")
             
             for source in sources:
-                output.append(f"### {source['title']}\n\n")
-                output.append(f"**文件来源**: `{os.path.basename(source['file_path'])}`\n\n")
+                original_title = os.path.splitext(os.path.basename(source['file_path']))[0]
+                output.append(f"### {original_title}\n\n")
+                output.append(f"**来源**: `{os.path.basename(source['file_path'])}`\n")
+                output.append(f"**字数**: {source['word_count']}\n")
+                if source.get('zhihu_link'):
+                    output.append(f"**知乎链接**: [{source['title']}]({source['zhihu_link']})\n")
+                output.append("\n")
                 output.append(f"> {source['content_preview']}\n\n")
             
             output.append("---\n\n")

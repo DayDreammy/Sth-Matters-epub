@@ -290,18 +290,9 @@ class SocializationEPUBGenerator:
         </head>
         <body>
             <div class="source-info">
-                <h2>{html.escape(source['title'])}</h2>
+                <h2>{html.escape(os.path.splitext(os.path.basename(source['file_path']))[0])}</h2>
                 <p><strong>来源:</strong> {html.escape(os.path.basename(source['file_path']))}</p>
                 <p><strong>字数:</strong> {source['word_count']}</p>
-                <p><strong>分类:</strong> {html.escape(source['category'])}</p>
-                <div class="tags">
-                    <strong>标签:</strong>
-                    {', '.join(f'<span class="tag">{html.escape(tag)}</span>' for tag in source['tags'])}
-                </div>
-                <div class="tags">
-                    <strong>关键概念:</strong>
-                    {', '.join(f'<span class="tag">{html.escape(concept)}</span>' for concept in source['key_concepts'])}
-                </div>
                 {f'<p><strong>知乎链接:</strong> <a href="{source["zhihu_link"]}">{html.escape(source["title"])}</a></p>' if source.get('zhihu_link') else ''}
             </div>
             <div class="content">

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库搜索系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>知识库搜索系统</h1>
+            <p>基于Claude Code的智能内容检索</p>
+        </header>
+
+        <main>
+            <!-- 搜索区域 -->
+            <section class="search-section">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="输入您的问题..." class="search-input">
+                    <button id="searchBtn" class="search-btn">搜索</button>
+                </div>
+                <div class="search-options">
+                    <label>
+                        <input type="checkbox" id="autoSearch" checked>
+                        自动搜索
+                    </label>
+                    <label>
+                        <input type="checkbox" id="showLog" checked>
+                        显示对话日志
+                    </label>
+                </div>
+            </section>
+
+            <!-- 搜索结果区域 -->
+            <section class="results-section">
+                <div class="results-header">
+                    <h2>搜索结果</h2>
+                    <span id="resultCount" class="result-count">共找到 0 个结果</span>
+                </div>
+                <div id="searchResults" class="search-results">
+                    <div class="empty-state">
+                        <p>请输入搜索关键词开始查找内容</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 对话日志区域 -->
+            <section id="logSection" class="log-section">
+                <div class="log-header">
+                    <h2>对话日志</h2>
+                    <button id="clearLog" class="clear-log-btn">清空日志</button>
+                </div>
+                <div id="conversationLog" class="conversation-log">
+                    <div class="log-entry">
+                        <div class="log-time">2025-08-26 10:30:00</div>
+                        <div class="log-content">系统初始化完成</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 知识库搜索系统 - 基于Claude Code</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

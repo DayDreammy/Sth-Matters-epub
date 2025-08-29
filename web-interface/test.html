@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库搜索系统 - 测试版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            padding: 1rem 2rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .search-btn:hover {
+            background: #5a6fd8;
+        }
+        
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .results-header {
+            background: #f8f9fa;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .results-header h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        .result-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .search-results {
+            padding: 1rem;
+        }
+        
+        .result-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-source {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .result-content {
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .empty-state {
+            padding: 3rem;
+            text-align: center;
+            color: #666;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        
+        .log-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .log-header {
+            background: #f8f9fa;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .log-header h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        .clear-log-btn {
+            padding: 0.5rem 1rem;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .conversation-log {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .log-entry {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .log-time {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .log-content {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .debug-info {
+            background: #e8f4f8;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .debug-info h3 {
+            color: #004085;
+            margin-bottom: 0.5rem;
+        }
+        
+        .debug-info pre {
+            background: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="debug-info">
+            <h3>调试信息</h3>
+            <div id="debugInfo">页面已加载</div>
+        </div>
+        
+        <div class="search-section">
+            <h1>知识库搜索系统 - 测试版</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="输入您的问题..." class="search-input">
+                <button id="searchBtn" class="search-btn">搜索</button>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <div class="results-header">
+                <h2>搜索结果</h2>
+                <span id="resultCount" class="result-count">共找到 0 个结果</span>
+            </div>
+            <div id="searchResults" class="search-results">
+                <div class="empty-state">
+                    <p>请输入搜索关键词开始查找内容</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="log-section">
+            <div class="log-header">
+                <h2>对话日志</h2>
+                <button id="clearLog" class="clear-log-btn">清空日志</button>
+            </div>
+            <div id="conversationLog" class="conversation-log">
+                <div class="log-entry">
+                    <div class="log-time">系统启动</div>
+                    <div class="log-content">知识库搜索系统已初始化</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 简化版搜索系统
+        class SimpleSearch {
+            constructor() {
+                this.debugInfo = document.getElementById('debugInfo');
+                this.searchInput = document.getElementById('searchInput');
+                this.searchBtn = document.getElementById('searchBtn');
+                this.searchResults = document.getElementById('searchResults');
+                this.resultCount = document.getElementById('resultCount');
+                this.conversationLog = document.getElementById('conversationLog');
+                this.clearLogBtn = document.getElementById('clearLog');
+                
+                this.knowledgeBase = [
+                    {
+                        title: "博士伦",
+                        source: "博士伦.md",
+                        content: "博士应该逃离的不该是科研，而是特定的人生困境。不要错误的定性。定性错了，整个问题就错了，而错误的问题已经预定了错误的答案。",
+                        tags: ["博士", "人生困境", "科研"]
+                    },
+                    {
+                        title: "导师",
+                        source: "导师.md",
+                        content: "导师只是提供指导服务，是辅助而已，不是ta要写论文你给代笔，ta的意见不具备决定性。",
+                        tags: ["导师", "论文", "学术自由"]
+                    },
+                    {
+                        title: "傻博士",
+                        source: "傻博士.md",
+                        content: "博士的"傻"其实有一种共同的本质：一般人倾向解决困扰，博士习惯性的倾向解决问题。",
+                        tags: ["博士", "解决问题", "研究方法"]
+                    }
+                ];
+                
+                this.init();
+            }
+            
+            init() {
+                this.log('初始化搜索系统...');
+                
+                // 检查DOM元素
+                this.log('搜索输入框:', this.searchInput);
+                this.log('搜索按钮:', this.searchBtn);
+                this.log('搜索结果区域:', this.searchResults);
+                
+                // 绑定事件
+                this.searchBtn.addEventListener('click', () => {
+                    this.log('搜索按钮被点击！');
+                    this.search();
+                });
+                
+                this.searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.log('回车键被按下！');
+                        this.search();
+                    }
+                });
+                
+                this.clearLogBtn.addEventListener('click', () => {
+                    this.clearLog();
+                });
+                
+                this.log('搜索系统初始化完成');
+            }
+            
+            search() {
+                const query = this.searchInput.value.trim();
+                this.log(`搜索查询: "${query}"`);
+                
+                if (!query) {
+                    this.showEmptyState();
+                    return;
+                }
+                
+                this.log(`开始搜索 "${query}"...`);
+                
+                // 模拟搜索
+                setTimeout(() => {
+                    const results = this.performSearch(query);
+                    this.displayResults(results, query);
+                    this.log(`搜索完成，找到 ${results.length} 个结果`);
+                }, 500);
+            }
+            
+            performSearch(query) {
+                const results = [];
+                const lowerQuery = query.toLowerCase();
+                
+                this.knowledgeBase.forEach(item => {
+                    let score = 0;
+                    
+                    if (item.title.toLowerCase().includes(lowerQuery)) score += 10;
+                    if (item.content.toLowerCase().includes(lowerQuery)) score += 5;
+                    item.tags.forEach(tag => {
+                        if (tag.toLowerCase().includes(lowerQuery)) score += 8;
+                    });
+                    
+                    if (score > 0) {
+                        results.push({...item, score});
+                    }
+                });
+                
+                return results.sort((a, b) => b.score - a.score);
+            }
+            
+            displayResults(results, query) {
+                this.searchResults.innerHTML = '';
+                this.resultCount.textContent = `共找到 ${results.length} 个结果`;
+                
+                if (results.length === 0) {
+                    this.showEmptyState();
+                    return;
+                }
+                
+                results.forEach(result => {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.className = 'result-item';
+                    resultDiv.innerHTML = `
+                        <h3 class="result-title">${result.title}</h3>
+                        <div class="result-source">${result.source}</div>
+                        <div class="result-content">
+                            <p>${this.highlightText(result.content, query)}</p>
+                        </div>
+                    `;
+                    this.searchResults.appendChild(resultDiv);
+                });
+            }
+            
+            highlightText(text, query) {
+                const regex = new RegExp(`(${query})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+            
+            showEmptyState() {
+                this.searchResults.innerHTML = `
+                    <div class="empty-state">
+                        <p>请输入搜索关键词开始查找内容</p>
+                    </div>
+                `;
+                this.resultCount.textContent = '共找到 0 个结果';
+            }
+            
+            log(message, data = null) {
+                console.log(message, data);
+                
+                const time = new Date().toLocaleTimeString();
+                const debugDiv = document.createElement('div');
+                debugDiv.innerHTML = `<strong>${time}:</strong> ${message}`;
+                this.debugInfo.appendChild(debugDiv);
+                
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry';
+                logEntry.innerHTML = `
+                    <div class="log-time">${time}</div>
+                    <div class="log-content">${message}</div>
+                `;
+                this.conversationLog.appendChild(logEntry);
+                
+                // 保持滚动到底部
+                this.debugInfo.scrollTop = this.debugInfo.scrollHeight;
+                this.conversationLog.scrollTop = this.conversationLog.scrollHeight;
+            }
+            
+            clearLog() {
+                this.conversationLog.innerHTML = '';
+                this.debugInfo.innerHTML = '<strong>日志已清空</strong>';
+                this.log('日志已清空');
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            window.simpleSearch = new SimpleSearch();
+        });
+    </script>
+</body>
+</html>
