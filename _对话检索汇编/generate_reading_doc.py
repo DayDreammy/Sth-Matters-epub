@@ -99,13 +99,11 @@ class SocializationDocumentGenerator:
                 
                 # 如果内容较长，可以添加更多原文
                 if len(content) > 500:
-                    output.append("```\n")
                     output.append(content[:1000] + "..." if len(content) > 1000 else content)
-                    output.append("\n```\n\n")
+                    output.append("\n\n")
                 else:
-                    output.append("```\n")
                     output.append(content)
-                    output.append("\n```\n\n")
+                    output.append("\n\n")
                 
                 output.append("---\n\n")
         
@@ -140,9 +138,8 @@ class SocializationDocumentGenerator:
                 
                 # 读取原文内容
                 content = self._read_source_file(file_path)
-                output.append("```\n")
                 output.append(content)
-                output.append("\n```\n\n")
+                output.append("\n\n")
             
             output.append("---\n\n")
         
@@ -178,6 +175,335 @@ class SocializationDocumentGenerator:
                 output.append(f"> {source['content_preview']}\n\n")
             
             output.append("---\n\n")
+        
+        return ''.join(output)
+    
+    def generate_html_document(self) -> str:
+        """生成HTML格式文档"""
+        output = []
+        
+        # HTML头部
+        metadata = self.index_data['metadata']
+        output.append("""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"""+metadata['topic']+""" - 知识文档</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .metadata {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .toc {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .toc h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .toc a:hover {
+            background-color: #f0f0f0;
+        }
+        .source {
+            background: white;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .source-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .source-title {
+            color: #333;
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        .source-meta {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .source-meta .meta-item {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 5px;
+        }
+        .source-content {
+            padding: 20px;
+        }
+        .content-preview {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        .original-content {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            font-family: inherit;
+        }
+        .category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .zhihu-link {
+            color: #0066ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .zhihu-link:hover {
+            text-decoration: underline;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .header {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>"""+metadata['topic']+"""</h1>
+        <p>知识文档 - 便于阅读的HTML格式</p>
+    </div>
+    
+    <div class="metadata">
+        <h2>文档信息</h2>
+        <div class="source-meta">
+            <span class="meta-item"><strong>生成日期:</strong> """+datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"""</span>
+            <span class="meta-item"><strong>主题:</strong> """+metadata['topic']+"""</span>
+            <span class="meta-item"><strong>来源数量:</strong> """+str(metadata['total_sources'])+"""</span>
+        </div>
+    </div>""")
+        
+        # 统计信息
+        total_words = sum(s['word_count'] for s in self.index_data['sources'])
+        output.append("""
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">"""+str(metadata['total_sources'])+"""</div>
+            <div class="stat-label">来源数量</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">"""+str(total_words)+"""</div>
+            <div class="stat-label">总字数</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">"""+str(len(set(s['category'] for s in self.index_data['sources'])))+"""</div>
+            <div class="stat-label">分类数量</div>
+        </div>
+    </div>""")
+        
+        # 目录
+        output.append("""
+    <div class="toc">
+        <h2>📚 目录</h2>
+        <ul>""")
+        
+        # 按分类生成目录
+        category_groups = {}
+        for source in self.index_data['sources']:
+            category = source['category']
+            if category not in category_groups:
+                category_groups[category] = []
+            category_groups[category].append(source)
+        
+        category_names = {
+            'core_theory': '核心理论',
+            'critical_analysis': '批判分析',
+            'family_education': '家庭教育',
+            'education_priority': '教育优先级',
+            'social_paradox': '社会悖论',
+            'consequences': '后果分析',
+            'social_negation': '社会性否定',
+            'child_development': '儿童发展',
+            'excessive_socialization': '过度社会化',
+            'personality_development': '人格发展',
+            'core_importance': '核心重要性',
+            'practice_guidance': '实践指导',
+            'human_attributes': '人类属性',
+            'self_awareness': '自我认知',
+            'gender_differences': '性别差异',
+            'practical_skills': '实践技能',
+            'survival_competitiveness': '生存竞争力',
+            'legal_awareness': '法律意识'
+        }
+        
+        for category, sources in category_groups.items():
+            category_name = category_names.get(category, category)
+            output.append(f"""            <li><a href="#{category}">{category_name} ({len(sources)}篇)</a></li>""")
+        
+        output.append("""
+        </ul>
+    </div>""")
+        
+        # 生成各分类内容
+        for category, sources in category_groups.items():
+            category_name = category_names.get(category, category)
+            output.append(f"""    <div class="source" id="{category}">
+        <div class="source-header">
+            <h2 class="source-title">{category_name}</h2>
+            <div class="source-meta">
+                <span class="category">{category_name}</span>
+                <span class="meta-item">共 {len(sources)} 篇文章</span>
+            </div>
+        </div>
+        <div class="source-content">""")
+            
+            for source in sources:
+                output.append(f"""            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">{source['title']}</h3>
+                    <div class="source-meta">""")
+                
+                if source.get('zhihu_link'):
+                    output.append(f"""                        <span class="meta-item">
+                            <a href="{source['zhihu_link']}" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>""")
+                
+                output.append(f"""                        <span class="meta-item"><strong>文件:</strong> {source['file_path']}</span>
+                        <span class="meta-item"><strong>字数:</strong> {source['word_count']}</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">{category_name}</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong>""")
+                
+                for tag in source['tags']:
+                    output.append(f""" <span class="tag">{tag}</span>""")
+                
+                output.append("""                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong>""")
+                
+                for concept in source['key_concepts']:
+                    output.append(f""" <span class="tag">{concept}</span>""")
+                
+                output.append("""                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">""")
+                
+                output.append(f"""{source['content_preview']}""")
+                
+                output.append("""</div>""")
+                
+                # 读取原文内容
+                content = self._read_source_file(source['file_path'])
+                if content.startswith("无法读取文件"):
+                    output.append(f"""                    <div class="original-content" style="color: #666; font-style: italic;">
+                        {content}
+                    </div>""")
+                else:
+                    output.append(f"""                    <div class="original-content">
+                        {content}
+                    </div>""")
+                
+                output.append("""
+                </div>
+            </div>""")
+            
+            output.append("""
+        </div>
+    </div>""")
+        
+        # HTML尾部
+        output.append("""
+    <footer style="text-align: center; margin-top: 40px; padding: 20px; color: #666; font-size: 0.9em;">
+        <p>文档由 Claude Code 自动生成 | 基于 JSON 索引数据</p>
+    </footer>
+</body>
+</html>""")
         
         return ''.join(output)
     
@@ -258,6 +584,8 @@ class SocializationDocumentGenerator:
             return self.generate_concepts_document()
         elif layout_type == 'summary':
             return self.generate_summary_document()
+        elif layout_type == 'html':
+            return self.generate_html_document()
         else:
             raise ValueError(f"不支持的布局类型: {layout_type}")
     
@@ -283,7 +611,7 @@ def main():
         generator = SocializationDocumentGenerator(index_file)
         
         # 生成不同格式的文档
-        layouts = ['thematic', 'source_based', 'concepts', 'summary']
+        layouts = ['thematic', 'source_based', 'concepts', 'summary', 'html']
         
         for layout in layouts:
             print(f"正在生成 {layout} 格式的文档...")
@@ -292,7 +620,11 @@ def main():
             content = generator.generate_document(layout)
             
             # 保存文档
-            output_file = os.path.join(output_dir, f"社会化_{layout}_文档.md")
+            if layout == 'html':
+                output_file = os.path.join(output_dir, f"社会化_{layout}_文档.html")
+            else:
+                output_file = os.path.join(output_dir, f"社会化_{layout}_文档.md")
+            
             generator.save_document(content, output_file)
             
             print(f"{layout} 格式文档生成完成!")
