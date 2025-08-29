@@ -133,7 +133,162 @@ The resulting document will include:
 - **Related Content**: Additional articles that may be of interest
 - **Organization**: Structured presentation of findings by topic or category
 
-## Enhanced Two-Step Search Process
+## Web Interface System
+
+A comprehensive web interface has been implemented to allow users to submit topic search requests through a user-friendly web form. The system uses Claude Code's headless mode to execute searches and sends results via email.
+
+### System Architecture
+
+```
+_对话检索汇编/
+├── frontend/                    # Web interface directory
+│   ├── index.html              # Frontend interface
+│   ├── app.py                  # Flask backend server
+│   ├── config.json             # Configuration file
+│   ├── requirements.txt        # Python dependencies
+│   ├── start.sh                # Linux/Mac startup script
+│   ├── start.bat               # Windows startup script
+│   └── README.md               # Frontend documentation
+├── generate_reading_doc.py    # Main document generator
+├── generate_epub.py          # EPUB generator  
+├── generated_docs/           # Output directory
+└── README.md                 # System documentation
+```
+
+### Features
+
+#### 🎯 Core Functionality
+- **User-Friendly Interface**: Modern web form with responsive design
+- **Multi-Format Support**: Choose from Markdown, HTML, EPUB, thematic, concepts, summary
+- **Real-Time Progress**: Live status updates and progress tracking
+- **Email Notifications**: Automatic delivery of results to user's inbox
+- **Asynchronous Processing**: Background task queue for concurrent requests
+
+#### 🛠️ Technical Implementation
+- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
+- **Backend**: Flask with RESTful API
+- **Task Management**: Thread-based queue system
+- **Email Integration**: SMTP with attachment support
+- **Error Handling**: Comprehensive logging and error recovery
+
+### Web Interface Workflow
+
+#### Step 1: User Submission
+1. **Access Interface**: Navigate to `http://localhost:5000`
+2. **Fill Form**: 
+   - Enter search topic
+   - Provide email address
+   - Select output formats
+   - Set priority level
+   - Add optional notes
+3. **Submit**: Click "开始搜索" to start the process
+
+#### Step 2: Backend Processing
+1. **Validation**: Server validates input and creates task
+2. **Queue System**: Task added to processing queue
+3. **Claude Code Execution**: System calls Claude Code in headless mode
+4. **Document Generation**: Multiple formats generated simultaneously
+
+#### Step 3: Result Delivery
+1. **Email Preparation**: Results packaged with HTML email body
+2. **Attachment Handling**: All generated files attached to email
+3. **Notification**: Email sent to user with complete results
+4. **Status Update**: Task status updated to completed
+
+### API Endpoints
+
+#### POST /api/search
+Submit a new search request
+
+**Request:**
+```json
+{
+  "topic": "搜索主题",
+  "email": "user@example.com", 
+  "priority": "normal|high|urgent",
+  "formats": "markdown,html,epub,thematic,concepts,summary",
+  "notes": "备注信息"
+}
+```
+
+#### GET /api/status/<task_id>
+Check task status and progress
+
+#### GET /api/health
+System health check and statistics
+
+### Configuration
+
+#### Email Setup
+Edit `frontend/config.json`:
+```json
+{
+  "email": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_username": "your_email@gmail.com",
+    "smtp_password": "your_app_password",
+    "from_email": "your_email@gmail.com"
+  }
+}
+```
+
+#### Claude Code Path
+Ensure Claude Code CLI is installed and accessible via command line.
+
+### Starting the System
+
+#### Method 1: Using Startup Scripts
+- **Windows**: Double-click `frontend/start.bat`
+- **Linux/Mac**: Run `./frontend/start.sh`
+
+#### Method 2: Manual Start
+```bash
+cd frontend
+pip install -r requirements.txt
+python app.py
+```
+
+### Usage Example
+
+1. **Start Server**: Run the startup script
+2. **Open Browser**: Navigate to `http://localhost:5000`
+3. **Submit Request**: 
+   - Topic: "家庭教育"
+   - Email: "your@email.com"
+   - Formats: Select all options
+   - Priority: "normal"
+4. **Monitor Progress**: Watch real-time progress updates
+5. **Receive Results**: Check email for completed documents
+
+### Benefits Over Direct Command Line
+
+1. **Accessibility**: No need to use command line interface
+2. **User-Friendly**: Intuitive web form with clear options
+3. **Notifications**: Automatic email delivery eliminates need to check for results
+4. **Progress Tracking**: Real-time status updates
+5. **Concurrent Processing**: Multiple users can submit requests simultaneously
+6. **Error Handling**: Better error reporting and recovery
+
+### When You Request a Topic Search Now
+
+When you ask me to search for a topic, I have two options:
+
+#### Option 1: Direct Processing (Previous Method)
+I can still execute the search directly as before:
+- Run `python generate_reading_doc.py` with your topic
+- Run `python generate_epub.py` with your topic  
+- Generate all format variations automatically
+- Provide complete results with explanations
+
+#### Option 2: Web Interface (New Method)
+I can guide you to use the web interface:
+- Start the web server using the startup script
+- Access the interface at `http://localhost:5000`
+- Submit your request through the web form
+- Receive results via email notification
+
+### Enhanced Two-Step Search Process
 
 A comprehensive automated system has been implemented for topic searches and multi-format document generation:
 
