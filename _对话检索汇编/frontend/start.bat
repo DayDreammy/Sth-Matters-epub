@@ -1,63 +1,55 @@
 @echo off
-chcp 65001 >nul
-echo 🚀 启动知识库主题搜索系统...
+echo Starting Knowledge Base Search System...
 
-:: 检查Python版本
+:: Check Python version
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ 错误: Python 未找到，请确保已安装Python
+    echo ERROR: Python not found, please ensure Python is installed
     pause
     exit /b 1
 )
 
-for /f "tokens=2" %%i in ('python --version 2^>^&1') do echo 📋 Python版本: %%i
+for /f "tokens=2" %%i in ('python --version 2^>^&1') do echo Python Version: %%i
 
-:: 检查是否在正确的目录
+:: Check if in correct directory
 if not exist "app.py" (
-    echo ❌ 错误: 请在frontend目录中运行此脚本
+    echo ERROR: Please run this script in the frontend directory
     pause
     exit /b 1
 )
 
-:: 检查依赖文件
+:: Check requirements file
 if not exist "requirements.txt" (
-    echo ❌ 错误: requirements.txt 文件不存在
+    echo ERROR: requirements.txt file not found
     pause
     exit /b 1
 )
 
-:: 安装依赖
-echo 📦 安装Python依赖...
+:: Install dependencies
+echo Installing Python dependencies...
 pip install -r requirements.txt
 
-:: 检查配置文件
+:: Check configuration file
 if not exist "config.json" (
-    echo ⚠️  警告: config.json 不存在，将使用默认配置
+    echo WARNING: config.json not found, will use default configuration
 )
 
-:: 检查Claude Code
-echo 🔍 检查Claude Code...
-claude --version >nul 2>&1
-if %errorlevel% neq 0 (
-    echo ❌ 错误: Claude Code 未找到，请确保已安装Claude Code CLI
-    echo 安装指南: https://docs.anthropic.com/claude/docs/claude-code
-    pause
-    exit /b 1
-)
+set ANTHROPIC_BASE_URL=https://open.bigmodel.cn/api/anthropic
+set ANTHROPIC_AUTH_TOKEN=3b222275909a41df8eb8553503ab3300.rJZMbCswT0DXgqph
 
-:: 创建必要的目录
+:: Create necessary directories
 if not exist "..\generated_docs" mkdir "..\generated_docs"
 if not exist "logs" mkdir "logs"
 
-echo ✅ 环境检查完成
-echo 🌐 启动服务器...
-echo 📍 服务地址: http://localhost:5000
-echo 📊 健康检查: http://localhost:5000/api/health
+echo Environment check completed
+echo Starting server...
+echo Service URL: http://localhost:5000
+echo Health check: http://localhost:5000/api/health
 echo.
-echo 按 Ctrl+C 停止服务器
+echo Press Ctrl+C to stop server
 echo.
 
-:: 启动服务器
+:: Start server
 python app.py
 
 pause

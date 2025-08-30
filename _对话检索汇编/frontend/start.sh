@@ -1,60 +1,60 @@
 #!/bin/bash
 
-# 知识库主题搜索系统启动脚本
+# Knowledge Base Search System Startup Script
 
 set -e
 
-echo "🚀 启动知识库主题搜索系统..."
+echo "Starting Knowledge Base Search System..."
 
-# 检查Python版本
+# Check Python version
 python_version=$(python3 --version 2>&1 | grep -o '[0-9]\+\.[0-9]\+' | head -1)
-echo "📋 Python版本: $python_version"
+echo "Python Version: $python_version"
 
-# 检查是否在正确的目录
+# Check if in correct directory
 if [ ! -f "app.py" ]; then
-    echo "❌ 错误: 请在frontend目录中运行此脚本"
+    echo "ERROR: Please run this script in the frontend directory"
     exit 1
 fi
 
-# 检查依赖
-echo "🔍 检查依赖..."
+# Check dependencies
+echo "Checking dependencies..."
 if [ ! -f "requirements.txt" ]; then
-    echo "❌ 错误: requirements.txt 文件不存在"
+    echo "ERROR: requirements.txt file not found"
     exit 1
 fi
 
-# 安装依赖
-echo "📦 安装Python依赖..."
+# Install dependencies
+echo "Installing Python dependencies..."
 pip install -r requirements.txt
 
-# 检查配置文件
+# Check configuration file
 if [ ! -f "config.json" ]; then
-    echo "⚠️  警告: config.json 不存在，将使用默认配置"
+    echo "WARNING: config.json not found, will use default configuration"
 fi
 
-# 检查Claude Code
-echo "🔍 检查Claude Code..."
+# Check Claude Code
+echo "Checking Claude Code..."
 if ! command -v claude &> /dev/null; then
-    echo "❌ 错误: Claude Code 未找到，请确保已安装Claude Code CLI"
-    echo "安装指南: https://docs.anthropic.com/claude/docs/claude-code"
+    echo "ERROR: Claude Code not found, please ensure Claude Code CLI is installed"
+    echo "Installation guide: https://docs.anthropic.com/claude/docs/claude-code"
     exit 1
 fi
 
-# 创建必要的目录
+# Create necessary directories
 mkdir -p ../generated_docs
 mkdir -p logs
 
-# 设置环境变量
+# Set environment variables
 export FLASK_APP=app.py
 export FLASK_ENV=production
 
-echo "✅ 环境检查完成"
-echo "🌐 启动服务器..."
-echo "📍 服务地址: http://localhost:5000"
-echo "📊 健康检查: http://localhost:5000/api/health"
+echo "Environment check completed"
+echo "Starting server..."
+echo "Service URL: http://localhost:5000"
+echo "Health check: http://localhost:5000/api/health"
 echo ""
-echo "按 Ctrl+C 停止服务器"
+echo "Press Ctrl+C to stop server"
 echo ""
 
-# 启动服务器
+# Start server
 python app.py

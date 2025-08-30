@@ -41,8 +41,10 @@ CORS(app)
 task_queue = queue.Queue()
 results = {}
 
+
 class SearchTask:
     """搜索任务类"""
+
     def __init__(self, task_id: str, data: Dict[str, Any]):
         self.task_id = task_id
         self.data = data
@@ -53,24 +55,30 @@ class SearchTask:
         self.error = None
         self.created_at = datetime.now()
 
+
 class SearchEngine:
     """搜索引擎类"""
-    
+
     def __init__(self, config_path: str = "config.json"):
         self.config = self.load_config(config_path)
         self.claude_code_path = self.config.get('claude_code_path', 'claude')
         self.base_dir = Path(__file__).parent
         self.generated_docs_dir = self.base_dir / "generated_docs"
-        
+
     def load_config(self, config_path: str) -> Dict[str, Any]:
         """加载配置文件"""
         try:
             with open(config_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except FileNotFoundError:
-            logger.warning(f"配置文件 {config_path} 不存在，使用默认配置")
+            logger.warning(
+                f"Configuration file {config_path} not found, using default configuration")
             return self.get_default_config()
-    
+        except UnicodeDecodeError:
+            logger.warning(
+                f"Configuration file {config_path} encoding error, using default configuration")
+            return self.get_default_config()
+
     def get_default_config(self) -> Dict[str, Any]:
         """获取默认配置"""
         return {
@@ -85,32 +93,53 @@ class SearchEngine:
             "output_dir": "generated_docs",
             "max_file_size": 50 * 1024 * 1024  # 50MB
         }
-    
+
     def execute_claude_search(self, topic: str, formats: List[str]) -> Dict[str, Any]:
-        """执行Claude Code无头模式搜索"""
+        """Execute Claude Code headless mode search"""
         try:
-            # 构建Claude Code命令
+            # Set environment variables for Claude Code
+            env = os.environ.copy()
+            env['ANTHROPIC_BASE_URL'] = 'https://open.bigmodel.cn/api/anthropic'
+            env['ANTHROPIC_AUTH_TOKEN'] = '3b222275909a41df8eb8553503ab3300.rJZMbCswT0DXgqph'
+
+            # Use forward slashes for cross-platform compatibility
+            target_dir = str(self.base_dir.parent).replace('\\', '/')
+
+            # Build Claude Code command with proper quoting
+            prompt = f'{topic},output formats:{formats}'
+            # 计算对话检索汇编目录相对于项目根目录的相对路径
+            conversation_dir = '_对话检索汇编'
             cmd = [
                 self.claude_code_path,
                 '-p',
-                f'搜索主题：{topic}，生成格式：{", ".join(formats)}',
+                f'"{prompt}"',
                 '--output-format', 'json',
                 '--allowed-tools', 'Bash,Read,Write,Glob,Grep,Task',
-                '--cwd', str(self.base_dir.parent),
-                '--append-system-prompt', '@CLAUDE.md'
+                '--add-dir', conversation_dir  # 使用相对路径
             ]
-            
-            logger.info(f"执行Claude Code命令: {' '.join(cmd)}")
-            
-            # 执行命令
+
+            logger.info(f"Target directory: {target_dir}")
+            logger.info(f"Executing Claude Code command: {' '.join(cmd)}")
+
+            # Execute command with environment variables
+            # 首先切换到项目根目录 D:\yy\Sth-Matters，然后执行claude命令
+            project_root = str(self.base_dir.parent.parent)
             result = subprocess.run(
                 cmd,
                 capture_output=True,
                 text=True,
-                timeout=1800  # 30分钟超时
+                timeout=1800,  # 30 minutes timeout
+                env=env,  # Pass environment variables
+                cwd=project_root,  # 设置工作目录为项目根目录
+                encoding='utf-8',  # Explicitly set UTF-8 encoding
+                errors='replace'  # Handle encoding errors gracefully
             )
-            
+
             if result.returncode == 0:
+                logger.info(f"Claude Code stdout: {result.stdout}")
+                logger.info(f"Claude Code stderr: {result.stderr}")
+
+                # Try to parse JSON output
                 try:
                     output = json.loads(result.stdout)
                     return {
@@ -119,29 +148,37 @@ class SearchEngine:
                         'files': self.find_generated_files(topic)
                     }
                 except json.JSONDecodeError:
-                    return {
-                        'success': True,
-                        'output': result.stdout,
-                        'files': self.find_generated_files(topic)
-                    }
+                    # If output is not JSON, check if it's a success response
+                    if result.stdout and "error" not in result.stdout.lower():
+                        return {
+                            'success': True,
+                            'output': result.stdout,
+                            'files': self.find_generated_files(topic)
+                        }
+                    else:
+                        return {
+                            'success': False,
+                            'error': f"Claude Code execution failed: {result.stdout}",
+                            'stderr': result.stderr
+                        }
             else:
                 return {
                     'success': False,
                     'error': result.stderr,
                     'returncode': result.returncode
                 }
-                
+
         except subprocess.TimeoutExpired:
             return {
                 'success': False,
-                'error': '搜索超时，请重试'
+                'error': 'Search timeout, please retry'
             }
         except Exception as e:
             return {
                 'success': False,
                 'error': str(e)
             }
-    
+
     def find_generated_files(self, topic: str) -> List[str]:
         """查找生成的文件"""
         files = []
@@ -151,16 +188,17 @@ class SearchEngine:
                     files.append(str(file_path))
         return files
 
+
 class EmailNotifier:
     """邮件通知类"""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.smtp_server = config['email']['smtp_server']
         self.smtp_port = config['email']['smtp_port']
         self.smtp_username = config['email']['smtp_username']
         self.smtp_password = config['email']['smtp_password']
         self.from_email = config['email']['from_email']
-    
+
     def send_notification(self, to_email: str, subject: str, body: str, attachments: List[str] = None):
         """发送邮件通知"""
         try:
@@ -168,10 +206,10 @@ class EmailNotifier:
             msg['From'] = self.from_email
             msg['To'] = to_email
             msg['Subject'] = subject
-            
+
             # 添加邮件正文
             msg.attach(MIMEText(body, 'html', 'utf-8'))
-            
+
             # 添加附件
             if attachments:
                 for file_path in attachments:
@@ -185,64 +223,67 @@ class EmailNotifier:
                                 f'attachment; filename= {os.path.basename(file_path)}'
                             )
                             msg.attach(part)
-            
+
             # 发送邮件
             with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
                 server.starttls()
                 server.login(self.smtp_username, self.smtp_password)
                 server.send_message(msg)
-            
-            logger.info(f"邮件已发送至 {to_email}")
+
+            logger.info(f"Email sent to {to_email}")
             return True
-            
+
         except Exception as e:
-            logger.error(f"发送邮件失败: {e}")
+            logger.error(f"Failed to send email: {e}")
             return False
+
 
 class TaskWorker:
     """任务工作线程"""
-    
+
     def __init__(self, search_engine: SearchEngine, email_notifier: EmailNotifier):
         self.search_engine = search_engine
         self.email_notifier = email_notifier
         self.running = True
-    
+
     def process_task(self, task: SearchTask):
         """处理单个任务"""
         try:
             task.status = "processing"
             task.message = "正在初始化搜索..."
             task.progress = 10
-            
+
             topic = task.data['topic']
             email = task.data['email']
             formats = task.data.get('formats', 'markdown,html,epub').split(',')
-            
-            logger.info(f"开始处理任务: {task.task_id}, 主题: {topic}")
-            
+
+            logger.info(
+                f"Starting task processing: {task.task_id}, topic: {topic}")
+
             # 执行搜索
             task.message = "正在执行智能检索..."
             task.progress = 30
-            
-            search_result = self.search_engine.execute_claude_search(topic, formats)
-            
+
+            search_result = self.search_engine.execute_claude_search(
+                topic, formats)
+
             if search_result['success']:
                 task.message = "正在生成文档..."
                 task.progress = 60
-                
+
                 # 准备邮件内容
                 subject = f"知识库搜索完成 - {topic}"
                 body = self.create_email_body(topic, search_result, task.data)
-                
+
                 # 发送邮件
                 task.message = "正在发送邮件..."
                 task.progress = 80
-                
+
                 attachments = search_result.get('files', [])
                 email_sent = self.email_notifier.send_notification(
                     email, subject, body, attachments
                 )
-                
+
                 if email_sent:
                     task.status = "completed"
                     task.message = "搜索完成，结果已发送至您的邮箱"
@@ -252,22 +293,22 @@ class TaskWorker:
                     task.status = "failed"
                     task.message = "搜索完成，但邮件发送失败"
                     task.error = "邮件发送失败"
-                    
+
             else:
                 task.status = "failed"
                 task.message = "搜索失败"
                 task.error = search_result.get('error', '未知错误')
-                
+
         except Exception as e:
             logger.error(f"处理任务 {task.task_id} 时发生错误: {e}")
             task.status = "failed"
             task.message = "处理过程中发生错误"
             task.error = str(e)
-    
+
     def create_email_body(self, topic: str, search_result: Dict[str, Any], task_data: Dict[str, Any]) -> str:
         """创建邮件正文"""
         files = search_result.get('files', [])
-        
+
         html_body = f"""
         <html>
         <head>
@@ -294,12 +335,12 @@ class TaskWorker:
                     <h4>📁 生成的文件：</h4>
                     <ul>
                 """
-        
+
         for file_path in files:
             file_name = os.path.basename(file_path)
             file_size = os.path.getsize(file_path) / 1024  # KB
             html_body += f"<li><strong>{file_name}</strong> ({file_size:.1f} KB)</li>"
-        
+
         html_body += f"""
                     </ul>
                 </div>
@@ -322,9 +363,9 @@ class TaskWorker:
         </body>
         </html>
         """
-        
+
         return html_body
-    
+
     def run(self):
         """运行工作线程"""
         while self.running:
@@ -338,22 +379,32 @@ class TaskWorker:
             except Exception as e:
                 logger.error(f"工作线程错误: {e}")
 
+
 # 全局变量
 search_engine = SearchEngine()
 email_notifier = EmailNotifier(search_engine.config)
 task_worker = TaskWorker(search_engine, email_notifier)
 
+
 @app.route('/')
 def index():
-    """首页"""
-    return app.send_static_file('index.html')
+    """Home page"""
+    try:
+        with open('index.html', 'r', encoding='utf-8') as f:
+            return f.read()
+    except UnicodeDecodeError:
+        with open('index.html', 'r', encoding='gbk') as f:
+            return f.read()
+    except FileNotFoundError:
+        return "<h1>Knowledge Base Search System</h1><p>Index.html file not found</p>"
+
 
 @app.route('/api/search', methods=['POST'])
 def search():
     """搜索接口"""
     try:
         data = request.get_json()
-        
+
         # 验证必需字段
         required_fields = ['topic', 'email']
         for field in required_fields:
@@ -362,29 +413,30 @@ def search():
                     'success': False,
                     'message': f'缺少必需字段: {field}'
                 }), 400
-        
+
         # 创建任务
         task_id = f"task_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{hash(data['topic']) % 10000:04d}"
         task = SearchTask(task_id, data)
-        
+
         # 添加到队列
         task_queue.put(task)
         results[task_id] = task
-        
-        logger.info(f"创建搜索任务: {task_id}, 主题: {data['topic']}")
-        
+
+        logger.info(f"Created search task: {task_id}, topic: {data['topic']}")
+
         return jsonify({
             'success': True,
             'task_id': task_id,
-            'message': '搜索任务已创建，正在处理中...'
+            'message': 'Search task created and processing...'
         })
-        
+
     except Exception as e:
-        logger.error(f"搜索接口错误: {e}")
+        logger.error(f"Search API error: {e}")
         return jsonify({
             'success': False,
             'message': str(e)
         }), 500
+
 
 @app.route('/api/status/<task_id>', methods=['GET'])
 def get_status(task_id):
@@ -394,7 +446,7 @@ def get_status(task_id):
             'success': False,
             'message': '任务不存在'
         }), 404
-    
+
     task = results[task_id]
     return jsonify({
         'success': True,
@@ -407,6 +459,7 @@ def get_status(task_id):
         'error': task.error
     })
 
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """健康检查"""
@@ -418,30 +471,32 @@ def health_check():
         'completed_tasks': len([t for t in results.values() if t.status == 'completed'])
     })
 
+
 def main():
     """主函数"""
     try:
         # 检查配置
         if not search_engine.config['email']['smtp_username']:
             logger.warning("邮件配置未完整设置，邮件通知功能将不可用")
-        
+
         # 启动工作线程
         worker_thread = threading.Thread(target=task_worker.run, daemon=True)
         worker_thread.start()
-        
-        logger.info("知识库搜索服务器启动")
-        logger.info(f"服务地址: http://localhost:5000")
-        
+
+        logger.info("Knowledge Base Search Server started")
+        logger.info(f"Service URL: http://localhost:5000")
+
         # 启动Flask服务器
         app.run(host='0.0.0.0', port=5000, debug=False, threaded=True)
-        
+
     except KeyboardInterrupt:
-        logger.info("正在关闭服务器...")
+        logger.info("Shutting down server...")
         task_worker.running = False
         sys.exit(0)
     except Exception as e:
-        logger.error(f"服务器启动失败: {e}")
+        logger.error(f"Failed to start server: {e}")
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

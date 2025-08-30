@@ -1,5 +1,5 @@
 {
-  "claude_code_path": "claude",
+  "claude_code_path": "C:\\Users\\yy\\AppData\\Roaming\\npm\\claude.cmd",
   "email": {
     "smtp_server": "smtp.gmail.com",
     "smtp_port": 587,

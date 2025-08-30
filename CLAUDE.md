@@ -109,7 +109,7 @@ python gen_reading_md.py -i ../[主题]_索引.json -o ../generated_docs [OPTION
 - `-o/--output`: 输出目录路径 (必需)
 - `-l/--layout`: 文档布局类型 (thematic/source_based/concepts/summary/html/all, 默认all)
 - `-t/--topic`: 自定义主题名称
-- `--no-source-content`: 不包含原始文件内容
+
 
 **Usage Examples**:
 ```bash
@@ -122,8 +122,10 @@ python gen_reading_md.py -i ../社会化_索引.json -o ../generated_docs -l the
 # 生成HTML文档并自定义主题
 python gen_reading_md.py -i ../社会化_索引.json -o ../generated_docs -l html -t "我的主题"
 
-# 不包含原始内容（仅索引信息）
-python gen_reading_md.py -i ../社会化_索引.json -o ../generated_docs --no-source-content
+# 生成epub电子书（适合微信读书等移动端阅读）
+python generate_epub_cli.py -i ../索引文件.json -o ../generated_docs
+python generate_epub_cli.py -i ../索引文件.json -o ../generated_docs -t "我的主题"
+
 ```
 
 **Output Directory Structure**:
@@ -135,6 +137,7 @@ _对话检索汇编/
 │   ├── [主题]_concepts_文档.md
 │   ├── [主题]_summary_文档.md
 │   └── [主题]_html_文档.html
+│   └── [主题]_epub_文档.epub
 ├── scripts/
 │   └── gen_reading_md.py
 └── [主题]_索引.json

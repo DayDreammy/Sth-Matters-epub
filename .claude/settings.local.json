@@ -10,7 +10,14 @@
       "Bash(git remote set-url:*)",
       "Bash(git push:*)",
       "Bash(pip install:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(timeout:*)",
+      "Bash(curl:*)",
+      "Bash(where:*)",
+      "Bash(claude:*)",
+      "Bash(del:*)",
+      "Bash(taskkill:*)",
+      "Read(/D:\\d D:\\yy\\Sth-Matters\\_对话检索汇编/**)"
     ],
     "deny": [],
     "ask": []

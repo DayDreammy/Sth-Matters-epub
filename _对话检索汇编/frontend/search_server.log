@@ -1,0 +1,500 @@
+2025-08-29 22:52:20,383 - INFO - ÖªÊ¶¿âËÑË÷·þÎñÆ÷Æô¶¯
+2025-08-29 22:52:20,383 - INFO - ·þÎñµØÖ·: http://localhost:5000
+2025-08-29 22:52:32,716 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 22:52:32,716 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 22:53:36,182 - INFO - Knowledge Base Search Server started
+2025-08-29 22:53:36,182 - INFO - Service URL: http://localhost:5000
+2025-08-29 22:53:48,509 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 22:53:48,509 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 22:53:58,819 - INFO - 127.0.0.1 - - [29/Aug/2025 22:53:58] "GET /api/health HTTP/1.1" 200 -
+2025-08-29 22:54:00,555 - INFO - 127.0.0.1 - - [29/Aug/2025 22:54:00] "[33mHEAD / HTTP/1.1[0m" 404 -
+2025-08-29 22:54:08,797 - INFO - 127.0.0.1 - - [29/Aug/2025 22:54:08] "[33mHEAD / HTTP/1.1[0m" 404 -
+2025-08-29 22:54:11,731 - INFO - Knowledge Base Search Server started
+2025-08-29 22:54:11,731 - INFO - Service URL: http://localhost:5000
+2025-08-29 22:54:24,064 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 22:54:24,064 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 22:54:35,976 - INFO - 127.0.0.1 - - [29/Aug/2025 22:54:35] "GET / HTTP/1.1" 200 -
+2025-08-29 22:54:58,248 - INFO - Created search task: task_20250829_225458_6630, topic: test
+2025-08-29 22:54:58,248 - INFO - Starting task processing: task_20250829_225458_6630, topic: test
+2025-08-29 22:54:58,248 - INFO - 127.0.0.1 - - [29/Aug/2025 22:54:58] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 22:54:58,249 - INFO - Executing Claude Code command: claude -p ËÑË÷Ö÷Ìâ£ºtest£¬Éú³É¸ñÊ½£ºmarkdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --cwd D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 22:55:10,734 - INFO - 127.0.0.1 - - [29/Aug/2025 22:55:10] "GET / HTTP/1.1" 200 -
+2025-08-29 22:55:12,068 - INFO - 127.0.0.1 - - [29/Aug/2025 22:55:12] "GET /api/health HTTP/1.1" 200 -
+2025-08-29 22:55:13,207 - INFO - 127.0.0.1 - - [29/Aug/2025 22:55:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-29 22:55:14,120 - INFO - Created search task: task_20250829_225514_8870, topic: Test Topic
+2025-08-29 22:55:14,120 - INFO - Starting task processing: task_20250829_225514_8870, topic: Test Topic
+2025-08-29 22:55:14,120 - INFO - 127.0.0.1 - - [29/Aug/2025 22:55:14] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 22:55:14,120 - INFO - Executing Claude Code command: claude -p ËÑË÷Ö÷Ìâ£ºTest Topic£¬Éú³É¸ñÊ½£ºmarkdown, html --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --cwd D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 22:55:16,160 - INFO - 127.0.0.1 - - [29/Aug/2025 22:55:16] "GET /api/status/task_20250829_225514_8870 HTTP/1.1" 200 -
+2025-08-29 22:55:37,845 - INFO - 127.0.0.1 - - [29/Aug/2025 22:55:37] "GET / HTTP/1.1" 200 -
+2025-08-29 22:55:53,149 - INFO - Created search task: task_20250829_225553_0880, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 22:55:53,149 - INFO - Starting task processing: task_20250829_225553_0880, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 22:55:53,151 - INFO - 127.0.0.1 - - [29/Aug/2025 22:55:53] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 22:55:53,151 - INFO - Executing Claude Code command: claude -p ËÑË÷Ö÷Ìâ£ºÇ×ÃÜ¹ØÏµ£¬Éú³É¸ñÊ½£ºmarkdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --cwd D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 22:57:57,371 - INFO - Created search task: task_20250829_225757_0880, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 22:57:57,371 - INFO - 127.0.0.1 - - [29/Aug/2025 22:57:57] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 22:57:57,371 - INFO - Starting task processing: task_20250829_225757_0880, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 22:57:57,371 - INFO - Executing Claude Code command: claude -p ËÑË÷Ö÷Ìâ£ºÇ×ÃÜ¹ØÏµ£¬Éú³É¸ñÊ½£ºmarkdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --cwd D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 22:58:52,469 - INFO - Knowledge Base Search Server started
+2025-08-29 22:58:52,469 - INFO - Service URL: http://localhost:5000
+2025-08-29 22:59:04,793 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 22:59:04,793 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 22:59:05,264 - INFO - 127.0.0.1 - - [29/Aug/2025 22:59:05] "GET /api/health HTTP/1.1" 200 -
+2025-08-29 22:59:19,403 - INFO - 127.0.0.1 - - [29/Aug/2025 22:59:19] "GET / HTTP/1.1" 200 -
+2025-08-29 22:59:29,774 - INFO - Created search task: task_20250829_225929_3510, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 22:59:29,776 - INFO - Starting task processing: task_20250829_225929_3510, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 22:59:29,776 - INFO - 127.0.0.1 - - [29/Aug/2025 22:59:29] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 22:59:29,776 - INFO - Executing Claude Code command: claude -p Search topic: Ç×ÃÜ¹ØÏµ, output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 22:59:33,755 - INFO - Created search task: task_20250829_225933_6385, topic: test
+2025-08-29 22:59:33,755 - INFO - Starting task processing: task_20250829_225933_6385, topic: test
+2025-08-29 22:59:33,755 - INFO - 127.0.0.1 - - [29/Aug/2025 22:59:33] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 22:59:33,755 - INFO - Executing Claude Code command: claude -p Search topic: test, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 22:59:47,578 - INFO - Created search task: task_20250829_225947_3510, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 22:59:47,578 - INFO - 127.0.0.1 - - [29/Aug/2025 22:59:47] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 22:59:47,578 - INFO - Starting task processing: task_20250829_225947_3510, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 22:59:47,578 - INFO - Executing Claude Code command: claude -p Search topic: Ç×ÃÜ¹ØÏµ, output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:01:57,904 - INFO - Knowledge Base Search Server started
+2025-08-29 23:01:57,904 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:02:02,909 - INFO - 127.0.0.1 - - [29/Aug/2025 23:02:02] "GET / HTTP/1.1" 200 -
+2025-08-29 23:02:02,952 - INFO - 127.0.0.1 - - [29/Aug/2025 23:02:02] "GET / HTTP/1.1" 200 -
+2025-08-29 23:02:10,223 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:02:10,224 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:02:13,180 - INFO - Created search task: task_20250829_230213_3510, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 23:02:13,180 - INFO - Starting task processing: task_20250829_230213_3510, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 23:02:13,180 - INFO - 127.0.0.1 - - [29/Aug/2025 23:02:13] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:02:13,180 - INFO - Executing Claude Code command: claude -p Search topic: Ç×ÃÜ¹ØÏµ, output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:06:20,533 - INFO - Knowledge Base Search Server started
+2025-08-29 23:06:20,533 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:06:32,851 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:06:32,851 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:06:42,959 - INFO - Created search task: task_20250829_230642_4813, topic: test
+2025-08-29 23:06:42,959 - INFO - Starting task processing: task_20250829_230642_4813, topic: test
+2025-08-29 23:06:42,961 - INFO - 127.0.0.1 - - [29/Aug/2025 23:06:42] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:06:42,961 - INFO - Executing Claude Code command: claude -p Search topic: test, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:06:51,425 - INFO - Knowledge Base Search Server started
+2025-08-29 23:06:51,425 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:07:00,821 - INFO - Created search task: task_20250829_230700_4813, topic: test
+2025-08-29 23:07:00,821 - INFO - Starting task processing: task_20250829_230700_4813, topic: test
+2025-08-29 23:07:00,822 - INFO - 127.0.0.1 - - [29/Aug/2025 23:07:00] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:07:00,822 - INFO - Executing Claude Code command: claude -p Search topic: test, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:07:03,744 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:07:03,744 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:07:16,874 - INFO - 127.0.0.1 - - [29/Aug/2025 23:07:16] "GET /api/status/task_20250829_230700_4813 HTTP/1.1" 200 -
+2025-08-29 23:07:21,100 - INFO - Knowledge Base Search Server started
+2025-08-29 23:07:21,100 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:07:25,163 - INFO - 127.0.0.1 - - [29/Aug/2025 23:07:25] "GET / HTTP/1.1" 200 -
+2025-08-29 23:07:33,432 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:07:33,432 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:07:34,265 - INFO - Created search task: task_20250829_230734_8586, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 23:07:34,265 - INFO - Starting task processing: task_20250829_230734_8586, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 23:07:34,267 - INFO - 127.0.0.1 - - [29/Aug/2025 23:07:34] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:07:34,267 - INFO - Executing Claude Code command: claude -p Search topic: Ç×ÃÜ¹ØÏµ, output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:07:46,401 - INFO - Knowledge Base Search Server started
+2025-08-29 23:07:46,401 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:07:55,377 - INFO - Created search task: task_20250829_230755_4813, topic: test
+2025-08-29 23:07:55,377 - INFO - Starting task processing: task_20250829_230755_4813, topic: test
+2025-08-29 23:07:55,379 - INFO - 127.0.0.1 - - [29/Aug/2025 23:07:55] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:07:55,379 - INFO - Executing Claude Code command: claude -p Search topic: test, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:07:58,737 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:07:58,737 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:08:21,741 - INFO - 127.0.0.1 - - [29/Aug/2025 23:08:21] "GET /api/status/task_20250829_230755_4813 HTTP/1.1" 200 -
+2025-08-29 23:09:21,458 - INFO - Knowledge Base Search Server started
+2025-08-29 23:09:21,458 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:09:32,260 - ERROR - Search API error: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2025-08-29 23:09:32,261 - INFO - 127.0.0.1 - - [29/Aug/2025 23:09:32] "[35m[1mPOST /api/search HTTP/1.1[0m" 500 -
+2025-08-29 23:09:33,769 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:09:33,769 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:09:34,631 - INFO - Created search task: task_20250829_230934_1988, topic: relationships
+2025-08-29 23:09:34,631 - INFO - Starting task processing: task_20250829_230934_1988, topic: relationships
+2025-08-29 23:09:34,632 - INFO - 127.0.0.1 - - [29/Aug/2025 23:09:34] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:09:34,632 - INFO - Executing Claude Code command: claude -p Search topic: relationships, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:10:26,999 - INFO - Created search task: task_20250829_231026_8586, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 23:10:26,999 - INFO - Starting task processing: task_20250829_231026_8586, topic: Ç×ÃÜ¹ØÏµ
+2025-08-29 23:10:26,999 - INFO - 127.0.0.1 - - [29/Aug/2025 23:10:26] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:10:26,999 - INFO - Executing Claude Code command: claude -p Search topic: Ç×ÃÜ¹ØÏµ, output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:21:11,785 - INFO - Created search task: task_20250829_232111_7437, topic: ×ÔÎ¿
+2025-08-29 23:21:11,785 - INFO - Starting task processing: task_20250829_232111_7437, topic: ×ÔÎ¿
+2025-08-29 23:21:11,785 - INFO - 127.0.0.1 - - [29/Aug/2025 23:21:11] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:21:11,785 - INFO - Executing Claude Code command: claude -p Search topic: ×ÔÎ¿, output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:21:29,207 - INFO - Knowledge Base Search Server started
+2025-08-29 23:21:29,208 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:21:34,015 - INFO - Created search task: task_20250829_232134_2780, topic: test topic
+2025-08-29 23:21:34,016 - INFO - Starting task processing: task_20250829_232134_2780, topic: test topic
+2025-08-29 23:21:34,016 - INFO - 127.0.0.1 - - [29/Aug/2025 23:21:34] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:21:34,016 - INFO - Executing Claude Code command: claude -p Search topic: test topic, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:21:41,538 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:21:41,538 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:22:15,367 - INFO - Knowledge Base Search Server started
+2025-08-29 23:22:15,367 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:22:16,876 - INFO - Knowledge Base Search Server started
+2025-08-29 23:22:16,876 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:22:19,714 - INFO - Created search task: task_20250829_232219_0388, topic: test topic 2
+2025-08-29 23:22:19,716 - INFO - Starting task processing: task_20250829_232219_0388, topic: test topic 2
+2025-08-29 23:22:19,717 - INFO - 127.0.0.1 - - [29/Aug/2025 23:22:19] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:22:19,717 - INFO - Executing document generation for topic: test topic 2
+2025-08-29 23:22:19,719 - INFO - Executing: python generate_reading_doc.py test topic 2
+2025-08-29 23:22:19,786 - INFO - Executing: python generate_epub.py test topic 2
+2025-08-29 23:22:22,139 - INFO - 127.0.0.1 - - [29/Aug/2025 23:22:22] "GET /api/status/task_20250829_232219_0388 HTTP/1.1" 200 -
+2025-08-29 23:22:27,679 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:22:27,679 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:22:27,690 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:22:27,690 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:22:29,928 - INFO - 127.0.0.1 - - [29/Aug/2025 23:22:29] "GET /api/status/task_20250829_232219_0388 HTTP/1.1" 200 -
+2025-08-29 23:22:45,623 - INFO - Knowledge Base Search Server started
+2025-08-29 23:22:45,623 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:22:46,250 - ERROR - Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-32745bd009dsm4771597a91.10 - gsmtp')
+2025-08-29 23:22:46,452 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:22:46,452 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:22:48,432 - ERROR - Search API error: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2025-08-29 23:22:48,433 - INFO - 127.0.0.1 - - [29/Aug/2025 23:22:48] "[35m[1mPOST /api/search HTTP/1.1[0m" 500 -
+2025-08-29 23:22:50,766 - INFO - Created search task: task_20250829_232250_1525, topic: relationships
+2025-08-29 23:22:50,766 - INFO - Starting task processing: task_20250829_232250_1525, topic: relationships
+2025-08-29 23:22:50,767 - INFO - 127.0.0.1 - - [29/Aug/2025 23:22:50] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:22:50,767 - INFO - Executing document generation for topic: relationships
+2025-08-29 23:22:50,767 - INFO - Executing: python generate_reading_doc.py relationships
+2025-08-29 23:22:50,833 - INFO - Executing: python generate_epub.py relationships
+2025-08-29 23:22:59,811 - ERROR - Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7722a26bc9csm2727746b3a.18 - gsmtp')
+2025-08-29 23:23:08,288 - INFO - 127.0.0.1 - - [29/Aug/2025 23:23:08] "GET /api/status/task_20250829_232250_1525 HTTP/1.1" 200 -
+2025-08-29 23:23:54,893 - INFO - 127.0.0.1 - - [29/Aug/2025 23:23:54] "GET / HTTP/1.1" 200 -
+2025-08-29 23:24:18,434 - INFO - Created search task: task_20250829_232418_3682, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:24:18,434 - INFO - Starting task processing: task_20250829_232418_3682, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:24:18,435 - INFO - 127.0.0.1 - - [29/Aug/2025 23:24:18] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:24:18,435 - INFO - Executing document generation for topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:24:18,437 - INFO - Executing: python generate_reading_doc.py ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:24:18,498 - INFO - Executing: python generate_epub.py ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:24:33,169 - ERROR - Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 41be03b00d2f7-b4cd28ad188sm2465133a12.26 - gsmtp')
+2025-08-29 23:26:05,348 - INFO - Knowledge Base Search Server started
+2025-08-29 23:26:05,348 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:26:08,328 - INFO - Created search task: task_20250829_232608_1501, topic: test
+2025-08-29 23:26:08,328 - INFO - Starting task processing: task_20250829_232608_1501, topic: test
+2025-08-29 23:26:08,330 - INFO - 127.0.0.1 - - [29/Aug/2025 23:26:08] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:26:08,330 - INFO - Executing document generation for topic: test
+2025-08-29 23:26:08,330 - INFO - Executing: C:\Users\yy\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\python.exe generate_reading_doc.py test
+2025-08-29 23:26:08,405 - INFO - Executing: C:\Users\yy\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\python.exe generate_epub.py test
+2025-08-29 23:26:17,686 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:26:17,686 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:26:19,374 - INFO - Knowledge Base Search Server started
+2025-08-29 23:26:19,374 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:26:20,218 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:26:20,218 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:26:22,564 - INFO - Created search task: task_20250829_232622_8896, topic: test2
+2025-08-29 23:26:22,564 - INFO - Starting task processing: task_20250829_232622_8896, topic: test2
+2025-08-29 23:26:22,566 - INFO - 127.0.0.1 - - [29/Aug/2025 23:26:22] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:26:22,566 - INFO - Executing Claude Code command: claude -p Search topic: test2, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:26:55,482 - INFO - 127.0.0.1 - - [29/Aug/2025 23:26:55] "GET /api/status/task_20250829_232622_8896 HTTP/1.1" 200 -
+2025-08-29 23:27:44,020 - INFO - Knowledge Base Search Server started
+2025-08-29 23:27:44,020 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:27:56,333 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:27:56,335 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:27:57,973 - INFO - Created search task: task_20250829_232757_7379, topic: test3
+2025-08-29 23:27:57,973 - INFO - Starting task processing: task_20250829_232757_7379, topic: test3
+2025-08-29 23:27:57,975 - INFO - 127.0.0.1 - - [29/Aug/2025 23:27:57] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:27:57,976 - INFO - Executing Claude Code command: claude -p Search topic: test3, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:29:00,538 - INFO - 127.0.0.1 - - [29/Aug/2025 23:29:00] "GET /api/status/task_20250829_232757_7379 HTTP/1.1" 200 -
+2025-08-29 23:30:09,973 - INFO - Knowledge Base Search Server started
+2025-08-29 23:30:09,973 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:30:22,312 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:30:22,312 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:30:40,790 - INFO - Created search task: task_20250829_233040_9891, topic: test4
+2025-08-29 23:30:40,792 - INFO - Starting task processing: task_20250829_233040_9891, topic: test4
+2025-08-29 23:30:40,792 - INFO - 127.0.0.1 - - [29/Aug/2025 23:30:40] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:30:40,792 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: test4, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:32:14,325 - INFO - 127.0.0.1 - - [29/Aug/2025 23:32:14] "GET /api/status/task_20250829_233040_9891 HTTP/1.1" 200 -
+2025-08-29 23:33:16,981 - INFO - Knowledge Base Search Server started
+2025-08-29 23:33:16,981 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:33:29,304 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:33:29,304 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:33:37,289 - INFO - Created search task: task_20250829_233337_8686, topic: test5
+2025-08-29 23:33:37,289 - INFO - Starting task processing: task_20250829_233337_8686, topic: test5
+2025-08-29 23:33:37,290 - INFO - 127.0.0.1 - - [29/Aug/2025 23:33:37] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:33:37,292 - INFO - Working directory: D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à
+2025-08-29 23:33:37,292 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: test5, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:34:18,519 - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "C:\Users\yy\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yy\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yy\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yy\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yy\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\yy\Sth-Matters\_¶Ô»°¼ìË÷»ã±à\frontend\app.py", line 377, in index
+    with open('index.html', 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'index.html'
+2025-08-29 23:34:18,521 - INFO - 127.0.0.1 - - [29/Aug/2025 23:34:18] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-08-29 23:34:33,340 - INFO - Claude Code stdout: None
+2025-08-29 23:34:33,340 - INFO - Claude Code stderr: 
+2025-08-29 23:35:55,223 - INFO - 127.0.0.1 - - [29/Aug/2025 23:35:55] "GET /api/status/task_20250829_233337_8686 HTTP/1.1" 200 -
+2025-08-29 23:37:45,384 - INFO - Knowledge Base Search Server started
+2025-08-29 23:37:45,384 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:37:57,697 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:37:57,697 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:38:01,736 - INFO - Created search task: task_20250829_233801_9041, topic: final_test
+2025-08-29 23:38:01,738 - INFO - Starting task processing: task_20250829_233801_9041, topic: final_test
+2025-08-29 23:38:01,738 - INFO - 127.0.0.1 - - [29/Aug/2025 23:38:01] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:38:01,739 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-29 23:38:01,739 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: final_test, output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:38:25,082 - INFO - 127.0.0.1 - - [29/Aug/2025 23:38:25] "GET / HTTP/1.1" 200 -
+2025-08-29 23:38:32,700 - INFO - Claude Code stdout: {"type":"result","subtype":"success","is_error":false,"duration_ms":30140,"duration_api_ms":33727,"num_turns":55,"result":"## Search Results for \"final_test\"\n\nThe automated search system has been executed for the topic \"final_test\". However, no relevant content was found in the knowledge base for this specific topic.\n\n### Generated Files\n\nThe system has created the following documents in the `generated_docs/` directory:\n\n1. **Markdown Documents:**\n   - `final_test_thematic_æ–‡æ¡£.md` - Thematic organization\n   - `final_test_source_based_æ–‡æ¡£.md` - Source-based organization  \n   - `final_test_concepts_æ–‡æ¡£.md` - Concept index\n   - `final_test_summary_æ–‡æ¡£.md` - Content summary\n\n2. **HTML Document:**\n   - `final_test_html_æ–‡æ¡£.html` - Web-friendly format\n\n3. **EPUB File:**\n   - `final_test_20250829_233818.epub` - E-book format for e-readers\n\n### Search Status\n\n- **Query**: \"final_test\"\n- **Results**: No matching content found in the knowledge base\n- **Files Generated**: All format templates created (empty)\n- **EPUB**: Generated successfully for WeChat Reading compatibility\n\n### Available Formats\n\nAll requested formats have been generated:\n- **Markdown**: For editing and documentation\n- **HTML**: For web browsing\n- **EPUB**: For e-reader consumption\n\nThe files are ready for use in the `generated_docs/` directory. Since no content was found for \"final_test\", the documents contain the standard template structure but no actual content from the knowledge base.","session_id":"fd339484-8911-4621-a422-b5f09fca7173","total_cost_usd":0.4474219199999999,"usage":{"input_tokens":507,"cache_creation_input_tokens":0,"cache_read_input_tokens":68879,"output_tokens":497,"server_tool_use":{"web_search_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":0}},"permission_denials":[],"uuid":"1fbefa04-af87-4b0a-aaea-d6fd6e82dd07"}
+
+2025-08-29 23:38:32,700 - INFO - Claude Code stderr: 
+2025-08-29 23:38:34,397 - INFO - Created search task: task_20250829_233834_8709, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:38:34,399 - INFO - 127.0.0.1 - - [29/Aug/2025 23:38:34] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:38:58,099 - ERROR - Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-249065ad9c0sm28448345ad.125 - gsmtp')
+2025-08-29 23:38:58,099 - INFO - Starting task processing: task_20250829_233834_8709, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:38:58,101 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-29 23:38:58,101 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ, output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:39:04,471 - INFO - 127.0.0.1 - - [29/Aug/2025 23:39:04] "GET /api/status/task_20250829_233801_9041 HTTP/1.1" 200 -
+2025-08-29 23:39:39,305 - INFO - Claude Code stdout: None
+2025-08-29 23:39:39,305 - INFO - Claude Code stderr: 
+2025-08-29 23:40:47,336 - INFO - Knowledge Base Search Server started
+2025-08-29 23:40:47,338 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:40:59,674 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:40:59,674 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:42:13,831 - ERROR - Search API error: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2025-08-29 23:42:13,832 - INFO - 127.0.0.1 - - [29/Aug/2025 23:42:13] "[35m[1mPOST /api/search HTTP/1.1[0m" 500 -
+2025-08-29 23:42:17,061 - INFO - 127.0.0.1 - - [29/Aug/2025 23:42:17] "GET /api/health HTTP/1.1" 200 -
+2025-08-29 23:42:21,513 - INFO - Knowledge Base Search Server started
+2025-08-29 23:42:21,513 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:42:24,995 - INFO - 127.0.0.1 - - [29/Aug/2025 23:42:24] "GET / HTTP/1.1" 200 -
+2025-08-29 23:42:33,312 - INFO - Created search task: task_20250829_234233_3751, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:42:33,313 - INFO - Starting task processing: task_20250829_234233_3751, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:42:33,313 - INFO - 127.0.0.1 - - [29/Aug/2025 23:42:33] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:42:33,313 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-29 23:42:33,313 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ", output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:42:33,817 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:42:33,817 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:44:12,881 - INFO - Claude Code stdout: None
+2025-08-29 23:44:12,881 - INFO - Claude Code stderr: 
+2025-08-29 23:44:56,962 - INFO - Knowledge Base Search Server started
+2025-08-29 23:44:56,962 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:45:09,291 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:45:09,293 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:47:10,243 - INFO - Created search task: task_20250829_234710_2147, topic: test topic
+2025-08-29 23:47:10,244 - INFO - Starting task processing: task_20250829_234710_2147, topic: test topic
+2025-08-29 23:47:10,244 - INFO - 127.0.0.1 - - [29/Aug/2025 23:47:10] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:47:10,244 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-29 23:47:10,244 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: "test topic", output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:47:12,464 - INFO - 127.0.0.1 - - [29/Aug/2025 23:47:12] "GET /api/status/task_20250829_234710_2147 HTTP/1.1" 200 -
+2025-08-29 23:47:18,173 - INFO - 127.0.0.1 - - [29/Aug/2025 23:47:18] "GET /api/status/task_20250829_234710_2147 HTTP/1.1" 200 -
+2025-08-29 23:47:39,554 - INFO - 127.0.0.1 - - [29/Aug/2025 23:47:39] "GET /api/status/task_20250829_234710_2147 HTTP/1.1" 200 -
+2025-08-29 23:47:48,392 - INFO - Claude Code stdout: {"type":"result","subtype":"success","is_error":false,"duration_ms":37329,"duration_api_ms":48237,"num_turns":37,"result":"## Search Results for \"test topic\"\n\nThe automated search system has completed and generated all requested formats. However, the search returned results for \"ç¤¾ä¼šåŒ–\" (socialization) instead of \"test topic\". This likely occurred because the search algorithm found related content in the knowledge base that matched the semantic meaning or there were no exact matches for \"test topic\".\n\n### Generated Documents\n\nAll requested formats have been generated and are available in the `generated_docs` directory:\n\n**Markdown Documents:**\n- `ç¤¾ä¼šåŒ–_åŽŸæ–‡æ±‡ç¼–.md` - Complete original text compilation\n- `ç¤¾ä¼šåŒ–_thematic_æ–‡æ¡£.md` - Thematic organization  \n- `ç¤¾ä¼šåŒ–_concepts_æ–‡æ¡£.md` - Concept index\n- `ç¤¾ä¼šåŒ–_summary_æ–‡æ¡£.md` - Content summary\n- `ç¤¾ä¼šåŒ–_source_based_æ–‡æ¡£.md` - Source-based organization\n\n**HTML Document:**\n- `ç¤¾ä¼šåŒ–_html_æ–‡æ¡£.html` - Web-friendly format\n\n**EPUB File:**\n- `ç¤¾ä¼šåŒ–_20250829_234735.epub` - E-book format optimized for WeChat Reading\n\n### What's Included\n\nThe documents contain comprehensive content about socialization topics from the knowledge base, including:\n- 166,649 characters of original text content\n- Thematic organization across multiple sections\n- Concept indexing and cross-references\n- HTML version for web browsing\n- EPUB format for e-reader compatibility\n\n### Options\n\n1. **Use the current results** - The socialization content may still be relevant to your interests\n2. **Search for a different topic** - If you'd like to search for something more specific\n3. **Customize the output** - Adjust formatting or organization as needed\n\nWould you like me to search for a different topic or would you prefer to work with the socialization content that was generated?","session_id":"7588c1a0-9499-4740-b7b8-b2de69d72f0b","total_cost_usd":0.26899472,"usage":{"input_tokens":408,"cache_creation_input_tokens":0,"cache_read_input_tokens":42704,"output_tokens":579,"server_tool_use":{"web_search_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":0}},"permission_denials":[],"uuid":"3e6c321e-8cd7-44b9-baad-85011823d4f8"}
+
+2025-08-29 23:47:48,392 - INFO - Claude Code stderr: 
+2025-08-29 23:49:43,610 - ERROR - Search API error: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2025-08-29 23:49:43,610 - INFO - 127.0.0.1 - - [29/Aug/2025 23:49:43] "[35m[1mPOST /api/search HTTP/1.1[0m" 500 -
+2025-08-29 23:49:46,876 - INFO - Created search task: task_20250829_234946_2495, topic: relationships
+2025-08-29 23:49:46,876 - INFO - Starting task processing: task_20250829_234946_2495, topic: relationships
+2025-08-29 23:49:46,876 - INFO - 127.0.0.1 - - [29/Aug/2025 23:49:46] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:49:46,877 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-29 23:49:46,877 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: "relationships", output formats: markdown, html, epub --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:49:49,983 - INFO - 127.0.0.1 - - [29/Aug/2025 23:49:49] "GET /api/status/task_20250829_234946_2495 HTTP/1.1" 200 -
+2025-08-29 23:50:22,616 - INFO - 127.0.0.1 - - [29/Aug/2025 23:50:22] "GET /api/status/task_20250829_234946_2495 HTTP/1.1" 200 -
+2025-08-29 23:50:27,408 - INFO - Claude Code stdout: None
+2025-08-29 23:50:27,408 - INFO - Claude Code stderr: 
+2025-08-29 23:53:02,982 - INFO - Created search task: task_20250829_235302_3751, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:53:02,982 - INFO - Starting task processing: task_20250829_235302_3751, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:53:02,982 - INFO - 127.0.0.1 - - [29/Aug/2025 23:53:02] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:53:02,982 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-29 23:53:02,982 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ", output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:53:27,045 - INFO - Claude Code stdout: None
+2025-08-29 23:53:27,045 - INFO - Claude Code stderr: 
+2025-08-29 23:58:04,136 - INFO - Knowledge Base Search Server started
+2025-08-29 23:58:04,136 - INFO - Service URL: http://localhost:5000
+2025-08-29 23:58:06,748 - INFO - 127.0.0.1 - - [29/Aug/2025 23:58:06] "GET / HTTP/1.1" 200 -
+2025-08-29 23:58:15,554 - INFO - Created search task: task_20250829_235815_3751, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:58:15,554 - INFO - Starting task processing: task_20250829_235815_3751, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-29 23:58:15,555 - INFO - 127.0.0.1 - - [29/Aug/2025 23:58:15] "POST /api/search HTTP/1.1" 200 -
+2025-08-29 23:58:15,555 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-29 23:58:15,557 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ", output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-29 23:58:16,460 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-29 23:58:16,460 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 23:58:45,219 - INFO - Claude Code stdout: None
+2025-08-29 23:58:45,219 - INFO - Claude Code stderr: 
+2025-08-30 00:00:19,359 - INFO - Knowledge Base Search Server started
+2025-08-30 00:00:19,359 - INFO - Service URL: http://localhost:5000
+2025-08-30 00:00:31,690 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-30 00:00:31,690 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-30 00:00:34,675 - INFO - Created search task: task_20250830_000034_3751, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:00:34,675 - INFO - Starting task processing: task_20250830_000034_3751, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:00:34,677 - INFO - 127.0.0.1 - - [30/Aug/2025 00:00:34] "POST /api/search HTTP/1.1" 200 -
+2025-08-30 00:00:34,677 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:00:34,677 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p Search topic: "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ", output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @CLAUDE.md
+2025-08-30 00:01:04,718 - INFO - Claude Code stdout: {"type":"result","subtype":"success","is_error":false,"duration_ms":29348,"duration_api_ms":34991,"num_turns":28,"result":"(no content)","session_id":"2ae39aaf-5398-4c2b-83e3-f54939dfe957","total_cost_usd":0.52087008,"usage":{"input_tokens":23061,"cache_creation_input_tokens":0,"cache_read_input_tokens":19593,"output_tokens":12,"server_tool_use":{"web_search_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":0}},"permission_denials":[],"uuid":"a75a428d-3f15-4deb-8ffa-49eae9ef2169"}
+
+2025-08-30 00:01:04,718 - INFO - Claude Code stderr: 
+2025-08-30 00:01:30,344 - ERROR - Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2490659a523sm28116025ad.119 - gsmtp')
+2025-08-30 00:02:50,230 - INFO - Knowledge Base Search Server started
+2025-08-30 00:02:50,230 - INFO - Service URL: http://localhost:5000
+2025-08-30 00:03:02,538 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-30 00:03:02,538 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-30 00:03:02,711 - INFO - 127.0.0.1 - - [30/Aug/2025 00:03:02] "GET / HTTP/1.1" 200 -
+2025-08-30 00:03:15,330 - INFO - Created search task: task_20250830_000315_4970, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:03:15,330 - INFO - Starting task processing: task_20250830_000315_4970, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:03:15,330 - INFO - 127.0.0.1 - - [30/Aug/2025 00:03:15] "POST /api/search HTTP/1.1" 200 -
+2025-08-30 00:03:15,330 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:03:15,332 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ", output formats: markdown, html, epub, thematic, concepts, summary --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @D:/yy/Sth-Matters/CLAUDE.md
+2025-08-30 00:04:32,560 - INFO - Claude Code stdout: None
+2025-08-30 00:04:32,560 - INFO - Claude Code stderr: 
+2025-08-30 00:05:31,964 - INFO - Knowledge Base Search Server started
+2025-08-30 00:05:31,964 - INFO - Service URL: http://localhost:5000
+2025-08-30 00:06:08,956 - INFO - Knowledge Base Search Server started
+2025-08-30 00:06:08,956 - INFO - Service URL: http://localhost:5000
+2025-08-30 00:06:21,283 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-30 00:06:21,283 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-30 00:06:21,328 - INFO - 127.0.0.1 - - [30/Aug/2025 00:06:21] "GET / HTTP/1.1" 200 -
+2025-08-30 00:06:36,203 - INFO - Created search task: task_20250830_000636_2560, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:06:36,203 - INFO - Starting task processing: task_20250830_000636_2560, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:06:36,203 - INFO - 127.0.0.1 - - [30/Aug/2025 00:06:36] "POST /api/search HTTP/1.1" 200 -
+2025-08-30 00:06:36,204 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:06:36,204 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ,output formats:['markdown', 'html', 'epub', 'thematic', 'concepts', 'summary']" --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --append-system-prompt @D:/yy/Sth-Matters/CLAUDE.md
+2025-08-30 00:06:54,536 - INFO - Claude Code stdout: {"type":"result","subtype":"success","is_error":false,"duration_ms":17617,"duration_api_ms":18409,"num_turns":28,"result":"## ËÑË÷½á¹û\n\nÒÑÎªÄúËÑË÷\"ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ\"Ïà¹ØÄÚÈÝ£¬²¢Éú³ÉÁËËùÓÐÇëÇóµÄ¸ñÊ½ÎÄµµ¡£\n\n### ËÑË÷½á¹û\nºÜÒÅº¶£¬ÔÚÖªÊ¶¿âÖÐÎ´ÕÒµ½Óë\"ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ\"Ö±½ÓÏà¹ØµÄÄÚÈÝ¡£\n\n### Éú³ÉµÄÎÄµµ¸ñÊ½\n¾¡¹ÜÃ»ÓÐÕÒµ½Ïà¹ØÄÚÈÝ£¬ÏµÍ³ÈÔÉú³ÉÁËÒÔÏÂ¸ñÊ½µÄÎÄµµ£º\n\n1. **Ô­ÎÄ»ã±à** (`ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_original_ÎÄµµ.md`) - ÍêÕûÔ­ÎÄ»ã±à\n2. **Ö÷ÌâÎÄµµ** (`ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_thematic_ÎÄµµ.md`) - Ö÷Ìâ×éÖ¯¸ñÊ½\n3. **¸ÅÄîÎÄµµ** (`ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_concepts_ÎÄµµ.md`) - ¸ÅÄîË÷Òý¸ñÊ½  \n4. **ÕªÒªÎÄµµ** (`ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_summary_ÎÄµµ.md`) - ÄÚÈÝÕªÒª¸ñÊ½\n5. **HTMLÎÄµµ** (`ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_html_ÎÄµµ.html`) - ÍøÒ³¸ñÊ½\n6. **EPUBµç×ÓÊé** (`ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_20250830_000647.epub`) - µç×ÓÊé¸ñÊ½\n\n### ½¨Òé\nÄú¿ÉÒÔ³¢ÊÔ£º\n- Ê¹ÓÃ²»Í¬µÄËÑË÷¹Ø¼ü´Ê\n- À©´óËÑË÷·¶Î§\n- ËÑË÷Ïà¹ØµÄÐÄÀíÑ§¡¢Á½ÐÔ¹ØÏµ»ò½¡¿µÖ÷Ìâ\n\nËùÓÐÉú³ÉµÄÎÄ¼þ¶¼±£´æÔÚ `generated_docs/` Ä¿Â¼ÖÐ£¬Äú¿ÉÒÔ¸ù¾ÝÐèÒªÑ¡ÔñºÏÊÊµÄ¸ñÊ½½øÐÐÔÄ¶Á¡£","session_id":"e34592ab-c30d-48ed-b698-b92393cf2b72","total_cost_usd":0.21003897999999996,"usage":{"input_tokens":270,"cache_creation_input_tokens":0,"cache_read_input_tokens":41749,"output_tokens":471,"server_tool_use":{"web_search_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":0}},"permission_denials":[],"uuid":"c6eb6869-281a-47d0-95d6-1df160ad7736"}
+
+2025-08-30 00:06:54,537 - INFO - Claude Code stderr: 
+2025-08-30 00:06:59,554 - ERROR - Failed to send email: Connection unexpectedly closed
+2025-08-30 00:11:51,143 - INFO - Knowledge Base Search Server started
+2025-08-30 00:11:51,143 - INFO - Service URL: http://localhost:5000
+2025-08-30 00:12:03,457 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-30 00:12:03,457 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-30 00:12:03,921 - INFO - 127.0.0.1 - - [30/Aug/2025 00:12:03] "GET / HTTP/1.1" 200 -
+2025-08-30 00:12:12,274 - INFO - Created search task: task_20250830_001212_8212, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:12:12,276 - INFO - Starting task processing: task_20250830_001212_8212, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:12:12,276 - INFO - 127.0.0.1 - - [30/Aug/2025 00:12:12] "POST /api/search HTTP/1.1" 200 -
+2025-08-30 00:12:12,277 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:12:12,277 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ,output formats:['markdown', 'html', 'epub', 'thematic', 'concepts', 'summary']" --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --cwd D:\yy\Sth-Matters
+2025-08-30 00:13:31,613 - INFO - Knowledge Base Search Server started
+2025-08-30 00:13:31,613 - INFO - Service URL: http://localhost:5000
+2025-08-30 00:13:43,958 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-30 00:13:43,958 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-30 00:13:45,769 - INFO - Created search task: task_20250830_001345_0968, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:13:45,769 - INFO - Starting task processing: task_20250830_001345_0968, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:13:45,771 - INFO - 127.0.0.1 - - [30/Aug/2025 00:13:45] "POST /api/search HTTP/1.1" 200 -
+2025-08-30 00:13:45,773 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:13:45,774 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ,output formats:['markdown', 'html', 'epub', 'thematic', 'concepts', 'summary']" --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à --cwd D:/yy/Sth-Matters
+2025-08-30 00:21:01,695 - INFO - Knowledge Base Search Server started
+2025-08-30 00:21:01,695 - INFO - Service URL: http://localhost:5000
+2025-08-30 00:21:14,036 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://198.18.0.1:5000
+2025-08-30 00:21:14,036 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-30 00:21:14,999 - INFO - 127.0.0.1 - - [30/Aug/2025 00:21:14] "GET / HTTP/1.1" 200 -
+2025-08-30 00:21:24,540 - INFO - Created search task: task_20250830_002124_0230, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:21:24,540 - INFO - Starting task processing: task_20250830_002124_0230, topic: ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ
+2025-08-30 00:21:24,540 - INFO - 127.0.0.1 - - [30/Aug/2025 00:21:24] "POST /api/search HTTP/1.1" 200 -
+2025-08-30 00:21:24,540 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:21:24,542 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p "ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ,output formats:['markdown', 'html', 'epub', 'thematic', 'concepts', 'summary']" --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir _¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:21:49,134 - INFO - Claude Code stdout: {"type":"result","subtype":"success","is_error":false,"duration_ms":23885,"duration_api_ms":38597,"num_turns":25,"result":"(no content)\n## ËÑË÷½á¹û\n\nÒÑÎª\"ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ\"Ö÷ÌâÍê³ÉËÑË÷£¬µ«**Î´ÕÒµ½Ïà¹ØÄÚÈÝ**¡£\n\n### Éú³ÉµÄÎÄµµ¸ñÊ½\n\n¾¡¹ÜÃ»ÓÐÕÒµ½Ïà¹ØÄÚÈÝ£¬ÏµÍ³ÈÔÉú³ÉÁËÒÔÏÂ¸ñÊ½µÄÎÄµµ£º\n\n1. **ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_original_ÎÄµµ.md** - Ô­ÎÄ»ã±à¸ñÊ½\n2. **ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_thematic_ÎÄµµ.md** - Ö÷Ìâ×éÖ¯¸ñÊ½  \n3. **ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_concepts_ÎÄµµ.md** - ¸ÅÄîË÷Òý¸ñÊ½\n4. **ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_summary_ÎÄµµ.md** - ÄÚÈÝÕªÒª¸ñÊ½\n5. **ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_html_ÎÄµµ.html** - HTMLÍøÒ³¸ñÊ½\n6. **ÐÔ¡¢×ÔÎ¿¡¢·¢Éú¹ØÏµ_20250830_002131.epub** - µç×ÓÊé¸ñÊ½\n\n### ½¨Òé\n\n- ³¢ÊÔÊ¹ÓÃ²»Í¬µÄËÑË÷´Ê£¬Èç\"Á½ÐÔ¹ØÏµ\"¡¢\"Ç×ÃÜ¹ØÏµ\"¡¢\"ÐÔ½ÌÓý\"µÈ\n- À©´óËÑË÷·¶Î§»òÊ¹ÓÃ¸ü¿í·ºµÄ¹Ø¼ü´Ê\n- ¼ì²éÊÇ·ñ´æÔÚÏà¹ØµÄÐÄÀíÑ§»òÉç»áÑ§ÄÚÈÝ\n\nËùÓÐÉú³ÉµÄÎÄ¼þÒÑ±£´æÔÚ `_¶Ô»°¼ìË÷»ã±à/generated_docs/` Ä¿Â¼ÖÐ¡£","session_id":"a8575462-9776-4da9-804d-12b3faf9612f","total_cost_usd":0.20586798,"usage":{"input_tokens":296,"cache_creation_input_tokens":0,"cache_read_input_tokens":42653,"output_tokens":408,"server_tool_use":{"web_search_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":0}},"permission_denials":[],"uuid":"f6910e97-f4c0-4366-9c9f-82a662dc8034"}
+
+2025-08-30 00:21:49,134 - INFO - Claude Code stderr: 
+2025-08-30 00:22:05,219 - ERROR - Failed to send email: Connection unexpectedly closed
+2025-08-30 00:22:56,865 - INFO - Created search task: task_20250830_002256_1073, topic: Ç×ÃÜ¹ØÏµ
+2025-08-30 00:22:56,865 - INFO - Starting task processing: task_20250830_002256_1073, topic: Ç×ÃÜ¹ØÏµ
+2025-08-30 00:22:56,866 - INFO - 127.0.0.1 - - [30/Aug/2025 00:22:56] "POST /api/search HTTP/1.1" 200 -
+2025-08-30 00:22:56,868 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:22:56,868 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p "Ç×ÃÜ¹ØÏµ,output formats:['markdown', 'html', 'epub', 'thematic', 'concepts', 'summary']" --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir _¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:23:11,827 - INFO - Claude Code stderr: 
+2025-08-30 00:23:16,838 - ERROR - Failed to send email: Connection unexpectedly closed
+2025-08-30 00:24:12,366 - INFO - Created search task: task_20250830_002412_4574, topic: ¼Ò¹úÇé»³
+2025-08-30 00:24:12,366 - INFO - Starting task processing: task_20250830_002412_4574, topic: ¼Ò¹úÇé»³
+2025-08-30 00:24:12,368 - INFO - 127.0.0.1 - - [30/Aug/2025 00:24:12] "POST /api/search HTTP/1.1" 200 -
+2025-08-30 00:24:12,369 - INFO - Target directory: D:/yy/Sth-Matters/_¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:24:12,371 - INFO - Executing Claude Code command: C:\Users\yy\AppData\Roaming\npm\claude.cmd -p "¼Ò¹úÇé»³,output formats:['markdown', 'html', 'epub', 'thematic', 'concepts', 'summary']" --output-format json --allowed-tools Bash,Read,Write,Glob,Grep,Task --add-dir _¶Ô»°¼ìË÷»ã±à
+2025-08-30 00:24:27,812 - INFO - Claude Code stderr: 
+2025-08-30 00:24:32,830 - ERROR - Failed to send email: Connection unexpectedly closed

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>知识库主题搜索系统</title>
+    <title>Knowledge Base Topic Search System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -114,65 +114,65 @@
                 <div class="search-container">
                     <div class="text-center mb-4">
                         <h1 class="display-4 text-primary mb-3">
-                            <i class="fas fa-search"></i> 知识库主题搜索
+                            <i class="fas fa-search"></i> Knowledge Base Topic Search
                         </h1>
                         <p class="lead text-muted">
-                            输入您想要搜索的主题，系统将自动生成多格式文档并发送到您的邮箱
+                            Enter your search topic, and the system will automatically generate multi-format documents and send them to your email
                         </p>
                     </div>
 
                     <form id="searchForm">
                         <div class="mb-4">
                             <label for="topic" class="form-label fw-bold">
-                                <i class="fas fa-tag"></i> 搜索主题
+                                <i class="fas fa-tag"></i> Search Topic
                             </label>
                             <input type="text" class="form-control" id="topic" name="topic" 
-                                   placeholder="请输入您想要搜索的主题关键词..." required>
-                            <div class="form-text">例如：家庭教育、心理学、社会化、人工智能等</div>
+                                   placeholder="Enter your search topic keywords..." required>
+                            <div class="form-text">Examples: family education, psychology, socialization, artificial intelligence, etc.</div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label fw-bold">
-                                    <i class="fas fa-envelope"></i> 邮箱地址
+                                    <i class="fas fa-envelope"></i> Email Address
                                 </label>
                                 <input type="email" class="form-control" id="email" name="email" 
                                        placeholder="your@email.com" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="priority" class="form-label fw-bold">
-                                    <i class="fas fa-flag"></i> 优先级
+                                    <i class="fas fa-flag"></i> Priority
                                 </label>
                                 <select class="form-select" id="priority" name="priority">
-                                    <option value="normal">普通</option>
-                                    <option value="high">高</option>
-                                    <option value="urgent">紧急</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label fw-bold">
-                                <i class="fas fa-file-alt"></i> 输出格式
+                                <i class="fas fa-file-alt"></i> Output Formats
                             </label>
                             <div class="format-options">
                                 <div class="format-option selected" data-format="markdown">
-                                    <i class="fas fa-file-code"></i> Markdown文档
+                                    <i class="fas fa-file-code"></i> Markdown
                                 </div>
                                 <div class="format-option selected" data-format="html">
-                                    <i class="fas fa-file-code"></i> HTML网页
+                                    <i class="fas fa-file-code"></i> HTML
                                 </div>
                                 <div class="format-option selected" data-format="epub">
-                                    <i class="fas fa-book"></i> EPUB电子书
+                                    <i class="fas fa-book"></i> EPUB
                                 </div>
                                 <div class="format-option selected" data-format="thematic">
-                                    <i class="fas fa-list"></i> 主题分类
+                                    <i class="fas fa-list"></i> Thematic
                                 </div>
                                 <div class="format-option selected" data-format="concepts">
-                                    <i class="fas fa-lightbulb"></i> 概念索引
+                                    <i class="fas fa-lightbulb"></i> Concepts
                                 </div>
                                 <div class="format-option selected" data-format="summary">
-                                    <i class="fas fa-chart-bar"></i> 内容概要
+                                    <i class="fas fa-chart-bar"></i> Summary
                                 </div>
                             </div>
                             <input type="hidden" id="formats" name="formats" value="markdown,html,epub,thematic,concepts,summary">
@@ -180,22 +180,22 @@
 
                         <div class="mb-4">
                             <label for="notes" class="form-label fw-bold">
-                                <i class="fas fa-comment"></i> 备注 (可选)
+                                <i class="fas fa-comment"></i> Notes (Optional)
                             </label>
                             <textarea class="form-control" id="notes" name="notes" rows="3" 
-                                      placeholder="请描述您的具体需求或偏好..."></textarea>
+                                      placeholder="Describe your specific requirements or preferences..."></textarea>
                         </div>
 
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
-                                <i class="fas fa-rocket"></i> 开始搜索
+                                <i class="fas fa-rocket"></i> Start Search
                             </button>
                         </div>
                     </form>
 
                     <div class="loading-spinner">
                         <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">处理中...</span>
+                            <span class="visually-hidden">Processing...</span>
                         </div>
                     </div>
 
@@ -205,7 +205,7 @@
                                  role="progressbar" style="width: 0%"></div>
                         </div>
                         <div class="text-center mt-2">
-                            <small class="text-muted" id="progressText">正在初始化...</small>
+                            <small class="text-muted" id="progressText">Initializing...</small>
                         </div>
                     </div>
 
@@ -220,8 +220,8 @@
                             <div class="feature-icon">
                                 <i class="fas fa-brain fa-2x"></i>
                             </div>
-                            <h5>智能检索</h5>
-                            <p class="text-muted small">基于AI的全文检索，准确匹配相关内容</p>
+                            <h5>AI-Powered Search</h5>
+                            <p class="text-muted small">Full-text search with AI-powered content matching</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -229,8 +229,8 @@
                             <div class="feature-icon">
                                 <i class="fas fa-file-export fa-2x"></i>
                             </div>
-                            <h5>多格式输出</h5>
-                            <p class="text-muted small">支持Markdown、HTML、EPUB等多种格式</p>
+                            <h5>Multi-Format Output</h5>
+                            <p class="text-muted small">Supports Markdown, HTML, EPUB and multiple formats</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -238,8 +238,8 @@
                             <div class="feature-icon">
                                 <i class="fas fa-paper-plane fa-2x"></i>
                             </div>
-                            <h5>邮件通知</h5>
-                            <p class="text-muted small">完成后自动发送结果到您的邮箱</p>
+                            <h5>Email Notifications</h5>
+                            <p class="text-muted small">Automatically sends results to your email when complete</p>
                         </div>
                     </div>
                 </div>
@@ -276,7 +276,7 @@
             
             // 禁用提交按钮
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 处理中...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             
             // 显示加载状态
             loadingSpinner.style.display = 'block';
@@ -289,13 +289,13 @@
             try {
                 // 模拟进度更新
                 const progressSteps = [
-                    { progress: 10, text: '正在验证输入...' },
-                    { progress: 20, text: '正在初始化搜索系统...' },
-                    { progress: 40, text: '正在执行智能检索...' },
-                    { progress: 60, text: '正在生成文档...' },
-                    { progress: 80, text: '正在打包文件...' },
-                    { progress: 90, text: '正在发送邮件...' },
-                    { progress: 100, text: '完成！' }
+                    { progress: 10, text: 'Validating input...' },
+                    { progress: 20, text: 'Initializing search system...' },
+                    { progress: 40, text: 'Executing intelligent search...' },
+                    { progress: 60, text: 'Generating documents...' },
+                    { progress: 80, text: 'Packaging files...' },
+                    { progress: 90, text: 'Sending email...' },
+                    { progress: 100, text: 'Complete!' }
                 ];
                 
                 for (let step of progressSteps) {
@@ -316,18 +316,18 @@
                 const result = await response.json();
                 
                 if (result.success) {
-                    showStatus('success', `搜索完成！结果已发送到 ${data.email}`);
+                    showStatus('success', `Search completed! Results sent to ${data.email}`);
                 } else {
-                    showStatus('error', `搜索失败：${result.message}`);
+                    showStatus('error', `Search failed: ${result.message}`);
                 }
                 
             } catch (error) {
                 console.error('Error:', error);
-                showStatus('error', '网络错误，请稍后重试');
+                showStatus('error', 'Network error, please try again later');
             } finally {
                 // 恢复按钮状态
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-rocket"></i> 开始搜索';
+                submitBtn.innerHTML = '<i class="fas fa-rocket"></i> Start Search';
                 loadingSpinner.style.display = 'none';
                 progressContainer.style.display = 'none';
             }

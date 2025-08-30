@@ -159,12 +159,12 @@ _对话检索汇编/
 1. 将最终JSON索引保存到 `_对话检索汇编/[主题]_索引.json`
 2. 进入脚本目录: `cd _对话检索汇编/scripts`
 3. 运行生成命令: `python gen_reading_md.py -i ../[主题]_索引.json -o ../generated_docs`
-4. 在 `generated_docs` 目录中查看生成的文档
+4. 运行生成epub命令: `python generate_epub_cli.py -i ../[主题]_索引.json -o ../generated_docs`
+5. 在 `generated_docs` 目录中查看生成的文档
 
 ### 自定义选项
 - 使用 `-l` 参数选择特定布局类型
 - 使用 `-t` 参数自定义主题名称
-- 使用 `--no-source-content` 参数排除原始文件内容
 
 ## 系统特点
 
