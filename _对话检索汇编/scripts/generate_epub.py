@@ -33,13 +33,25 @@ class SocializationEPUBGenerator:
 
     def _read_source_file(self, file_path: str) -> str:
         """读取源文件内容"""
-        try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                return f.read()
-        except FileNotFoundError:
-            return f"无法读取文件: {file_path}"
-        except Exception as e:
-            return f"读取文件时发生错误: {e}"
+        # 转换路径分隔符并尝试多个可能的路径
+        normalized_path = os.path.normpath(file_path)
+
+        # 尝试的路径列表
+        possible_paths = [
+            normalized_path,  # 原始路径
+            os.path.join("..", normalized_path),  # 相对于脚本目录的上级目录
+            os.path.join("../..", normalized_path),  # 更上级目录
+        ]
+
+        for path in possible_paths:
+            try:
+                if os.path.exists(path):
+                    with open(path, 'r', encoding='utf-8') as f:
+                        return f.read()
+            except Exception:
+                continue
+
+        return f"无法读取文件: {file_path} (尝试了路径: {', '.join(possible_paths)})"
 
     def _markdown_to_html(self, markdown_text: str) -> str:
         """将markdown文本转换为HTML格式"""

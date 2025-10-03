@@ -120,7 +120,7 @@ class KnowledgeSearchInterface:
     def create_interface(self):
         """创建Gradio界面"""
         with gr.Blocks(
-            title="知识库深度搜索系统",
+            title="Sth-matters 知识库搜索系统",
             theme=gr.themes.Soft(),
             css="""
             .gradio-container {
@@ -143,8 +143,13 @@ class KnowledgeSearchInterface:
             # 标题和说明
             gr.HTML("""
             <div class="main-header">
-                <h1>🔍 知识库深度搜索系统</h1>
+                <h1>📚 Sth-matters 知识库帮你找原文</h1>
                 <p>输入您感兴趣的主题，系统将自动进行深度搜索并生成多种格式的学习文档，然后发送到您的邮箱。</p>
+                <div style="background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 15px; margin: 15px 0;">
+                    <p style="margin: 0; color: #856404;">
+                        <strong>⏰ 温馨提示：</strong>深度搜索分析需要较长时间（约3-5分钟），成功后会自动发送到您的邮箱。提交后您可以先去忙其他事情，完成后查收邮件即可！
+                    </p>
+                </div>
             </div>
             """)
 
@@ -198,6 +203,15 @@ class KnowledgeSearchInterface:
                     variant="secondary",
                     size="lg"
                 )
+
+            # 操作提示
+            gr.HTML("""
+            <div style="text-align: center; margin: 10px 0; color: #666;">
+                <p style="margin: 0; font-size: 0.9em;">
+                    💡 提交后将开始深度搜索，请耐心等待3-5分钟，完成后会自动发送到您的邮箱
+                </p>
+            </div>
+            """)
 
             # 结果显示区域
             result_output = gr.Markdown(

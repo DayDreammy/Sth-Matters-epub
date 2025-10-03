@@ -95,7 +95,7 @@ class EmailSender:
             body = f"""
 您好！
 
-您的知识库深度搜索已完成，以下是搜索结果详情：
+您的9a知识库深度搜索已完成，以下是搜索结果详情：
 
 搜索主题：{topic}
 完成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
@@ -106,21 +106,17 @@ class EmailSender:
 
             for file_type, file_path in files.items():
                 file_name = os.path.basename(file_path)
-                file_size = os.path.getsize(file_path) / 1024 / 1024  # MB
-                body += f"- {file_name} ({file_type.upper()}, {file_size:.2f}MB)\n"
+                file_size = os.path.getsize(file_path) / 1024  # KB
+                body += f"- {file_name} ({file_type.upper()}, {file_size:.0f}KB)\n"
 
             body += """
 这些文件包含了您搜索主题的深度分析结果，包括：
-- 主题分类文档
-- 关键概念分析
-- 来源分组文档
-- 内容概要
 - EPUB电子书（适合移动端阅读）
 
-如有任何问题，请回复此邮件。
+如有任何问题，请联系 Daydreammy.
 
-祝好！
-知识库搜索系统
+祝你健康、平安、喜乐，有信心、有成果、有收获！
+Sth-matters 知识库搜索系统
 """
 
             msg.attach(MIMEText(body, 'plain', 'utf-8'))

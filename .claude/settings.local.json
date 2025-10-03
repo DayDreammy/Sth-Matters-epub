@@ -17,7 +17,9 @@
       "Bash(claude:*)",
       "Bash(del:*)",
       "Bash(taskkill:*)",
-      "Read(/D:\\d D:\\yy\\Sth-Matters\\_对话检索汇编/**)"
+      "Read(/D:\\d D:\\yy\\Sth-Matters\\_对话检索汇编/**)",
+      "Bash(done)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
