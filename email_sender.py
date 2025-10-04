@@ -105,9 +105,12 @@ class EmailSender:
 """
 
             for file_type, file_path in files.items():
-                file_name = os.path.basename(file_path)
-                file_size = os.path.getsize(file_path) / 1024  # KB
-                body += f"- {file_name} ({file_type.upper()}, {file_size:.0f}KB)\n"
+                if os.path.exists(file_path):
+                    file_name = os.path.basename(file_path)
+                    file_size = os.path.getsize(file_path) / 1024  # KB
+                    body += f"- {file_name} ({file_type.upper()}, {file_size:.0f}KB)\n"
+                else:
+                    body += f"- {file_type.upper()} 文件 (文件不存在)\n"
 
             body += """
 这些文件包含了您搜索主题的深度分析结果，包括：
@@ -257,7 +260,7 @@ if __name__ == "__main__":
     if test_result["success"]:
         print("\n=== 发送测试邮件 ===")
         test_files = {
-            "epub": r"D:\yy\Sth-Matters\_对话检索汇编\generated_docs\亲密关系中的责任_20250831_225816.epub",
+            "epub": r"D:\yy\Sth-Matters\_对话检索汇编\generated_docs\面对重大选择的心态与对象选择_20251004_003825.epub",
             "md": r"D:\yy\Sth-Matters\_对话检索汇编\generated_docs\亲密关系中的责任_concepts_文档.md"
         }
 
