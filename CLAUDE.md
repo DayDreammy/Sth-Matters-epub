@@ -97,11 +97,8 @@ The system uses a flexible Python script (`gen_reading_md.py`) that processes JS
 
 **Command Line Interface**:
 ```bash
-# 进入脚本目录
-cd _对话检索汇编/scripts
-
-# 生成文档
-python gen_reading_md.py -i ../[主题]_索引.json -o ../generated_docs [OPTIONS]
+# 进入脚本目录并生成所有格式文档（一句命令完成）
+cd _对话检索汇编/scripts && python gen_reading_md.py -i ../[主题]_索引.json -o ../generated_docs -l all
 ```
 
 **Available Options**:
