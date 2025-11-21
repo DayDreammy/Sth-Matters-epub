@@ -39,7 +39,7 @@ class SearchAPI:
 
     def search(self, query: str, search_type: str = "all",
                max_results: int = 50, format_type: str = "summary",
-               save_file: bool = False) -> Dict[str, Any]:
+               save_file: bool = False, include_full_content: bool = False) -> Dict[str, Any]:
         """
         执行搜索
 
@@ -47,8 +47,9 @@ class SearchAPI:
             query: 搜索关键词
             search_type: 搜索类型 ('filename', 'content', 'tag', 'all')
             max_results: 最大结果数
-            format_type: 输出格式 ('summary', 'detailed', 'thematic', 'html', 'json')
+            format_type: 输出格式 ('summary', 'detailed', 'thematic', 'full_content', 'html', 'json')
             save_file: 是否保存到文件
+            include_full_content: 是否包含完整原文内容
 
         Returns:
             Dict: 搜索结果
@@ -57,10 +58,12 @@ class SearchAPI:
         print(f"📁 知识库目录: {self.engine.knowledge_base_dir}")
         print(f"📂 搜索路径: {self.engine.search_paths}")
         print(f"🔎 搜索类型: {search_type}")
+        if include_full_content:
+            print(f"📄 包含完整原文内容")
         print("-" * 50)
 
         # 执行搜索
-        results = self.engine.search(query, search_type, max_results)
+        results = self.engine.search(query, search_type, max_results, include_full_content)
 
         print(f"✅ 找到 {len(results)} 个结果")
 
@@ -77,13 +80,13 @@ class SearchAPI:
 
         # 生成输出
         if format_type == "html":
-            content = self.generator.generate_html(results, query)
+            content = self.generator.generate_html(results, query, include_full_content)
             output_format = "html"
         elif format_type == "json":
-            content = self.generator.generate_json(results, query)
+            content = self.generator.generate_json(results, query, include_full_content=include_full_content)
             output_format = "json"
         else:
-            content = self.generator.generate_markdown(results, query, format_type)
+            content = self.generator.generate_markdown(results, query, format_type, include_full_content)
             output_format = "markdown"
 
         # 保存文件
@@ -144,9 +147,10 @@ def main():
                        default="all", help="搜索类型")
     parser.add_argument("-n", "--max-results", type=int, default=50,
                        help="最大结果数")
-    parser.add_argument("-f", "--format", choices=["summary", "detailed", "thematic", "html", "json"],
+    parser.add_argument("-f", "--format", choices=["summary", "detailed", "thematic", "full_content", "html", "json"],
                        default="summary", help="输出格式")
     parser.add_argument("-s", "--save", action="store_true", help="保存到文件")
+    parser.add_argument("--full-content", action="store_true", help="包含完整原文内容")
     parser.add_argument("-d", "--knowledge-base-dir", default="knowledge_base", help="知识库根目录路径")
     parser.add_argument("-p", "--search-paths", nargs="+", help="搜索路径列表（相对于知识库根目录）")
     parser.add_argument("-c", "--config", default="config/config.json", help="配置文件路径")
@@ -223,7 +227,8 @@ def main():
         search_type=args.type,
         max_results=args.max_results,
         format_type=args.format,
-        save_file=args.save
+        save_file=args.save,
+        include_full_content=args.full_content
     )
 
     # 显示结果

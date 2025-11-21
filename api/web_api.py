@@ -36,26 +36,36 @@ def api_search():
 
         search_type = data.get('type', 'all')
         max_results = min(data.get('max_results', 50), 200)  # 限制最大结果数
+        include_full_content = data.get('include_full_content', False)
 
         # 执行搜索
-        results = engine.search(query, search_type, max_results)
+        results = engine.search(query, search_type, max_results, include_full_content)
+
+        results_data = []
+        for r in results:
+            result_item = {
+                "title": r.title,
+                "file_path": r.file_path,
+                "content_preview": r.content_preview,
+                "relevance_score": r.relevance_score,
+                "match_type": r.match_type,
+                "line_numbers": r.line_numbers,
+                "word_count": r.word_count
+            }
+
+            # 如果有完整内容，添加到结果中
+            if include_full_content and r.full_content is not None:
+                result_item["full_content"] = r.full_content
+
+            results_data.append(result_item)
 
         return jsonify({
             "success": True,
             "query": query,
             "search_type": search_type,
             "total_results": len(results),
-            "results": [
-                {
-                    "title": r.title,
-                    "file_path": r.file_path,
-                    "content_preview": r.content_preview,
-                    "relevance_score": r.relevance_score,
-                    "match_type": r.match_type,
-                    "line_numbers": r.line_numbers,
-                    "word_count": r.word_count
-                } for r in results
-            ]
+            "include_full_content": include_full_content,
+            "results": results_data
         })
 
     except Exception as e:
@@ -76,26 +86,28 @@ def api_generate():
         max_results = min(data.get('max_results', 50), 200)
         format_type = data.get('format', 'summary')
         save_file = data.get('save_file', False)
+        include_full_content = data.get('include_full_content', False)
 
         # 执行搜索
-        results = engine.search(query, search_type, max_results)
+        results = engine.search(query, search_type, max_results, include_full_content)
 
         if not results:
             return jsonify({"error": "未找到相关结果"}), 404
 
         # 生成文档
         if format_type == 'html':
-            content = generator.generate_html(results, query)
+            content = generator.generate_html(results, query, include_full_content)
         elif format_type == 'json':
-            content = generator.generate_json(results, query)
+            content = generator.generate_json(results, query, include_full_content=include_full_content)
         else:
-            content = generator.generate_markdown(results, query, format_type)
+            content = generator.generate_markdown(results, query, format_type, include_full_content)
 
         response_data = {
             "success": True,
             "query": query,
             "format": format_type,
             "total_results": len(results),
+            "include_full_content": include_full_content,
             "content": content
         }
 

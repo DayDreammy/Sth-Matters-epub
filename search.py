@@ -49,9 +49,10 @@ def main():
                         default="all", help="搜索类型 (默认: all)")
     parser.add_argument("-n", "--max-results", type=int, default=50,
                         help="最大结果数 (默认: 50)")
-    parser.add_argument("-f", "--format", choices=["summary", "detailed", "thematic", "html", "json"],
+    parser.add_argument("-f", "--format", choices=["summary", "detailed", "thematic", "full_content", "html", "json"],
                         default="summary", help="输出格式 (默认: summary)")
     parser.add_argument("-s", "--save", action="store_true", help="保存结果到文件")
+    parser.add_argument("--full-content", action="store_true", help="包含完整原文内容")
     parser.add_argument("-d", "--knowledge-base-dir",
                         default="knowledge_base", help="知识库根目录路径 (默认: knowledge_base)")
     parser.add_argument("-p", "--search-paths", nargs="+",
@@ -191,7 +192,8 @@ def main():
             search_type=args.type,
             max_results=args.max_results,
             format_type=args.format,
-            save_file=args.save
+            save_file=args.save,
+            include_full_content=args.full_content
         )
 
         if result["success"]:

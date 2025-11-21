@@ -25,6 +25,7 @@ class SearchResult:
     match_type: str  # 'filename', 'content', 'tag'
     line_numbers: List[int]
     word_count: int
+    full_content: Optional[str] = None  # 完整原文内容
 
 
 class IntelligentSearchEngine:
@@ -198,7 +199,8 @@ class IntelligentSearchEngine:
         print(f"索引构建完成: {file_count} 个文件, 总大小 {total_size/1024:.1f} KB")
         return index
 
-    def search(self, query: str, search_type: str = "all", max_results: int = 50) -> List[SearchResult]:
+    def search(self, query: str, search_type: str = "all", max_results: int = 50,
+                include_full_content: bool = False) -> List[SearchResult]:
         """
         执行搜索
 
@@ -206,6 +208,7 @@ class IntelligentSearchEngine:
             query: 搜索关键词
             search_type: 搜索类型 ('filename', 'content', 'tag', 'all')
             max_results: 最大结果数
+            include_full_content: 是否包含完整原文内容
 
         Returns:
             List[SearchResult]: 搜索结果列表
@@ -223,7 +226,7 @@ class IntelligentSearchEngine:
             if search_type in ['filename', 'all']:
                 if query_lower in file_path.name.lower():
                     result = self._create_search_result(
-                        file_path, file_info, query, 'filename', []
+                        file_path, file_info, query, 'filename', [], include_full_content
                     )
                     results.append(result)
 
@@ -232,7 +235,7 @@ class IntelligentSearchEngine:
                 for tag in file_info.get("tags", []):
                     if query_lower in tag.lower():
                         result = self._create_search_result(
-                            file_path, file_info, query, 'tag', []
+                            file_path, file_info, query, 'tag', [], include_full_content
                         )
                         results.append(result)
                         break
@@ -242,7 +245,7 @@ class IntelligentSearchEngine:
                 content_matches = self._search_content(file_path, query)
                 if content_matches:
                     result = self._create_search_result(
-                        file_path, file_info, query, 'content', content_matches
+                        file_path, file_info, query, 'content', content_matches, include_full_content
                     )
                     results.append(result)
 
@@ -325,7 +328,8 @@ class IntelligentSearchEngine:
             return []
 
     def _create_search_result(self, file_path: Path, file_info: Dict[str, Any],
-                            query: str, match_type: str, line_numbers: List[int]) -> SearchResult:
+                            query: str, match_type: str, line_numbers: List[int],
+                            include_full_content: bool = False) -> SearchResult:
         """创建搜索结果对象"""
         # 计算相关性得分
         score = 0.0
@@ -338,6 +342,8 @@ class IntelligentSearchEngine:
 
         # 获取内容预览
         preview = file_info.get("preview", "")
+        full_content = None
+
         if match_type == 'content' and line_numbers:
             try:
                 content = file_path.read_text(encoding='utf-8', errors='ignore')
@@ -349,6 +355,16 @@ class IntelligentSearchEngine:
                         if line:
                             preview_lines.append(f"第{line_num}行: {line}")
                 preview = "\n".join(preview_lines)
+
+                # 如果需要完整内容，直接使用读取的内容
+                if include_full_content:
+                    full_content = content
+            except Exception:
+                pass
+        elif include_full_content:
+            # 对于非内容匹配，如果需要完整内容也读取
+            try:
+                full_content = file_path.read_text(encoding='utf-8', errors='ignore')
             except Exception:
                 pass
 
@@ -359,7 +375,8 @@ class IntelligentSearchEngine:
             relevance_score=score,
             match_type=match_type,
             line_numbers=line_numbers,
-            word_count=file_info.get("word_count", 0)
+            word_count=file_info.get("word_count", 0),
+            full_content=full_content
         )
 
     def get_stats(self) -> Dict[str, Any]:

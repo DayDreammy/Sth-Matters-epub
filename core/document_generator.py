@@ -26,14 +26,15 @@ class DocumentGenerator:
         self.output_dir.mkdir(exist_ok=True)
 
     def generate_markdown(self, results: List[SearchResult], query: str,
-                         layout: str = "summary") -> str:
+                         layout: str = "summary", include_full_content: bool = False) -> str:
         """
         生成Markdown文档
 
         Args:
             results: 搜索结果列表
             query: 搜索关键词
-            layout: 布局类型 ('summary', 'detailed', 'thematic')
+            layout: 布局类型 ('summary', 'detailed', 'thematic', 'full_content')
+            include_full_content: 是否包含完整原文内容
 
         Returns:
             str: 生成的Markdown内容
@@ -43,9 +44,11 @@ class DocumentGenerator:
         if layout == "summary":
             return self._generate_summary_markdown(results, query, timestamp)
         elif layout == "detailed":
-            return self._generate_detailed_markdown(results, query, timestamp)
+            return self._generate_detailed_markdown(results, query, timestamp, include_full_content)
         elif layout == "thematic":
-            return self._generate_thematic_markdown(results, query, timestamp)
+            return self._generate_thematic_markdown(results, query, timestamp, include_full_content)
+        elif layout == "full_content":
+            return self._generate_full_content_markdown(results, query, timestamp)
         else:
             return self._generate_summary_markdown(results, query, timestamp)
 
@@ -84,7 +87,7 @@ class DocumentGenerator:
         return md_content
 
     def _generate_detailed_markdown(self, results: List[SearchResult],
-                                  query: str, timestamp: str) -> str:
+                                  query: str, timestamp: str, include_full_content: bool = False) -> str:
         """生成详细式Markdown文档"""
         md_content = f"""# 详细搜索结果
 
@@ -114,14 +117,25 @@ class DocumentGenerator:
 ```markdown
 {result.content_preview}
 ```
+"""
+
+            # 如果需要完整内容且有完整内容
+            if include_full_content and result.full_content:
+                md_content += f"""
+**完整原文**:
+```markdown
+{result.full_content}
+```
 
 ---
 """
+            else:
+                md_content += "\n---\n"
 
         return md_content
 
     def _generate_thematic_markdown(self, results: List[SearchResult],
-                                  query: str, timestamp: str) -> str:
+                                  query: str, timestamp: str, include_full_content: bool = False) -> str:
         """生成主题式Markdown文档"""
         # 按匹配类型分组
         grouped_results = {}
@@ -163,11 +177,60 @@ class DocumentGenerator:
                 if result.line_numbers:
                     md_content += f"**匹配行**: {result.line_numbers[:3]}{'...' if len(result.line_numbers) > 3 else ''}  \n"
                 md_content += f"**预览**: {result.content_preview[:150]}{'...' if len(result.content_preview) > 150 else ''}\n\n"
+
+                # 如果需要完整内容且有完整内容
+                if include_full_content and result.full_content:
+                    md_content += f"**完整原文**:\n\n```markdown\n{result.full_content}\n```\n\n"
+
                 md_content += "---\n\n"
 
         return md_content
 
-    def generate_html(self, results: List[SearchResult], query: str) -> str:
+    def _generate_full_content_markdown(self, results: List[SearchResult],
+                                      query: str, timestamp: str) -> str:
+        """生成完整内容式Markdown文档"""
+        md_content = f"""# 完整原文搜索结果
+
+**搜索关键词**: `{query}`
+**生成时间**: {timestamp}
+**结果数量**: {len(results)}
+
+---
+
+"""
+
+        if not results:
+            md_content += "未找到相关结果。\n"
+            return md_content
+
+        results.sort(key=lambda x: x.relevance_score, reverse=True)
+
+        for i, result in enumerate(results, 1):
+            md_content += f"""## {i}. {result.title}
+
+**文件路径**: `{result.file_path}`
+**匹配类型**: {result.match_type}
+**相关性得分**: {result.relevance_score:.2f}
+**字数**: {result.word_count:,} 字
+
+"""
+
+            # 显示完整内容
+            if result.full_content:
+                md_content += f"""```markdown
+{result.full_content}
+```
+
+"""
+            else:
+                md_content += "**完整内容不可用**\n\n"
+
+            md_content += "---\n\n"
+
+        return md_content
+
+    def generate_html(self, results: List[SearchResult], query: str,
+                     include_full_content: bool = False) -> str:
         """生成HTML文档"""
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -211,6 +274,12 @@ class DocumentGenerator:
 
             for result in results:
                 match_class = f"match-{result.match_type}"
+                content_display = result.content_preview
+
+                # 如果需要完整内容且有完整内容
+                if include_full_content and result.full_content:
+                    content_display = result.full_content
+
                 html_content += f"""
         <div class="result {match_class}">
             <div class="result-header">
@@ -220,10 +289,11 @@ class DocumentGenerator:
                     匹配类型: {result.match_type} |
                     路径: <code>{result.file_path}</code> |
                     字数: {result.word_count:,}
+                    {' | 包含完整内容' if include_full_content and result.full_content else ''}
                 </div>
             </div>
             <div class="result-content">
-                <div class="preview">{result.content_preview}</div>
+                <div class="preview">{content_display}</div>
             </div>
         </div>
 """
@@ -236,7 +306,7 @@ class DocumentGenerator:
         return html_content
 
     def generate_json(self, results: List[SearchResult], query: str,
-                     metadata: Dict[str, Any] = None) -> Dict[str, Any]:
+                     metadata: Dict[str, Any] = None, include_full_content: bool = False) -> Dict[str, Any]:
         """生成JSON格式结果"""
         timestamp = datetime.now().isoformat()
 
@@ -263,6 +333,11 @@ class DocumentGenerator:
                 "line_numbers": result.line_numbers,
                 "word_count": result.word_count
             }
+
+            # 如果需要完整内容且有完整内容
+            if include_full_content and result.full_content is not None:
+                result_data["full_content"] = result.full_content
+
             json_data["results"].append(result_data)
 
         return json_data
@@ -288,7 +363,7 @@ class DocumentGenerator:
         return str(file_path)
 
     def generate_all_formats(self, results: List[SearchResult], query: str,
-                           base_filename: str = None) -> Dict[str, str]:
+                           base_filename: str = None, include_full_content: bool = False) -> Dict[str, str]:
         """生成所有格式的文档"""
         if not base_filename:
             # 从查询中生成安全的文件名
@@ -299,12 +374,18 @@ class DocumentGenerator:
 
         # 生成各种格式的文档
         formats = [
-            ("summary_markdown", "summary", self.generate_markdown(results, query, "summary")),
-            ("detailed_markdown", "detailed", self.generate_markdown(results, query, "detailed")),
-            ("thematic_markdown", "thematic", self.generate_markdown(results, query, "thematic")),
-            ("html", "html", self.generate_html(results, query)),
-            ("json", "json", self.generate_json(results, query))
+            ("summary_markdown", "summary", self.generate_markdown(results, query, "summary", include_full_content)),
+            ("detailed_markdown", "detailed", self.generate_markdown(results, query, "detailed", include_full_content)),
+            ("thematic_markdown", "thematic", self.generate_markdown(results, query, "thematic", include_full_content)),
+            ("html", "html", self.generate_html(results, query, include_full_content)),
+            ("json", "json", self.generate_json(results, query, include_full_content=include_full_content))
         ]
+
+        # 如果需要完整内容，再生成一个专门的完整内容文档
+        if include_full_content:
+            formats.append(
+                ("full_content_markdown", "full_content", self.generate_markdown(results, query, "full_content"))
+            )
 
         for format_name, format_type, content in formats:
             try:
