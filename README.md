@@ -24,17 +24,25 @@ pip install flask flask-cors
 ### 基本使用
 
 ```bash
-# 基本搜索（默认搜索knowledge_base/Sth-Matters目录）
+# 基本搜索（默认搜索knowledge_base/Sth-Matters目录，返回完整原文）
 python search.py "搜索关键词"
 
 # 指定搜索范围
 python search.py "关键词" -p "Sth-Matters/【文章目录】" "Sth-Matters/沙海拾金"
 
-# 内容搜索
+# 内容搜索（返回包含关键词的完整原文）
 python search.py "关键词" -t content
 
-# 生成HTML格式并保存
+# 生成HTML格式并保存（包含完整原文）
 python search.py "关键词" -f html -s
+
+# 不同输出格式（都默认包含完整原文）
+python search.py "关键词" -f detailed    # 详细格式
+python search.py "关键词" -f thematic     # 主题格式
+python search.py "关键词" -f full_content # 专门全文格式
+
+# 仅显示摘要（不含全文）
+python search.py "关键词" -f summary
 
 # 显示系统统计信息
 python search.py --stats
@@ -51,6 +59,53 @@ python search.py --list-paths
 
 # 启动Web API服务
 python search.py --web
+```
+
+### 🆕 完整原文功能
+
+系统默认返回**完整原文内容**，不再只是片段预览。
+
+#### 全文输出格式对比
+
+- **`summary`** - 概要格式，仅显示文件信息和预览（不含全文）
+- **`detailed`** - 详细格式，包含完整原文内容（默认）
+- **`thematic`** - 主题格式，按匹配类型分组，包含完整原文
+- **`full_content`** - 专门全文格式，最大化原文展示
+- **`html`** - HTML网页格式，包含完整原文
+- **`json`** - JSON数据格式，包含完整原文
+
+#### 全文功能控制
+
+```bash
+# 显式启用全文功能（与默认行为相同）
+python search.py "关键词" --full-content
+
+# 禁用全文功能，仅显示摘要
+python search.py "关键词" -f summary
+
+# 保存完整内容到文件
+python search.py "关键词" --full-content -s
+```
+
+#### API中的全文功能
+
+```bash
+# REST API请求示例
+curl -X POST http://localhost:5000/api/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "搜索关键词",
+    "include_full_content": true
+  }'
+
+curl -X POST http://localhost:5000/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "关键词",
+    "format": "detailed",
+    "include_full_content": true,
+    "save_file": true
+  }'
 ```
 
 ## 📁 项目结构
@@ -102,11 +157,12 @@ intelligent-search-engine/
 
 ### 输出格式
 
-- **summary**: 概要式Markdown文档
-- **detailed**: 详细式Markdown文档
-- **thematic**: 主题式Markdown文档
-- **html**: 交互式HTML网页
-- **json**: 结构化JSON数据
+- **summary**: 概要式Markdown文档（仅文件信息，不含全文）
+- **detailed**: 详细式Markdown文档（包含完整原文，默认行为）
+- **thematic**: 主题式Markdown文档（按类型分组，包含完整原文）
+- **full_content**: 专门全文格式（最大化原文展示）
+- **html**: 交互式HTML网页（包含完整原文）
+- **json**: 结构化JSON数据（包含完整原文）
 
 ### 命令行选项
 
@@ -127,8 +183,9 @@ python search.py [关键词] [选项]
 搜索选项:
   -t, --type          搜索类型 (filename/content/tag/all)
   -n, --max-results   最大结果数 (默认: 50)
-  -f, --format        输出格式 (summary/detailed/thematic/html/json)
+  -f, --format        输出格式 (summary/detailed/thematic/full_content/html/json)
   -s, --save          保存结果到文件
+  --full-content      包含完整原文内容（默认启用，仅在summary格式中禁用）
 
 系统管理:
   -o, --output-dir    输出目录路径 (默认: output)
@@ -163,15 +220,20 @@ python search.py --web
 ### API使用示例
 
 ```bash
-# 搜索API
+# 搜索API（默认包含完整原文）
 curl -X POST http://localhost:5000/api/search \
   -H "Content-Type: application/json" \
-  -d '{"query": "搜索关键词", "type": "content"}'
+  -d '{"query": "搜索关键词", "type": "content", "include_full_content": true}'
 
-# 生成文档API
+# 生成文档API（默认包含完整原文）
 curl -X POST http://localhost:5000/api/generate \
   -H "Content-Type: application/json" \
-  -d '{"query": "关键词", "format": "html", "save_file": true}'
+  -d '{"query": "关键词", "format": "detailed", "include_full_content": true, "save_file": true}'
+
+# 仅获取摘要信息（不含全文）
+curl -X POST http://localhost:5000/api/search \
+  -H "Content-Type: application/json" \
+  -d '{"query": "搜索关键词", "include_full_content": false}'
 ```
 
 ## ⚙️ 配置说明

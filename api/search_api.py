@@ -49,21 +49,30 @@ class SearchAPI:
             max_results: 最大结果数
             format_type: 输出格式 ('summary', 'detailed', 'thematic', 'full_content', 'html', 'json')
             save_file: 是否保存到文件
-            include_full_content: 是否包含完整原文内容
+            include_full_content: 是否包含完整原文内容（默认启用，summary格式除外）
 
         Returns:
             Dict: 搜索结果
         """
+        # 确定是否包含全文内容：
+        # - 如果用户明确指定了--full-content，按照用户的设置
+        # - 如果用户没有指定，summary格式不包含全文，其他格式默认包含全文
+        if include_full_content:
+            actual_include_full_content = True
+        else:
+            actual_include_full_content = format_type != "summary"
+
         print(f"🔍 搜索关键词: '{query}'")
         print(f"📁 知识库目录: {self.engine.knowledge_base_dir}")
         print(f"📂 搜索路径: {self.engine.search_paths}")
         print(f"🔎 搜索类型: {search_type}")
-        if include_full_content:
-            print(f"📄 包含完整原文内容")
+        print(f"📄 输出格式: {format_type}")
+        if actual_include_full_content:
+            print(f"✓ 包含完整原文内容")
         print("-" * 50)
 
         # 执行搜索
-        results = self.engine.search(query, search_type, max_results, include_full_content)
+        results = self.engine.search(query, search_type, max_results, actual_include_full_content)
 
         print(f"✅ 找到 {len(results)} 个结果")
 
@@ -80,13 +89,13 @@ class SearchAPI:
 
         # 生成输出
         if format_type == "html":
-            content = self.generator.generate_html(results, query, include_full_content)
+            content = self.generator.generate_html(results, query, actual_include_full_content)
             output_format = "html"
         elif format_type == "json":
-            content = self.generator.generate_json(results, query, include_full_content=include_full_content)
+            content = self.generator.generate_json(results, query, include_full_content=actual_include_full_content)
             output_format = "json"
         else:
-            content = self.generator.generate_markdown(results, query, format_type, include_full_content)
+            content = self.generator.generate_markdown(results, query, format_type, actual_include_full_content)
             output_format = "markdown"
 
         # 保存文件

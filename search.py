@@ -52,7 +52,7 @@ def main():
     parser.add_argument("-f", "--format", choices=["summary", "detailed", "thematic", "full_content", "html", "json"],
                         default="summary", help="输出格式 (默认: summary)")
     parser.add_argument("-s", "--save", action="store_true", help="保存结果到文件")
-    parser.add_argument("--full-content", action="store_true", help="包含完整原文内容")
+    parser.add_argument("--full-content", action="store_true", help="包含完整原文内容（默认启用，仅在summary格式中禁用）")
     parser.add_argument("-d", "--knowledge-base-dir",
                         default="knowledge_base", help="知识库根目录路径 (默认: knowledge_base)")
     parser.add_argument("-p", "--search-paths", nargs="+",
