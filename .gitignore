@@ -1,11 +1,77 @@
 
-# 忽略 Obsidian 配置文件
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.icloud
+
+# Obsidian 配置文件
 .obsidian/app.json
 .obsidian/workspace.json
+.obsidian/plugins/
 
-# 忽略 macOS 系统文件
-.DS_Store
-**/.DS_Store
+# Project specific - 生成的文档和索引
+_对话检索汇编/generated_docs/
+_对话检索汇编/*_索引.json
+_对话检索汇编/temp/
+_对话检索汇编/logs/
+*.log
+output/
+temp/
+cache/
 
-# 忽略 iCloud 备份文件
-*.icloud
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

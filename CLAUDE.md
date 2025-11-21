@@ -4,151 +4,192 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a comprehensive Chinese knowledge management repository containing organized learning notes and articles from a Chinese author. The repository includes a sophisticated document retrieval and generation system that performs deep search on specific topics and generates multi-format reading documents.
+This is a Chinese intelligent search system that provides efficient document retrieval and content analysis capabilities. The system features a command-line interface and web API for searching through a comprehensive Chinese knowledge base, with support for multiple output formats including Markdown, HTML, and JSON.
 
-## Primary Task: Deep Search System
+**Note**: The repository contains two systems:
+1. **Current Active System**: An intelligent search engine (`search.py`, `core/`, `api/`)
+2. **Legacy Deep Search System**: Referenced in documentation but directories not currently present (`_对话检索汇编/`)
 
-The core functionality of this repository is to perform deep search on any given topic within the knowledge base. The system follows a structured four-phase workflow:
+This CLAUDE.md focuses on the current active intelligent search system.
 
-### Phase 1: Initial Deep Search
-**Objective**: Conduct comprehensive multi-angle search to create a foundational index
+## Development Commands
 
-**Search Strategy**:
-- **Multi-dimensional approach**: Search from various perspectives and aspects
-- **File-level search**: Scan filenames and directory structures using the Chinese Library Classification system
-- **Content-level search**: Full-text search within all Markdown files
-- **Tag-based search**: Leverage the comprehensive tagging system
-- **Semantic search**: Understand concepts beyond simple keyword matching
+### Running the System
 
-**Output**: JSON index containing:
-- Original article content and metadata
-- Zhihu links and source references
-- Content categorization and tagging
-- Word counts and relevance scoring
-- Key concept extraction
-
-### Phase 2: Concept Expansion
-**Objective**: Deepen understanding and extend search scope based on initial results
-
-**Process**:
-- **Internal deepening**: Analyze key concepts from Phase 1 results
-- **External expansion**: Identify related concepts and broader themes
-- **Relationship mapping**: Establish connections between concepts
-- **Contextual enrichment**: Find supporting and contrasting viewpoints
-
-**Search Enhancement**:
-- Extract key concepts from initial results
-- Search for related terminology and broader themes
-- Identify cross-disciplinary connections
-- Find practical applications and theoretical frameworks
-
-### Phase 3: Result Integration
-**Objective**: Combine both search phases into a comprehensive index
-
-**Integration Process**:
-- Merge initial search results with expanded concepts
-- Remove duplicates and resolve conflicts
-- Establish hierarchical relationships between concepts
-- Create unified categorization system
-- Generate comprehensive metadata
-
-**Final Index Structure**:
-```json
-{
-  "metadata": {
-    "topic": "搜索主题",
-    "search_date": "2025-08-30",
-    "total_sources": 25,
-    "description": "Comprehensive topic analysis"
-  },
-  "sources": [
-    {
-      "id": 1,
-      "title": "文章标题",
-      "file_path": "完整文件路径",
-      "zhihu_link": "知乎原文链接",
-      "category": "分类标签",
-      "tags": ["相关标签"],
-      "content_preview": "内容预览",
-      "word_count": 1500,
-      "key_concepts": ["关键概念"]
-    }
-  ],
-  "relationships": {
-    "core_concepts": [],
-    "related_topics": [],
-    "practical_applications": [],
-    "critical_viewpoints": []
-  }
-}
-```
-
-### Phase 4: Document Generation
-**Objective**: Generate multiple format documents from the integrated index
-
-**JSON Index File Storage**:
-- Save the integrated JSON index from Phase 3 to: `_对话检索汇编/[主题]_索引.json`
-- Example file path: `_对话检索汇编/社会化_索引.json`
-
-**Document Generator Tool**: 
-The system uses a flexible Python script (`gen_reading_md.py`) that processes JSON index files and generates various document formats.
-
-**Script Location**: `_对话检索汇编/scripts/gen_reading_md.py`
-
-**Command Line Interface**:
+**Basic Search Operations:**
 ```bash
-# 进入脚本目录并生成所有格式文档（一句命令完成）
-cd _对话检索汇编/scripts && python gen_reading_md.py -i ../[主题]_索引.json -o ../generated_docs -l all
+# Basic search (default searches knowledge_base/9a directory)
+python search.py "搜索关键词"
+
+# Search specific directories
+python search.py "关键词" -p "knowledge_base/Sth-Matters/【文章目录】" "knowledge_base/Sth-Matters/沙海拾金"
+
+# Content-only search
+python search.py "关键词" -t content
+
+# Generate HTML format and save
+python search.py "关键词" -f html -s
+
+# Use predefined search profiles
+python search.py --profile articles    # Search articles only
+python search.py --profile highlights   # Search highlights and excerpts
+
+# Display system statistics
+python search.py --stats
+
+# List current search paths
+python search.py --list-paths
+
+# Show available search profiles
+python search.py --profiles
 ```
 
-**Available Options**:
-- `-i/--index`: JSON索引文件路径 (必需)
-- `-o/--output`: 输出目录路径 (必需)
-- `-l/--layout`: 文档布局类型 (thematic/source_based/concepts/summary/html/all, 默认all)
-- `-t/--topic`: 自定义主题名称
-
-
-**Usage Examples**:
+**Web API Operations:**
 ```bash
-# 生成所有格式文档
-python gen_reading_md.py -i ../社会化_索引.json -o ../generated_docs
+# Start Web API service
+python search.py --web
+# Service runs on http://localhost:5000
 
-# 生成特定格式文档
-python gen_reading_md.py -i ../社会化_索引.json -o ../generated_docs -l thematic
-
-# 生成HTML文档并自定义主题
-python gen_reading_md.py -i ../社会化_索引.json -o ../generated_docs -l html -t "我的主题"
-
-# 生成epub电子书（适合微信读书等移动端阅读）
-python generate_epub_cli.py -i ../索引文件.json -o ../generated_docs
-python generate_epub_cli.py -i ../索引文件.json -o ../generated_docs -t "我的主题"
-
+# Install dependencies for web API
+pip install flask flask-cors
 ```
 
-**Output Directory Structure**:
+**System Management:**
+```bash
+# Rebuild search index
+python search.py --rebuild
+
+# View all available options
+python search.py --help
 ```
-_对话检索汇编/
-├── generated_docs/
-│   ├── [主题]_thematic_文档.md
-│   ├── [主题]_source_based_文档.md
-│   ├── [主题]_concepts_文档.md
-│   ├── [主题]_summary_文档.md
-│   └── [主题]_html_文档.html
-│   └── [主题]_epub_文档.epub
-├── scripts/
-│   └── gen_reading_md.py
-└── [主题]_索引.json
+
+### Installation and Setup
+
+**Dependencies:**
+```bash
+# Core functionality (Python standard library only)
+# No additional dependencies required
+
+# For Web API functionality
+pip install -r requirements.txt
+
+# Development dependencies
+pip install pytest black flake8
 ```
+
+### Testing and Development
+
+**Code Quality:**
+```bash
+# Format code
+black *.py core/ api/
+
+# Lint code
+flake8 *.py core/ api/
+
+# Run tests (when available)
+pytest
+```
+
+## System Architecture
+
+### Core Components
+
+**Search Engine (`core/search_engine.py`)**:
+- `IntelligentSearchEngine`: Main search engine class
+- `SearchResult`: Data class for search results
+- Multi-dimensional search: filename, content, tag, and combined search
+- Configurable search paths and file type filtering
+- Memory caching for performance optimization
+
+**Document Generator (`core/document_generator.py`)**:
+- `DocumentGenerator`: Converts search results to various formats
+- Support for summary, detailed, thematic, HTML, and JSON outputs
+- Template-based document generation
+- File saving and organization capabilities
+
+**API Layer**:
+- `api/search_api.py`: `SearchAPI` class providing unified interface
+- `api/web_api.py`: Flask-based REST API service
+- Command-line interface through `search.py`
+
+### Configuration System
+
+**Main Configuration (`config/config.json`)**:
+- Search engine settings (paths, file types, limits)
+- Document generator preferences
+- Web API configuration (host, port, CORS)
+- Search profiles for different scopes
+- Feature toggles and logging settings
+
+**Search Profiles**:
+- `default`: Standard knowledge base search
+- `all`: Entire knowledge base search
+- `articles`: Article directory only
+- `highlights`: Highlights and excerpts
+
+### Knowledge Base Structure
+
+**Directory Organization**:
+```
+knowledge_base/
+└── Sth-Matters/           # Main knowledge base
+    ├── 【文章目录】/         # Primary articles
+    ├── 沙海拾金/           # Curated highlights
+    ├── 摘抄本/             # Excerpts and quotes
+    ├── 待归档/             # Pending organization
+    └── 其他资料...         # Additional materials
+```
+
+**File Support**: `.md`, `.txt`, `.json`, `.html`, `.htm`
+
+### API Endpoints (Web API)
+
+When running `python search.py --web`, the following endpoints are available:
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | `/api/search` | Execute search |
+| POST | `/api/generate` | Generate documents |
+| GET | `/api/stats` | Get system statistics |
+| POST | `/api/rebuild` | Rebuild index |
+| GET | `/api/profiles` | List search profiles |
+| POST | `/api/profile/<name>` | Use specific profile |
+| GET/POST | `/api/paths` | Get/set search paths |
+| GET | `/api/health` | Health check |
+| GET | `/api/download/<filename>` | Download files |
+
+### Search Types
+
+**Available Search Types**:
+- `filename`: File name matching
+- `content`: Full-text content search
+- `tag`: Tag search (supports #tag format)
+- `all`: Combined search (default)
 
 **Output Formats**:
-1. **EPUB Electronic Books**: Optimized for mobile reading, especially WeChat Reading
-2. **Markdown Documents**: Multiple layouts (thematic, source-based, concepts, summary)
-3. **HTML Documents**: Web-friendly format with interactive navigation
-4. **Reading Compilations**: Organized by theme and relevance
+- `summary`: Concise Markdown overview
+- `detailed`: Comprehensive Markdown report
+- `thematic`: Topic-organized Markdown
+- `html`: Interactive HTML document
+- `json`: Structured JSON data
 
-**Layout Types**:
-- **thematic**: 按主题分类的文档
-- **source_based**: 按来源分组的文档
-- **concepts**: 按关键概念组织的文档
-- **summary**: 内容概要文档
-- **html**: 交互式HTML文档
+### Key Implementation Details
+
+**Search Algorithm**:
+- Multi-dimensional matching with relevance scoring
+- Support for fuzzy matching and exact matching
+- Content preview extraction with highlighting
+- Line number tracking for content matches
+
+**Performance Features**:
+- In-memory caching of search indices
+- Configurable result limits (default: 50, max: 200)
+- Incremental index updates
+- File size and type filtering
+
+**Extensibility**:
+- Plugin-ready architecture for new search types
+- Configurable output templates
+- Custom search profiles
+- Modular component design

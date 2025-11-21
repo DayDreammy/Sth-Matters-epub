@@ -19,7 +19,9 @@
       "Bash(taskkill:*)",
       "Read(/D:\\d D:\\yy\\Sth-Matters\\_对话检索汇编/**)",
       "Bash(done)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

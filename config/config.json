@@ -1,0 +1,65 @@
+{
+  "search_engine": {
+    "knowledge_base_directory": "knowledge_base",
+    "default_search_paths": ["Sth-Matters"],
+    "supported_extensions": [".md", ".txt", ".json", ".html", ".htm"],
+    "max_results_default": 50,
+    "max_results_limit": 200,
+    "cache_enabled": true,
+    "auto_rebuild_interval": 3600,
+    "search_scope": {
+      "include_subdirectories": true,
+      "exclude_patterns": [".git", "__pycache__", "node_modules", ".DS_Store"],
+      "max_file_size": 104857600
+    }
+  },
+  "document_generator": {
+    "output_directory": "output",
+    "default_format": "summary",
+    "preview_length": 200,
+    "max_content_lines": 10
+  },
+  "web_api": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "debug": false,
+    "cors_enabled": true,
+    "rate_limit": {
+      "enabled": false,
+      "requests_per_minute": 60
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "logs/search_engine.log"
+  },
+  "features": {
+    "semantic_search": false,
+    "fuzzy_matching": true,
+    "tag_extraction": true,
+    "auto_categorization": true
+  },
+  "search_profiles": {
+    "default": {
+      "name": "默认搜索",
+      "paths": ["Sth-Matters"],
+      "description": "搜索默认知识库内容"
+    },
+    "all": {
+      "name": "全库搜索",
+      "paths": ["*"],
+      "description": "搜索整个知识库"
+    },
+    "articles": {
+      "name": "文章搜索",
+      "paths": ["Sth-Matters/【文章目录】"],
+      "description": "仅搜索文章目录"
+    },
+    "highlights": {
+      "name": "精华内容",
+      "paths": ["Sth-Matters/沙海拾金", "Sth-Matters/摘抄本"],
+      "description": "搜索精华内容和摘抄"
+    }
+  }
+}
