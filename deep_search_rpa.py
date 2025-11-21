@@ -23,6 +23,52 @@ class DeepSearchRPA:
         self.generated_docs_dir = os.path.join(self.base_dir, "_对话检索汇编", "generated_docs")
         self.index_dir = os.path.join(self.base_dir, "_对话检索汇编")
 
+    def _find_claude_cli(self) -> Optional[str]:
+        """
+        自动检测Claude CLI的路径，支持Linux和Windows
+
+        Returns:
+            str or None: Claude CLI的路径，如果未找到则返回None
+        """
+        import platform
+        import shutil
+
+        system = platform.system().lower()
+
+        # 1. 首先尝试从PATH中查找
+        claude_path = shutil.which("claude")
+        if claude_path:
+            print(f"在PATH中找到Claude CLI: {claude_path}")
+            return claude_path
+
+        # 2. 如果PATH中没有，尝试常见安装位置
+        if system == "windows":
+            # Windows常见路径
+            possible_paths = [
+                os.path.expanduser(r"~/AppData/Local/npm/claude.cmd"),
+                os.path.expanduser(r"~/AppData/Roaming/npm/claude.cmd"),
+                r"C:\Program Files\nodejs\claude.cmd",
+                r"C:\Users\%USERNAME%\AppData\Local\Programs\Microsoft VS Code\bin\claude.cmd"
+            ]
+        else:
+            # Linux/macOS常见路径
+            possible_paths = [
+                "/usr/bin/claude",
+                "/usr/local/bin/claude",
+                os.path.expanduser("~/.local/bin/claude"),
+                os.path.expanduser("~/bin/claude"),
+                "/opt/claude/bin/claude"
+            ]
+
+        for path in possible_paths:
+            if os.path.exists(path):
+                print(f"在常见位置找到Claude CLI: {path}")
+                return path
+
+        # 3. 如果都找不到，返回None
+        print("未找到Claude CLI，请确保已正确安装")
+        return None
+
     def run_claude_search(self, topic: str) -> Dict[str, Any]:
         """
         执行Claude CLI命令进行深度搜索
@@ -35,9 +81,18 @@ class DeepSearchRPA:
         """
         print(f"开始为主题 '{topic}' 执行深度搜索...")
 
-        # 构造Claude CLI命令（使用完整路径）
+        # 构造Claude CLI命令（自动检测路径）
         prompt = f"请根据CLAUDE.md中定义的流程，对{topic}进行一次完整的深度搜索和文档生成。"
-        claude_path = r"C:\Users\yy\AppData\Roaming\npm\claude.cmd"
+
+        # 自动检测Claude CLI路径
+        claude_path = self._find_claude_cli()
+        if claude_path is None:
+            return {
+                "success": False,
+                "error": "未找到Claude CLI，请确保已正确安装",
+                "returncode": -3
+            }
+
         command = [
             claude_path,
             "-p", prompt,

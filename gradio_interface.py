@@ -274,7 +274,7 @@ def main():
 
     interface.launch(
         server_name="0.0.0.0",
-        server_port=7860,
+        server_port=7899,
         share=False,
         show_error=True,
         show_api=True

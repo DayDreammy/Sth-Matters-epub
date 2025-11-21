@@ -1,0 +1,351 @@
+{
+  "metadata": {
+    "total_unique_tags": 205,
+    "total_tag_occurrences": 3593,
+    "build_date": "2025-08-30"
+  },
+  "tag_categories": {
+    "_专题合集": {
+      "name": "专题合集",
+      "description": "Special Collections",
+      "subcategories": {
+        "合集1-概念与定义": {
+          "count": 202
+        },
+        "合集2-一些推荐": {
+          "count": 75
+        },
+        "合集3-Covid疫情": {
+          "count": 55
+        },
+        "合集4-战争论": {
+          "count": 252
+        },
+        "合集6-个人信仰": {
+          "count": 151,
+          "subcategories": {
+            "A-Caritas": {
+              "count": 109,
+              "subcategories": {
+                "1-爱": {
+                  "count": 109
+                }
+              }
+            },
+            "B-其他信仰": {
+              "count": 42
+            }
+          }
+        }
+      }
+    },
+    "1-个人成长": {
+      "name": "个人成长",
+      "description": "Personal Growth",
+      "subcategories": {
+        "1-内在建设": {
+          "count": 221,
+          "subcategories": {
+            "1A-品格": {
+              "count": 115,
+              "subcategories": {
+                "1c-价值观": {
+                  "count": 66
+                },
+                "1b-品味": {
+                  "count": 49
+                }
+              }
+            },
+            "1B-修养": {
+              "count": 59
+            },
+            "1C-自强": {
+              "count": 96
+            },
+            "1D-志向": {
+              "count": 43
+            }
+          }
+        },
+        "3-处世之道": {
+          "count": 378,
+          "subcategories": {
+            "3a-人身安全": {
+              "count": 136,
+              "subcategories": {
+                "1-保护自己": {
+                  "count": 136,
+                  "subcategories": {
+                    "1b-危险迹象": {
+                      "count": 51
+                    },
+                    "1c-警惕策略": {
+                      "count": 68
+                    }
+                  }
+                },
+                "2-保护他人": {
+                  "count": 42
+                }
+              }
+            },
+            "3c-文责意识": {
+              "count": 83
+            },
+            "3e-社交规范": {
+              "count": 83
+            },
+            "3f-行为准则": {
+              "count": 60
+            },
+            "3g-冲突处理": {
+              "count": 79
+            },
+            "3h-待人接物": {
+              "count": 47
+            }
+          }
+        },
+        "4-心理建设": {
+          "count": 111,
+          "subcategories": {
+            "4a-心态调整": {
+              "count": 72
+            },
+            "4c-情绪管理": {
+              "count": 39
+            }
+          }
+        },
+        "5-核心能力": {
+          "count": 545,
+          "subcategories": {
+            "5a-核心能力总论": {
+              "count": 75,
+              "subcategories": {
+                "论学习": {
+                  "count": 75
+                }
+              }
+            },
+            "5b-学逻辑": {
+              "count": 105,
+              "subcategories": {
+                "怀疑的艺术": {
+                  "count": 60
+                },
+                "信源管理": {
+                  "count": 45
+                }
+              }
+            },
+            "5c-学哲学": {
+              "count": 106,
+              "subcategories": {
+                "中国哲学": {
+                  "count": 57
+                },
+                "西洋哲学": {
+                  "count": 49
+                }
+              }
+            },
+            "5d-学语文": {
+              "count": 59
+            },
+            "5f-做计划": {
+              "count": 44
+            },
+            "5g-学投资": {
+              "count": 72
+            },
+            "5h-做学术": {
+              "count": 75
+            }
+          }
+        }
+      }
+    },
+    "2-亲密关系": {
+      "name": "亲密关系",
+      "description": "Intimate Relationships",
+      "subcategories": {
+        "1-交往准则": {
+          "count": 482,
+          "subcategories": {
+            "1a-爱的原理": {
+              "count": 80
+            },
+            "1b-爱的禁忌": {
+              "count": 70
+            },
+            "1c-隐私与授信": {
+              "count": 52
+            },
+            "1e-择偶标准": {
+              "count": 52
+            },
+            "1f-银子弹": {
+              "count": 145
+            }
+          }
+        },
+        "2-婚姻家庭": {
+          "count": 227,
+          "subcategories": {
+            "2a-婚姻关系": {
+              "count": 68
+            },
+            "2b-家庭伦理": {
+              "count": 159
+            }
+          }
+        }
+      }
+    },
+    "3-家庭伦理": {
+      "name": "家庭伦理",
+      "description": "Family Ethics",
+      "subcategories": {
+        "2-亲子关系": {
+          "count": 159,
+          "subcategories": {
+            "2b-家庭教育": {
+              "count": 159
+            }
+          }
+        },
+        "2c-为人父母": {
+          "count": 55
+        }
+      }
+    },
+    "4-职业发展": {
+      "name": "职业发展",
+      "description": "Career Development",
+      "subcategories": {
+        "1-态度伦理": {
+          "count": 135
+        },
+        "2-选择与规划": {
+          "count": 75
+        },
+        "3-职业分析": {
+          "count": 55
+        },
+        "4-职业道德": {
+          "count": 94
+        },
+        "6-经营策略": {
+          "count": 76
+        }
+      }
+    },
+    "5-社会科学": {
+      "name": "社会科学",
+      "description": "Social Sciences",
+      "subcategories": {
+        "1-社会学": {
+          "count": 57,
+          "subcategories": {
+            "1a-社会学总论": {
+              "count": 57
+            }
+          }
+        },
+        "2-政治学": {
+          "count": 180,
+          "subcategories": {
+            "1a-政治学总论": {
+              "count": 57
+            },
+            "1b-政治制度": {
+              "count": 63,
+              "subcategories": {
+                "公权力问题": {
+                  "count": 60
+                }
+              }
+            },
+            "1c-国际关系": {
+              "count": 40
+            },
+            "2g-社会治理": {
+              "count": 111,
+              "subcategories": {
+                "社会保障": {
+                  "count": 48
+                },
+                "社会发展": {
+                  "count": 63
+                }
+              }
+            }
+          }
+        },
+        "4-军事学": {
+          "count": 48,
+          "subcategories": {
+            "8-国防防务": {
+              "count": 48
+            }
+          }
+        }
+      }
+    },
+    "6-文化艺术": {
+      "name": "文化艺术",
+      "description": "Culture & Arts",
+      "subcategories": {
+        "1-艺术总论": {
+          "count": 47
+        },
+        "2-语言文学": {
+          "count": 48,
+          "subcategories": {
+            "2b-新闻学": {
+              "count": 48,
+              "subcategories": {
+                "新闻媒体": {
+                  "count": 48
+                }
+              }
+            }
+          }
+        },
+        "3-影视与戏剧": {
+          "count": 47
+        },
+        "4-技艺": {
+          "count": 47,
+          "subcategories": {
+            "摄影": {
+              "count": 47
+            },
+            "绘画与设计": {
+              "count": 47
+            },
+            "书法": {
+              "count": 47
+            },
+            "音乐": {
+              "count": 47
+            }
+          }
+        },
+        "5-文化娱乐": {
+          "count": 122,
+          "subcategories": {
+            "自媒体": {
+              "count": 75
+            },
+            "游戏": {
+              "count": 47
+            }
+          }
+        }
+      }
+    }
+  }
+}
