@@ -43,5 +43,5 @@
 - [x] 修改 `src/main.py` 的Gradio界面，添加“快速搜索”与“深度搜索”的切换选项
 - [x] 更新 `evaluate.py` 脚本，添加针对快速搜索功能的集成测试
 - [x] 确保新的 `evaluate.py` 测试通过
-- [ ] 将 `feature/quick-search` 分支合并到当前分支，并删除该特性分支
+- [x] 将 `feature/quick-search` 分支合并到当前分支，并删除该特性分支
 
