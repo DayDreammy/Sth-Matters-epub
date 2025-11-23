@@ -30,3 +30,18 @@
 - [x] 创建 `plan.md`。
 - [x] 创建 `context.md`。
 - [x] 创建 `tasks.md`。
+
+---
+# Task List: Quick Search Feature
+
+## Pending
+- [x] 创建新Git分支 `feature/quick-search`
+- [x] 创建 `src/quick_search.py` 模块用于实现核心搜索逻辑
+- [x] 在 `src/quick_search.py` 中实现文件遍历、关键词匹配、信息提取（标题、原文、字数、知乎链接）功能
+- [x] 确保 `quick_search.py` 输出与文档生成器兼容的JSON索引文件
+- [x] 在 `src/main.py` 中新增 `quick_search_and_send` 方法作为新功能的业务流程编排
+- [x] 修改 `src/main.py` 的Gradio界面，添加“快速搜索”与“深度搜索”的切换选项
+- [x] 更新 `evaluate.py` 脚本，添加针对快速搜索功能的集成测试
+- [x] 确保新的 `evaluate.py` 测试通过
+- [ ] 将 `feature/quick-search` 分支合并到当前分支，并删除该特性分支
+

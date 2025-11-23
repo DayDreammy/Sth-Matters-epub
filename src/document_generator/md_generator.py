@@ -238,22 +238,25 @@ class MDDocumentGenerator:
             for source in sources:
                 output.append(self._format_source_header(source))
 
-                # 读取原文内容
-                content = self._read_source_file(source['file_path'])
+                # --- MODIFICATION START ---
+                # Add Word Count and Zhihu Link if they exist, for Quick Search compatibility
+                if 'word_count' in source:
+                    output.append(f"**字数:** {source['word_count']}\n\n")
+                if source.get('zhihu_link'):
+                    output.append(f"**知乎链接:** {source['zhihu_link']}\n\n")
 
-                # 提取主要引用（这里简化处理，实际可以根据需要更精确地提取）
-                output.append(f"> {source['content_preview']}\n\n")
-
-                # 如果内容较长，可以添加更多原文
-                if len(content) > 500:
-                    output.append(
-                        content[:1000] + "..." if len(content) > 1000 else content)
-                    output.append("\n\n")
+                # Add the full original content with a clear header
+                output.append("### 原文\n\n---\n\n")
+                if 'full_content' in source:
+                    # Prefer the full_content passed directly from quick_search
+                    output.append(source['full_content'])
                 else:
+                    # Fallback to reading from file_path for deep_search compatibility
+                    content = self._read_source_file(source['file_path'])
                     output.append(content)
-                    output.append("\n\n")
-
-                output.append("---\n\n")
+                
+                output.append("\n\n---\n\n")
+                # --- MODIFICATION END ---
 
         return ''.join(output)
 
