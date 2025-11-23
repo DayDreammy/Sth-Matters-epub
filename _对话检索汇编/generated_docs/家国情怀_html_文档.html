@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家国情怀 - 知识文档</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .metadata {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .toc {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .toc h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .toc a:hover {
+            background-color: #f0f0f0;
+        }
+        .source {
+            background: white;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .source-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .source-title {
+            color: #333;
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        .source-meta {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .source-meta .meta-item {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 5px;
+        }
+        .source-content {
+            padding: 20px;
+        }
+        .content-preview {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        .original-content {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: inherit;
+            line-height: 1.8;
+        }
+        .original-content h1, .original-content h2, .original-content h3, 
+        .original-content h4, .original-content h5, .original-content h6 {
+            color: #333;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .original-content h1 {
+            font-size: 2em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .original-content h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+        .original-content h3 {
+            font-size: 1.25em;
+        }
+        .original-content p {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+        .original-content ul, .original-content ol {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+        .original-content li {
+            margin-bottom: 8px;
+        }
+        .original-content blockquote {
+            border-left: 4px solid #667eea;
+            margin: 16px 0;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            font-style: italic;
+        }
+        .original-content pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        .original-content code {
+            background: #e2e8f0;
+            color: #2d3748;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        .original-content pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        .original-content a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .original-content a:hover {
+            text-decoration: underline;
+        }
+        .original-content hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 24px 0;
+        }
+        .original-content strong {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        .original-content em {
+            font-style: italic;
+            color: #4a5568;
+        }
+        .category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .zhihu-link {
+            color: #0066ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .zhihu-link:hover {
+            text-decoration: underline;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .header {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>家国情怀</h1>
+        <p>知识文档 - 便于阅读的HTML格式</p>
+    </div>
+    
+    <div class="metadata">
+        <h2>文档信息</h2>
+        <div class="source-meta">
+            <span class="meta-item"><strong>生成日期:</strong> 2025-10-02 21:20:48</span>
+            <span class="meta-item"><strong>主题:</strong> 家国情怀</span>
+            <span class="meta-item"><strong>来源数量:</strong> 15</span>
+        </div>
+    </div>
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">15</div>
+            <div class="stat-label">来源数量</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">16300</div>
+            <div class="stat-label">总字数</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">6</div>
+            <div class="stat-label">分类数量</div>
+        </div>
+    </div>
+    <div class="toc">
+        <h2>📚 目录</h2>
+        <ul>            <li><a href="#政治学-中国政治制度">政治学-中国政治制度 (2篇)</a></li>            <li><a href="#社会学-社会学总论">社会学-社会学总论 (4篇)</a></li>            <li><a href="#伦理学-国家伦理">伦理学-国家伦理 (1篇)</a></li>            <li><a href="#伦理学-个人伦理">伦理学-个人伦理 (1篇)</a></li>            <li><a href="#政治学-国际关系">政治学-国际关系 (1篇)</a></li>            <li><a href="#经济学-贸易">经济学-贸易 (1篇)</a></li>
+        </ul>
+    </div>    <div class="source" id="政治学-中国政治制度">
+        <div class="source-header">
+            <h2 class="source-title">政治学-中国政治制度</h2>
+            <div class="source-meta">
+                <span class="category">政治学-中国政治制度</span>
+                <span class="meta-item">共 2 篇文章</span>
+            </div>
+        </div>
+        <div class="source-content">            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">爱国</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/451566522/answer/2349951843" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【5 - 社会科学】\570 - 政治\573 - 中国政治制度\爱国.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 2100</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">政治学-中国政治制度</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">爱国</span> <span class="tag">个人构建</span> <span class="tag">爱的责任</span> <span class="tag">哲学伦理</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">个人化的爱国</span> <span class="tag">爱的责任</span> <span class="tag">敬酒与罚酒</span> <span class="tag">爱的双赢策略</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">在绝对的意义上，爱国的人每个爱的都是自己心目中的一个'自定义的国'。你爱的是你的国，ta爱的是ta的国。但爱国主义的真正争议，其实并不在于'国'上，而在于'爱'上。人为什么应该爱国？因为人不应该拒绝一种可以兴起爱的因缘。</div>                    <div class="original-content">
+                        <h1>爱国</h1>
+<a href="https://www.zhihu.com/question/451566522/answer/2349951843" target="_blank">如何从哲学伦理角度看待爱国行为？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: [编辑于 2022-02-16]</blockquote>
+<blockquote>Link: [[爱]] [[可爱]] [[谁先来]] [[对人类失望]] [[民族种族]] [[你讨厌的那种人]] [[所谓国籍]] [[爱国行为]] [[爱国爱党]]</blockquote>
+<blockquote>Category: #【答集】/04-社科答集</blockquote>
+<blockquote>Tag: #5-社会科学/1-社会学/1a-社会学总论  #1-个人成长/5-核心能力/5b-学逻辑/怀疑的艺术  #<em>专题合集/合集6-个人信仰/A-Caritas/1-爱</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p>你爱的国和你隔壁同学爱的那个国，真的是同一国吗？</p>
+<p>即使你把“国”的定义指向从“政府”转向到“这片土地上的人民”，你们关于“人民”的定义真的是重合的吗？</p>
+<strong>在绝对的意义上，爱国的人每个爱的都是自己心目中的一个“自定义的国”。</strong>
+<p>你爱的是你的国，ta爱的是ta的国。</p>
+<p>不可否认，你的国和ta对国在很多方面、很多内容上有千丝万缕的联系和交叠，在很多上下文里甚至不存在可以察觉的区别。</p>
+<p>问题是，这仍然在本质上没有改变你们所说的那个国在整体上、绝对意义上不重合的。</p>
+<p>比如，在你心里的这个国里的叛徒和罪人和ta心里的那个版本恐怕在很大意义上有所不同。</p>
+<p>所以，在根本的意义上说，爱国的人爱的是自己内心的一种个人构建，一个私有的——很不幸也只能是私有的——名为“国家”的构建。</p>
+<p>而“不爱国”的人则分为三层境界：</p>
+<p>第一层境界，是不爱别人所构建的那个国。</p>
+<p>“如果“国”就是你定义的那个样子，我不爱你说的这个定义所指向的那个对象。”</p>
+<p>第二层境界，是<strong>ta自己也不爱自己所构建的那个国</strong>。</p>
+<p>即在ta的心里对自己作为理念的上帝所构建的这个名为国的事物也无热爱。</p>
+<p>第三层境界，是作为理念的上帝，当事人自己根本上拒绝构建一个可以产生感情（不论这感情本身的向背）的“国”的概念，而要将之降格为“想象的共同体”，“虚构的非实在物”，“窃取了大义名分的利益共同体”之类的虚无幻影。</p>
+<p>心中本无国，何处谈爱憎？</p>
+<strong>但爱国主义的真正争议，其实并不在于“国”上，而在于“爱”上。</strong>
+<strong>人为什么应该爱国？</strong>
+<strong>因为人不应该拒绝一种可以兴起爱的因缘。</strong>
+<strong>这个世界上的爱永远都太少了，如果有任何一种理由，可以激起你去爱任何一群人，你都不应该拒绝它。</strong>
+<strong>无论它有多“粗糙”，多经不起“质疑”。</strong>
+<strong>那根本就不重要。</strong>
+<p>你决定要去爱，你总能找到足够的勇气。在这种勇气之下，任何因由都是足够的。</p>
+<p>ta是你的同族、ta是你的同乡、ta是你的故交……</p>
+<p>乃至“ta是一个人”。</p>
+<p>乃至“ta是一条命”。</p>
+<p>都已经足够了。</p>
+<p>ta是你的国人，又有何不可？对这“国人”的身份何必如此计较？</p>
+<p>这人低于标准线一毫米，那人不符合两个鉴别标准，那又如何？</p>
+<strong>对爱国主义的种种挑剔、质疑，说到底，是想找到足够的理由回避一种爱的责任和义务。</strong>
+<p>人为什么要对该爱谁、不该爱谁锱铢必较，“宁缺毋滥”？</p>
+<strong>因为这样想的人误以为爱是吃亏的，是损失，是屈辱，是被动，是债务，是麻烦。</strong>
+<strong>所以，除非实在没有理由推脱，否则推脱为上，少少益善。</strong>
+<strong>这是对爱极端无知而又极端傲慢自以为这事简单可以无师自通，总是乱搞一气导致惨败而形成的反向适应。</strong>
+<strong>明明是自己不学无术，却反向认定“爱不可能”，然后基于“爱不可能”推出“爱就要吃亏”，进而养成了一种“能找到理由证明自己没有爱的义务就尽量找”的强烈习性。</strong>
+<p>这种mindset心里是怎么想的？</p>
+<p>“理论上，只要推卸掉所有不必要的爱的义务，然后把有限的资源集中到实在无法推卸掉的极少数爱的项目上，就可以勉强可以承受损失。”</p>
+<p>比如，“全世界我都不爱，我就只爱我的一个娃，就只爱这一个，这我应该亏得起。”</p>
+<p>问题是，不是先去学会怎么“极大概率爱出双赢”，而是抱着一个“极大概率爱出事故”的破技能，全部退守到这最后的一个“幸运儿”身上，实际上是把<strong>全部的拙劣聚焦到了这最后的倒霉蛋身上了。</strong></p>
+<strong>其净结果，</strong>
+<strong>第一，往往把自己最后实在没有办法回避爱的义务的这个对象、这个自己不爱实在说不过去的人“爱”得求生不得求死不能。</strong>
+<p>“<strong>爱”出刻骨怨毒；</strong></p>
+<p>第二，是往往在半途中经常无法克制的发现——即使对这最后的无法回避爱的义务的对象，再找借口回避爱的义务，也远比继续这么折磨、沉重、无望的爱下去“可行”得多。</p>
+<p>你是一路逃，逃到这最后一站的，你觉得这一站你就会守得住吗？你一身都是逃的经验，一次都没守住过，你觉得你最后是会守还是会再逃？</p>
+<strong>所谓“收缩战线，以便集中优势兵力取得胜利”，不过是自欺欺人罢了。</strong>
+<p>你要么咬死了“我非学会爱出双赢、爱出可持续”的基本策略，抓住每一次机会、每一点能让你继续坚持的理由去继续攻克“应该怎么爱”的技术问题，要么就一路败退，直到退无可退还要再退。</p>
+<p>走前一条路的，不会觉得“爱国”存在任何问题。</p>
+<p>走后一条路的，“爱国”只是最容易找到理由、于是也最早被放弃的头几座城之一。</p>
+<p>这就是“爱国的伦理问题”。</p>
+<p>这其实是一个你准备吃红还是吃蓝的问题。</p>
+<p>![](https://pic1.zhimg.com/50/v2-1395aa116f91e459b9b4ff3155596397</em>720w.jpg?source=1940ef5c)</p>
+                    </div>
+                </div>
+            </div>            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">爱国行为</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/278990045/answer/696239495" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【5 - 社会科学】\570 - 政治\573 - 中国政治制度\爱国行为.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 1200</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">政治学-中国政治制度</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">爱国行为</span> <span class="tag">消费选择</span> <span class="tag">国产品牌</span> <span class="tag">国际贸易</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">理性爱国</span> <span class="tag">买方收益</span> <span class="tag">卖方收益</span> <span class="tag">贸易互利</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">购买可堪使用的国货绝对是爱国，这个不必多说的。但这里要纠正一个常识问题——那就是购买别国生产的优秀产品是不是就不如购买国产产品爱国？无论国人基于效用原则购买哪一国商品，都是对本国比对进口国更有利的。</div>                    <div class="original-content">
+                        <h1>爱国行为</h1>
+<a href="https://www.zhihu.com/question/278990045/answer/696239495" target="_blank">如何看待用“爱国就买华为”这口号来捆绑国人买华为手机？这种口号是怎么来的？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: [编辑于 2021-05-25]</blockquote>
+<blockquote>Link: [[爱国]] [[爱国爱党]] [[爱]] [[爱的产生]]</blockquote>
+<blockquote>Category: #【答集】/04-社科答集</blockquote>
+<blockquote>Tag: #5-社会科学/1-社会学/1a-社会学总论 #1-个人成长/5-核心能力/5e-数学与会计</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p>买华为是不是爱国？</p>
+<p>当然是。</p>
+<p>购买可堪使用的国货绝对是爱国，这个不必多说的。</p>
+<p>但这里要纠正一个常识问题——那就是购买别国生产的优秀产品是不是就不如购买国产产品爱国？</p>
+<p>这里往往存在一个思维陷阱。</p>
+<p>譬如一个中国人买了一个苹果手机，到底是美国占了便宜，还是中国占了便宜？作为生产工具，使用这台手机产生的利益归中国，销售这台手机的利益属于美国的部分归美国。但只要我们不去狂妄的假设买家都是蠢货不懂得评估使用价值，就知道前者一定是大于后者的。</p>
+<p>中国人买了一台美国挖掘机，用来干的工程所产生的利益是属于中国的，美国人赚到了挖掘机钱。</p>
+<p>是人用挖掘机在其整个生命周期里创造的价值大，还是挖掘机价格里含有的利润价值大？</p>
+<p>中国人买了一颗芯片，用来做的计算产生的利益首先是属于中国的，美国人赚到了芯片的利润。</p>
+<p>是用芯片完成的工作的价值大，还是芯片本身的利润价值大？</p>
+<p>看明白了吗？禁止国人买美国产品，美国人失去的是产品本身的利润（销售利润、开发经验积累、品牌声誉积累、销售产生的税收，合称“卖方收益”），中国人失去的是产品在整个生命周期里所能创造的利润（使用经验、研究参考、工具效用、效用滋生的税收，合称“买方收益”）</p>
+<p>后者远远大于前者。</p>
+<p>无论国人基于效用原则购买哪一国商品，都是对本国比对进口国更有利的，只是基于虚荣的才除外。——但购买者是否基于虚荣，不是外人所能评判。</p>
+<p>但这当然不是问题的全部。</p>
+<p>换一个角度，如果存在国内产品和国外产品性能一样，价格一样，那么购买国货，则买方收益和卖方收益都在国内。那么这相对于购买进口货会产生比较优势。这取决于进口货的性能优势有多大。</p>
+<p>但这是锦上添花的变化，是从赚一份变成赚两份的变化，而不是从亏损变成赚钱。</p>
+<p>更进一步的如果对方是敌国，那么才是买方的净收益是买方收益要减去卖方收益。</p>
+<p>但即使在这种情况下，只要这个余数仍然是正的，那么购买行为仍然有利于进口货。</p>
+<p>毕竟，正常来说，拿工具能干的活的价值总会大幅的超过了工具价值。</p>
+<p>只要贸易是基于利润考虑自发自愿的，那么购买进口货也在绝大多数情况下是净有利于进口国的行为。</p>
+<p>因为一种根本不算账的爱国观而去批评和阻挠中国人自由的使用世界上一切可得的生产工具，不爱国。</p>
+<p>因为根本站不住脚的意识形态而剥夺中国人谋求最大的个人效率的做法，不爱国。</p>
+<p>上面两者没有伤害到任何自认为的敌人，只是伤害到了自己的同胞和天然的盟友。</p>
+<p>这不对。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <div class="source" id="社会学-社会学总论">
+        <div class="source-header">
+            <h2 class="source-title">社会学-社会学总论</h2>
+            <div class="source-meta">
+                <span class="category">社会学-社会学总论</span>
+                <span class="meta-item">共 4 篇文章</span>
+            </div>
+        </div>
+        <div class="source-content">            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">爱国爱党</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/48593630/answer/2194563256" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【5 - 社会科学】\540 - 社会学\540 - 社会学总论\爱国爱党.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 1100</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">社会学-社会学总论</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">爱</span> <span class="tag">批评</span> <span class="tag">爱的本质</span> <span class="tag">义务</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">爱的本质</span> <span class="tag">奴隶式爱</span> <span class="tag">可持续的爱</span> <span class="tag">交往方式</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">爱不是指像奴隶一样累死累活、端茶送水、小意逢迎、千依百顺。如果有人因为你不够像奴隶而指责你不爱ta，你可以断然的告诉ta，你是不可能按这个定义去爱ta的。爱不是一个你可以基于自己的欲望去定义的概念。</div>                    <div class="original-content">
+                        <h1>爱国爱党</h1>
+<a href="https://www.zhihu.com/question/48593630/answer/2194563256" target="_blank">爱国和爱党是一回事吗？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: <em>29/10/2021</em></blockquote>
+<blockquote>Link: [[爱国行为]] [[不爱国的权利]] [[爱无筹码]] [[拜物癖]] [[理性的爱]] [[学习的快乐]] [[爱的痛苦]]</blockquote>
+<blockquote>Category: #【答集】/04-社科答集</blockquote>
+<blockquote>Tag: #_专题合集/合集6-个人信仰/A-Caritas/1-爱 #2-亲密关系/1-交往准则/1a-爱的原理 #5-社会科学/1-社会学/1a-社会学总论</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p>爱不是指像奴隶一样累死累活、端茶送水、小意逢迎、千依百顺。</p>
+<p>如果有人因为你不够像奴隶而指责你不爱ta，你可以断然的告诉ta，你是不可能按这个定义去爱ta的。</p>
+<p><strong>爱不是一个你可以基于自己的欲望去定义的概念</strong>。爱是一套客观的规则，只能你去理解它适应它，容不得你去定义它、修改它。</p>
+<p>爱根本就不包括千依百顺，保证你心想事成。</p>
+<p>你把爱理解成了千依百顺，为奴为婢，于是你一天到晚害怕有人强迫你爱这个爱那个。</p>
+<p>这是一个建立在错误认知上的逻辑病。</p>
+<p>按这种“爱”法，别说爱国爱党了，爱爹妈、爱子女、爱配偶，全都是<strong>爱谁害谁</strong>、而且终为人所憎。拿来“爱”自己，连你自己都会害到你自己，最后你自己都会憎恨你自己、流放你自己。</p>
+<p>按那种“爱”法，你就别犯愁谁会找你索要爱的义务了。</p>
+<p>真的没必要——人家躲还来不及。</p>
+<p>得不到这种“爱”——准确的说，避免了这种“爱”——正确的反应是开香槟庆祝。</p>
+<p>会因为没有得到这种“爱”，心怀怨恨，还跑来惩罚你、“逼迫”你的人或者组织，实属大脑发育不完善，人格不健全，自己找倒霉——因为最后一定得不偿失。</p>
+<p>真正的爱是可以批评的，而且越批评感情越深。是可以提自己的需求而不会伤感情的。</p>
+<p>它是人与其他人、与任何组织、任何事物之间最轻松、最容易自持、产出最大的交往方式。你要是学会了，你会毫不犹豫的用在一切交往对象身上，根本不需要任何“义务规定”的强迫和驱使。</p>
+<p>久了你根本就不会第二种与人的交往互动的方式了，就是对敌人，也是同一套做法。</p>
+<p>默认就是这样，不这样还要花费额外的成本，还更累、更折腾。</p>
+<p>叫你不要爱这个不要那个，还真不知道要怎么办到。</p>
+<p>何止党和国。</p>
+                    </div>
+                </div>
+            </div>            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">不爱国的权利</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/48504087/answer/2194599793" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【5 - 社会科学】\540 - 社会学\540 - 社会学总论\不爱国的权利.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 900</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">社会学-社会学总论</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">权利</span> <span class="tag">义务</span> <span class="tag">责任</span> <span class="tag">选择</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">足额兑现</span> <span class="tag">敬酒与罚酒</span> <span class="tag">无可避免之事</span> <span class="tag">价值判断</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">爱与不爱，你要承担的义务是相同的。这个国家——包括其他的国家——的全体成员对于一个爱国的人的要求，不是要求这个人做出义务以外的超额付出，而是在要求一个人对自己份内的义务做出足额的兑现。</div>                    <div class="original-content">
+                        <h1>不爱国的权利</h1>
+<a href="https://www.zhihu.com/question/48504087/answer/2194599793" target="_blank">人有没有权利不爱国？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: <em>29/10/2021</em></blockquote>
+<blockquote>Link: [[爱无筹码]] [[尊重的实践]] [[愚蠢的不尊重]] [[期望]] [[爱国爱党]] [[爱国行为]] [[基准财]] [[所谓国籍]] [[王天下]]</blockquote>
+<blockquote>Category: #【答集】/04-社科答集</blockquote>
+<blockquote>Tag: #5-社会科学/1-社会学/1a-社会学总论</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p>爱与不爱，你要承担的义务是相同的。</p>
+<p>这个国家——包括其他的国家——的全体成员对于一个爱国的人的要求，不是要求这个人做出义务以外的<strong>超额付出</strong>，而是在要求一个人对自己份内的义务做出<strong>足额的兑现</strong>。</p>
+<p><strong>足额兑现</strong>，你就已经是当之无愧的爱国者了。</p>
+<p>再超出这个限度，就无法作为“要求”了。</p>
+<p>remind me if I’m wrong, 迄今我还没有听说过哪个国家把爱国定义为“足额履行了全部法定义务仍然算不及格”的。</p>
+<p>而这个“足额兑现”的要求，其实无论你主观感情上是否乐于接受，或者事实行为上是否可以成功逃避，都是同样有效的强制加诸于你的头上的。</p>
+<p>也就是你面前的这杯，你必须要喝，不喝就会受罚。</p>
+<p>你爱喝，也是要喝，只是喝得高兴，满足。</p>
+<p>你不爱喝，也是要喝，只是喝得勉强，痛苦。</p>
+<p>你爱不爱喝、不改变你要喝的这杯，一点一滴都没有改变。</p>
+<p>唯一改变的，是你喝它的感受。</p>
+<p>改变的是这酒是敬酒还是罚酒。</p>
+<p>当你认清一件事情是无可选择，唯一可选的是敬酒或罚酒的时候，从利益的角度上讲，你当然选择吃敬酒更为明智。</p>
+<p>而从神学上讲，<strong>无可避免之事自动免于价值判断的评价，你可努力的唯一方向是降低自己接受它的成本。</strong></p>
+<p>简单来说，“不爱国的权利”实际上是一个如同“发光的影子”一样虚无的概念。</p>
+<p>它自身并不存在，也就不存在你是否拥有它这个问题了。</p>
+                    </div>
+                </div>
+            </div>            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">所谓民族</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/466310147/answer/2000850134" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【5 - 社会科学】\540 - 社会学\540 - 社会学总论\所谓民族.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 2800</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">社会学-社会学总论</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">民族</span> <span class="tag">文化认同</span> <span class="tag">想象的共同体</span> <span class="tag">殖民主义</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">文化认同</span> <span class="tag">血统身份</span> <span class="tag">殖民工具</span> <span class="tag">民族分裂</span> <span class="tag">文化融合</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">'中华民族'根本就不是一个血统身份，而是一个文化认同身份。用民族视角来划分人群，坚决按照民族来编定历史、来考察历史变迁，这是欧洲近代的学术观点，是围绕着殖民文化而构建起来的思想武器。</div>                    <div class="original-content">
+                        <h1>所谓民族</h1>
+<a href="https://www.zhihu.com/question/466310147/answer/2000850134" target="_blank">分子人类学与民族是“想象的共同体”是否冲突？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: [编辑于 2021-07-17]</blockquote>
+<blockquote>Link: [[所谓国籍]] [[历史必然]] [[王天下]] [[中国式反同化]] [[文物 2]] [[【文章目录】/【5 - 社会科学】/570 - 政治/573 - 中国政治制度/中国的不足]] [[天下共主]] [[斗争]] [[自信]] [[超英赶美]] [[独得之秘]] [[芯片]] [[智能失业]] [[全球化与失业]] [[非洲、非洲]] [[反犹]] [[海外团结]]</blockquote>
+<blockquote>Category: #【答集】/08-文艺答集</blockquote>
+<blockquote>Tag: #5-社会科学/1-社会学/1a-社会学总论</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p><strong>“中华民族”根本就不是一个血统身份</strong>，而是一个<strong>文化认同身份</strong>。</p>
+<p>用民族视角来划分人群，坚决按照民族来编定历史、来考察历史变迁，这是欧洲近代的学术观点，是围绕着殖民文化而构建起来的思想武器。</p>
+<p>这个<strong>观点</strong>比起以伦理准则来划分人群（华夷之辨）的东方社会学体系、按照宗教信仰来划分人群的亚细亚/中世纪欧洲社会学体系，按照城邦来划分的希腊/罗马社会学体系，按照种族来分的纳粹社会学体系，按照阶级来划分的马克思主义社会学体系来相比，<strong>并没有什么额外的合理性。</strong></p>
+<strong>甚至有额外的不合理性。</strong>
+<strong>一个典型的例子，是它本能的痛恨混血儿，发誓要把混血儿全自动的向下拉平，甚至视为连“劣等民族”都不如的等外品。</strong>
+<p>因为“混血儿”是“民族史观”一个绕不过、说不通、吞不下的逻辑困难。</p>
+<p>它是一个和稀泥的、半吊子的、靠着在文化上抹杀混血儿的合法性和异族通婚的合理性来维持，甚至除了<strong>煽动分裂</strong>之外都没有什么实际指导意义的<strong>伪学术</strong>。</p>
+<p>它最大的意义，是让殖民者告诉被殖民者“张三，你跟李四王五赵六不是一起的”，好去分裂它们之间的关系，去撺掇它们习于这些被塑造出来的异己性的下意识设定。</p>
+<p>好方便他们去引诱、挑拨、分化，去避免自己成为众矢之的。</p>
+<p>“民族差异”这个概念，自打诞生和被鼓吹的第一秒钟开始，就是为了制造歧视链和猜疑链，为了制造仇恨和混乱。越分裂越好，越混乱越好。</p>
+<p>找到一切可以利用来区分人群记号来提醒人们“你们彼此有重大差别”是它的<strong>诉求</strong>，是它的本能的价值追求。</p>
+<strong>它怎么可能不含混和模糊？</strong>
+<strong>结果搞了几百年，人们才突然“如梦方醒”的似乎看到了一两个“特例”，去惊呼“犹太民族”是虚构的，“大和民族”是虚构的，“大韩民族”是虚构的，似乎是一种“学术大发现”。</strong>
+<strong>真的是让人不能不兴一浩叹。</strong>
+<h2><strong>别折腾了，所有“民族”，追根到底都是虚构的。你根本用不着什么“分子生物学证据”或者什么语言学证据、风俗学证据去“证明”这一点。</strong></h2>
+<p>这个概念一开始就是伪概念，一个意识形态陷阱、一个有意无意的学术阴谋。</p>
+<p>是一种借着“非我族类、其心必异”的人类劣根性而设计的、完全为殖民掠夺、为以小博大而在情急之下顺嘴胡扯出来，因惊喜的发现极其好用而被投入重金持续维护的罪恶。</p>
+<p>世界上根本就没有什么种族、也没有民族这两种东西存在。</p>
+<strong>去在意识形态领域开动宣传机器去对人强调你们、我们、ta们的“巨大差异”，把一切尝试弭平和非议题化这些差异的举动视为一种“迫害”和攻击——就如美国在新疆、西藏、香港议题上对中国人所做的那样——“我吃亏了”、“ta们占便宜了”这样的猜疑就会永远存在。</strong>
+<p>只要“异族”概念不可动摇，“团结”、“和平”就永远只能依赖“恐怖平衡”和“力量均势”，只不过是“暂时没把握消灭”的虚与委蛇和敷衍应付。</p>
+<p>殖民主义者们对香港兴起的“hongkonger”旗帜是何等的手舞足蹈？</p>
+<p>ta们是多么害怕中国人彼此再不能分出彼此？</p>
+<p>如果一个中国人因为可以自由迁徙、可以很少阻碍的跨方言、跨地区、跨“民族”、跨“信仰”的通婚，彼此都难以分辨谁是回族、谁是广东人，谁是山东人，ta们还怎么讲那些“打压地方文化”“灭绝少数民族”“迫害其他信仰”的故事呢？</p>
+<p>ta们酷爱“多元”、强烈的抬高“文化身份”，哪里是为了什么“平等”和“多样化”，<strong>恰恰是为了制造最大的不平等</strong>——<strong>令弱势的绝大多数充满分别心和相互疑忌、仇恨，永远无法克服彼此之间的巨大猜忌而团结起来，对同样人数稀少但却占据着巨大的先发优势的ta们形成任何严肃的挑战。</strong></p>
+<p>坦白说，西方的新殖民主义正在通过一种看起来似乎与殖民没有任何关系的、看似恰好相反的方式进行全新的实践——以“保护多样化”“保护少数民族”的旗号，在事实上将一切融合、和解、统一、甚至是现代化的努力全部“反人类“化了。</p>
+<p>如果有一个总统要推进内部两大部族的身份淡化，ta几乎必定要被定性为“文化灭绝”。</p>
+<p>如果有一位部长决定要开发矿藏，迁移一个部落，ta几乎必定要被定性为“消灭独特生活方式”。</p>
+<p>如果有一委员会要强行推行统一官方语言，这个不得了，是要“抹杀少数民族的文化身份”。</p>
+<p>ta们在事实上将这种理念武器化了。表面上看起来是忏悔当年的种族灭绝政策，<strong>事实上是要借此维持自己造成的大分裂、大对立状态不受挑战</strong>。</p>
+<p>如果有可能，ta们只会支持诞生新的民族身份、意识形态身份，再把他国的政治生态进一步的碎片化，使得任何国家的思想上的统一、政策上的稳定都变得近乎不可能。</p>
+<p>ta们会捂住嘴巴——啊，“统一思想”，多么可怕的罪恶啊。</p>
+<p>ta们通过高喊“保护多样化”而制造的弱者的困难是如此的大，以至于ta们自己可以尽情的展开“人道主义援助”也不至于能根本的威胁到由ta们主导的这个格局。</p>
+<p>于是ta们既可以尽情的展示善良和同情，又不必担心这些被展示的对象有一天可以真的不再需要ta们的善良的同情，甚至更妙——ta们也不必忧愁“善款”会短缺。</p>
+<p>主张“多样性”“多元化”，把“同化”“民族融合”“价值观一体化”视为“种族灭绝、文化灭绝”一样的“罪恶”造成了一切发展中国家摆脱长期内乱和分裂动荡、彼此和解和合作的近乎不可逾越的障碍。<strong>但它却没有被视作一种恶</strong>，反而被视为了一种天经地义的、不容置疑、甚至不容异议的绝对正确，成了一种<strong>伟大的美德</strong>，一种“被勇敢承担的道义”。</p>
+<p>这对人类，是一种何等样的悲剧。</p>
+<p>你们明白美国以及它的“盟友”们为什么觉得在新疆议题上编造谎言是如此有必要，并对这样做一定会有效如此充满信心了吗？</p>
+<p>你们明白为什么恰恰是前殖民国家们如此关心“少数民族”的永久存在了吗？</p>
+<p>这个概念是否会退出历史舞台，取决于你对人类的命运最终香何处去如何看待。</p>
+<p>福山高喊“人类的历史已结束”，说的不是人类的历史终结于“选票民主制”，而是在说他自信人类的历史将永远凝固在以“选票民主“为具体机制维持的永久的分裂和被发达国家统治的状态。</p>
+<p>他只是学力不足，不清楚自己所说的东西更深的本质是什么罢了。</p>
+<strong>他错了。</strong>
+                    </div>
+                </div>
+            </div>            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">集体主义</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/484974881/answer/2394140523" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【5 - 社会科学】\540 - 社会学\540 - 社会学总论\集体主义.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 1600</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">社会学-社会学总论</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">集体主义</span> <span class="tag">个人与集体</span> <span class="tag">代价支付</span> <span class="tag">认知战术</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">集体庇护</span> <span class="tag">代价支付</span> <span class="tag">免费错觉</span> <span class="tag">逻辑严谨性</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">其实你反对的根本不是集体主义，而是集体主义里让你不爽的部分。没有人类可以诚实的反对集体主义，因为诚实的反集体主义者应该没机会学会人类的语言，更不必提上网写文章了。</div>                    <div class="original-content">
+                        <h1>集体主义</h1>
+<a href="https://www.zhihu.com/question/484974881/answer/2394140523" target="_blank">特别反感集体主义正常吗？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: [编辑于 2022-03-18]</blockquote>
+<blockquote>Link: [[学好语文]] [[条理]]</blockquote>
+<blockquote>Category: #【答集】/01-家族答集</blockquote>
+<blockquote>Tag:  #5-社会科学/1-社会学/1a-社会学总论</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<strong>其实你反对的根本不是集体主义，而是集体主义里让你不爽的部分。</strong>
+<p>我发现很多人不清楚什么叫反对集体主义、什么叫主张集体主义。</p>
+<p>下面这个经典的思想实验可以帮你测出自己的倾向——</p>
+<p>你飞机失事了，跟一大群人掉到荒岛上了。</p>
+<p>然后存在两种观点，</p>
+<p>观点A——我们应该形成一个集体，推举出某个管理机制来分配任务和物资，管理彼此间的冲突，这样我们幸存机会最大，好过各自为战。</p>
+<p>观点B——我们应该立刻各自分开，各画一块地盘自谋生路，最后谁能活下来，各凭天意。这样我们幸存下来的机会最大，好过集体行动。</p>
+<strong>前者就是集体主义的观点，后者就是反集体主义的观点。</strong>
+<strong>你选后者，你才叫反对集体主义。</strong>
+<strong>你选前者，但是同时发表“我反感集体主义“的言论，你就属于“不反集体主义，只是反对集体主义的代价”。</strong>
+<strong>也就是不反对餐厅，但是反对买单。</strong>
+<p>没有人类可以诚实的反对集体主义，因为<strong>诚实的反集体主义者</strong>应该没机会学会人类的语言，更不必提上网写文章了。</p>
+<p>真诚的反对集体主义的人，难道不应该不在任何一个集体中吗？</p>
+<p>尽管充满各种矛盾，但人类仍可以成立联合国、签订国际公约、在某种意义上实施国际法、的确存在着一种国际秩序（无论你是否喜欢）。</p>
+<p>人类本身就是一个总集体，只不过是强力程度上有所区别，而没有什么是与不是的争议。</p>
+<p>所以，任何一个能用语言文字反对集体主义的人，首先必然是处在某个集体中，而且还至少要利用这个集体所提供的言论平台来发言出声。</p>
+<p>不是吗？</p>
+<p>这跟吃着米饭说“我反对吃米饭”，一边活着一边主张“人应该去死”一样，<strong>根本不构成一种可行的观点，而只是一种认知失调的状态。</strong></p>
+<p>这事有两种解释——</p>
+<p>1）他们反对的不是集体主义，他们是在享受集体的庇护、集体的救济、集体的支撑的前提下，<strong>反对支付任何他们“不愿意支付”的代价。</strong></p>
+<p>“不愿意支付的代价”，只是“任何代价”的一种文雅说法——因为实际上只要是个代价，他们就都不愿意支付。</p>
+<p>这个“观点”，怎么说呢？没什么必要花时间讨论。这只是儿童长期由父母代付账单产生的一种“免费错觉”。</p>
+<p>将来成了人，需要找饭碗、找人脉、找客户了，自然会体会到到底这是个买方市场还是个卖方市场——你嫌弃集体？集体还嫌弃你呢！</p>
+<p>看谁先挺不住好了。</p>
+<p>2）ta们其实反对的是<strong>某种特定风格的集体主义</strong>，然后因为学术水平太糟糕，滥用大词的习惯太根深蒂固，或者——更恶毒的——出于某种不可告人的其它目的，将某种风格的集体称为集体，而把另一种风格的集体标榜为“非集体”，把后者与前者的风格差异、程度差异，提升为性质差异、本质差异，来把听起来正常、逻辑通顺、但是却完全没有“力量”的“反对xx风格的集体主义”，包装成了“反对集体主义”。</p>
+<p>这手法，ta们在“民主”、“自由”这些概念上也常用。即将两种风格不同、程度不同的民主，上升到一个民主、一个非民主。</p>
+<p>等等等等。</p>
+<p>其实，这是一种上不了台面，经不起什么认真的驳斥的<strong>认知战术</strong>。</p>
+<p>根本就没打算来跟你讲学术、讲道理、只是拿来分敌我、挖陷阱、上拳脚的。</p>
+<p>这是<strong>等而下之的下流“学术”</strong>，你要是学不会分辨这种把戏，你这辈子是很难有什么终身成就的。</p>
+<p>因为人一辈子太长了，若是立足之处没有真正意义上的逻辑严谨性，在这长达七八十年的漫长岁月里，你很可能要经历几次重大的崩溃。</p>
+<p>崩溃之前的成就，常常付之一炬。</p>
+<p>这么说吧——<strong>真诚的持有后一种观点的人处在系统性的自然消亡中，ta们只是一代一代的重新被生出来而已</strong>。</p>
+<p>每一代都式微了，输了，完了，挂了，dead，buried。</p>
+<p>只是下一代的新生儿里，还是会有这样的人重新出现，无法根绝。</p>
+<p>被变异出来，感染出来，制造出来，蛊惑出来。</p>
+<p>然后再次死在人类的旷野里。</p>
+<p>所以，一定要学好语文。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <div class="source" id="伦理学-国家伦理">
+        <div class="source-header">
+            <h2 class="source-title">伦理学-国家伦理</h2>
+            <div class="source-meta">
+                <span class="category">伦理学-国家伦理</span>
+                <span class="meta-item">共 1 篇文章</span>
+            </div>
+        </div>
+        <div class="source-content">            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">王天下</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/351381447/answer/1542235785" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【1 - 哲学类】\190 - 伦理学\196 - 国家伦理\王天下.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 2500</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">伦理学-国家伦理</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">中国道路</span> <span class="tag">天下观</span> <span class="tag">王道</span> <span class="tag">仁义礼智信</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">王道</span> <span class="tag">霸道</span> <span class="tag">天下共主</span> <span class="tag">惊人的温柔</span> <span class="tag">权谋服从大义</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">中国到底在走一条什么路？王天下的路。实力强大对昂撒文化和中国文化是两个完全不同的筹码。在昂撒文化里，实力强大是可以不必顾及其他人的筹码，是称霸的工具；在中国的文化里，实力强大是可以从容照顾其他人利益的筹码，是称王的条件。</div>                    <div class="original-content">
+                        <h1>王天下</h1>
+<a href="https://www.zhihu.com/question/351381447/answer/1542235785" target="_blank">中国道路为什么走得对？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: [编辑于 2021-06-19]</blockquote>
+<blockquote>Link: [[天下共主]] [[废除汉字]] [[舆论战]] [[帝国病]] [[温柔]] [[滚滚向前]] [[以爱应恨]] [[掐脖子的水电站]] [[奥卡姆剃刀]] [[仇日]] [[非常之非常]]</blockquote>
+<blockquote>Category: #【答集】/04-社科答集</blockquote>
+<blockquote>Tag: #8-世界史地/2-中国史地/中国文化 #5-社会科学/2-政治学/2c-中国政治 #_专题合集/合集6-个人信仰/A-Caritas/1-爱</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p>中国到底在走一条什么路？</p>
+<strong>王天下的路。</strong>
+<p>实力强大对昂撒文化和中国文化是两个完全不同的筹码。</p>
+<p>在昂撒文化里，实力强大是<strong>可以不必顾及其他人</strong>的筹码，是<strong>称霸</strong>的工具；</p>
+<p>在中国的文化里，实力强大是<strong>可以从容照顾其他人利益</strong>的筹码，是<strong>称王</strong>的条件。</p>
+<p>正因为是这样，中国才注定在最后加冕为王。而昂撒文化注定只是一时枭雄，历史的过客。</p>
+<p>中国的方法曲折而且慢，但却是无法压制的，而且<strong>一旦登顶，除非自己抛弃正道，极其难以再挑战动摇</strong>。</p>
+<p>不要因为昂撒文化看似威风了三四百年就以为他们才是对的。中国雄视东亚天下近2000年，将一个又一个曾经的军事霸主送进了坟墓。</p>
+<p>你会看到的，最终<strong>他们是错的</strong>，而且你后面会越来越清楚的看到他们这种因为自身脆弱而不断耍阴谋诡计、挑拨离间、威逼恐吓的策略只是一种岛国心理缺陷。</p>
+<p>我们不是岛，我们是<strong>中央大陆</strong>——鲸鱼为什么要去学海豹的生存之道？</p>
+<p>马前卒现在对台湾的心态，完全是美国式的、盎格鲁撒克逊式的。这是马前卒最大的问题——他没有意识到他一切红色名词的背后的根本方法论实际上是大英帝国的——那种以“实力支撑权谋”的体系。</p>
+<p>中国真正的武器不是权谋——这恰恰是用了两千多年把所有可能的权谋玩到熟烂之后的最终结论。权谋必须服从于大义。</p>
+<p>所有的权谋，最后都是用来将敌人的不义无可辩驳的暴露出来，而将自己的义理证明出来。所以才有不打第一枪，不首先动用核武器，不排除一切和平统一的努力……这一系列的基本国策。</p>
+<p>这本身就是最大的权谋，但这是阳谋。这【不是“实力不济的委曲求全”】。</p>
+<p>凡是在任何意义上认为是后者的人，自己根本就没有理解中国到底是什么以及中国为什么必然会胜利。他们所出的一切“谋划”，都不过是在追求战术上的红利而与中国整体复兴的根本战略背道而驰。</p>
+<p>不是外部的任何攻击，而是<strong>中国年轻人里泛滥着的对称霸的渴望</strong>，是长远的将来对中国称王的前途<strong>最大的威胁</strong>。</p>
+<p>这一点，我希望每一个中国人、每一个中国的青年人又毫无侥幸的清醒认识，只有这样坚定而分明的信念，才能真正保护这个国家最终赢得这个世界上最多的帮助，最终压倒那些机械阴谋的敌人。</p>
+<p>为王的人，必需承受只满足于称霸的人所不肯承受也不能承受的责任。西方人不懂什么叫天下共主，他们从来就没有受过这样的历史的教育，他们在这一点上只是文盲一样的蠢人。</p>
+<p>为什么要向根本无知的人学习怎么做一个王？</p>
+<p>中国永远不称霸，但中国必终为王。</p>
+<p>只有这样的国家来操持世界的权柄，这个世界才能从昂撒人的这种机关算尽、机械阴谋的刻意谋划的分裂状态里解脱出来。全球变暖、环境污染、物种灭绝才能得到有现实希望的扭转，种族、宗教冲突才不会因为地球统治者自己的脆弱惊惶而成为人类永远不能愈合的伤口。</p>
+<p>只有这样，人类才有可能在下一轮——甚至就是这一轮——的技术浪潮的挑战里幸存下来。</p>
+<strong>大过滤器留给人类的时间恐怕已经不超过百年。</strong>
+<strong>中国身上承担的，事实上是整个人类的希望。我们只有不到五十年的时间让整个人类明白这一点。</strong>
+<p>而要做到这一点，靠的不是惊人的强大，而是靠<strong>惊人的温柔</strong>。</p>
+<p>这条路上的每一个关口，都要靠【惊人的温柔】去攻克，只有这样过了一关，才是真的扎扎实实的过掉了一关。</p>
+<p>这样说，很多小孩子们恐怕难以接受，因为我们这个民族最大的隐患，就是我们的青年一代在事实上并不了解中国自己，而是在极大的程度上潜移默化的接受了“昂撒模式才是唯一可行的模式”的精神烙印。</p>
+<p>他们并没有意识到他们只是一群站在“中国开局”上的【美国玩家】——只是军队是中国的、经济是中国的，而战略思想和基本方法论几乎完全是盎格鲁撒克逊式的。ta们满脑子都是巧妙的威逼利诱，恐吓欺诈，视之为智慧，为战略。</p>
+<p>ta们完全没有对仁、义、礼、智、信的丝毫信念。一心只打算把这些真正令敌人土崩瓦解，无力团结的利器视为“经济和军事手段”的“伪装迷彩”。</p>
+<p>这是我们最大的危机，这也是为什么我对马前卒所代表的这种潮流加以反复强烈批评的原因。</p>
+<p>你们是希望中国成为新的中国，还是只是希望中国成为下一个美国？甚至只是下一个斯大林的苏联？？</p>
+<p>美国这么一两百年的【幸运】，就配中国看在眼里，以为绝对正确的“楷模”吗？</p>
+<p>这个世界的最终致胜之道到底是什么，到底是剑还是犁？</p>
+<p>你们仔仔细细想个清楚！</p>
+<p>中国的这一代领导者看起来是完全清楚自己在做什么。但是迟早折接力棒会交到你们这一代手中。</p>
+<strong>你们不能作为有中国血统和国籍的“美国人”来接这一棒。</strong>
+<strong>因为“美国人”注定接不住。</strong>
+<p>不然“秦”现在何以失其鹿？</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <div class="source" id="伦理学-个人伦理">
+        <div class="source-header">
+            <h2 class="source-title">伦理学-个人伦理</h2>
+            <div class="source-meta">
+                <span class="category">伦理学-个人伦理</span>
+                <span class="meta-item">共 1 篇文章</span>
+            </div>
+        </div>
+        <div class="source-content">            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">为中华之崛起而读书</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/592510972/answer/3047855056" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【1 - 哲学类】\190 - 伦理学\192 - 个人伦理\立志\为中华之崛起而读书.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 1500</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">伦理学-个人伦理</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">立志</span> <span class="tag">事业规划</span> <span class="tag">中国需求</span> <span class="tag">明智选择</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">明智策略</span> <span class="tag">中国需求</span> <span class="tag">投资回报</span> <span class="tag">历史眼光</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">其实，叫你'为中华之崛起而读书'，与其说是教你要高尚，不如说是叫你要明智。因为从长期看这在中国是优良而且实用的生存策略。'面向中国需求学习'当然是显而易见的合理策略。</div>                    <div class="original-content">
+                        <h1>为中华之崛起而读书</h1>
+<a href="https://www.zhihu.com/question/592510972/answer/3047855056" target="_blank">为中华之崛起而读书已经成为笑话了吗?</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: [编辑于 2023-05-28]</blockquote>
+<blockquote>Link:</blockquote>
+<blockquote>Category: #【答集】/01-家族答集 #【答集】/04-社科答集</blockquote>
+<blockquote>Tag: #1-个人成长/1-内在建设/1D-立志</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p>很多人都觉得这句话好像很傻，属于“过于理想主义”。但说这话的人最后官至总理，几乎被一切人——包括他的敌人看作毫无疑问的成功者。</p>
+<p>其实，叫你“为中华之崛起而读书”，与其说是教你要高尚，不如说是叫你要明智。</p>
+<p>因为从长期看这在中国是优良而且实用的生存策略。</p>
+<p>简单来说，“为中华之崛起而读书“可以被具体的理解为“面向中华民族复兴的需求而进行知识构建和技能学习”，或者更进一步的——面向中国的国家战略相关需求来进行事业规划。</p>
+<p>这种策略是否明智，要看几个要素——</p>
+<p>第一，中国的复兴是否是一个真实的需求，这个需求是否会获得足够的投资，有没有足够的成功希望，成功之后有没有足够的利润去回报这些投资。</p>
+<p>这是不是真实的需求？这个需要多说吗？</p>
+<p>第二，这个需求是否会获得足够的投资？中国是全民所有制国家，政府拥有一切国土资源和财政权利，除非你有某种理由认为中国政府只是在玩过家家，否则认为中国不会在民族复兴上投入足够多的投资是非常荒谬的。如果这是一种耳光的话，中国近四十年的天量的基础建设、教育、国防、产业投资本身怕不是有史以来最大的巴掌。</p>
+<p>第三，这个投资如果成功是否会有足够的利润？中国复兴如果成功，所谓“屹立世界民族之林”纯属客气说法，实际上至少也会主导这个世界近半的国际秩序。这里面要是没有利润，古往今来为什么这么多人要为了这个位置舍生忘死的争夺？</p>
+<p>唯一算得上是问题的，仅仅只是你是否认为这有足够的机会成功。</p>
+<p>但这个问题对你不重要，因为只需要手握投资决策的人肯为这个目标持续投入，作为参与者的你已经足以获得自己个人的回报了。</p>
+<p>老板要做这游戏上市，ta自己信心满满肯烧钱请人，你作为员工自己工资至少是拿到了，ta的信心对不对又如何？要你操什么心？</p>
+<p>这够现实了吗？</p>
+<p>说白了，中国崛起是二十一世纪最大的经济题材。不光是你个人的事业选择问题，对所有的国家和企业都有极大的投资价值。谁有能力促进这一进程，中国既不会吝于给ta回报，也有显而易见的能力给得出这样的回报。在中国赚得盆满钵满的各国企业并不仅仅是因为ta们善于经营，还在很大程度上是因为ta们踩中了中国的战略需求——不管ta们是有意还是无意。</p>
+<p>如此多的先例在前，“面向中国需求学习”当然是显而易见的合理策略。这在今天用不着任何特殊的“献身精神”、“牺牲精神”。就像一家企业“面对苹果需求建厂“一样，甚至用不着什么神奇的理想主义。</p>
+<p>恰恰相反——如果你真想赚大钱、真想做大事，这点基本的历史眼光、形势直觉都没有，你根本就没什么资格做这种梦。</p>
+<p>你敢脱离这个大前提去盲目的追逐“一夜暴富”的幻梦，不是出门就亏死，就是如日中天时被一巴掌拍熄——管你多大的产业、多高的名望、多大的势力，身在国内还挡在中国十四亿人的复兴需要面前当拦路虎或者仓库鼠，你都只能寄希望于不被发现和优先处理。</p>
+<p>问题是，中国越强发现能力和处理能力就越强，你客观上这跟预定焦虑抑郁的床位有什么区别？</p>
+<p>会嘲笑这句话的人，你不必鄙视ta们的道德，<strong>但着实要警惕ta们的愚蠢</strong>。</p>
+<p>这种愚蠢将来很容易导致ta们要找你借钱去救ta们那突然变成过街老鼠的所谓“事业”。而你天天跟ta们混，到时候不借说得过去吗？硬不借回头多一堆恨你入骨的仇人。</p>
+<p>这都谈不到什么意识形态，纯属现实问题。</p>
+<p>这当然并没有改变你自己个人的具体决策要明智——这意思是你要关心中国真正的、实际的需求，要有足够的前瞻性和具体性，而不是全是大而化之的甚至不着调的自我感动。</p>
+<p>比如，你去关注中国的养老问题，可以学一学老年化社区的设施设备的研发设计和维护；你关注中国的人口问题，可以研究一下跨国婚姻的政策辅导和心理辅导；你关心中国的产业升级，可以研究下东南亚文化和非洲文化或者拉美产业法规，而且从一开始就要削尖脑袋去跟实际从事这些行业的人、有实际经验的人包括现在的权威接触了解一下，随时保持联系。而且你要勤学苦练，争取熟练而优秀。</p>
+<p>为中华之崛起而读书，也是要及格的。</p>
+<p>不及格，那只能叫“为中华之崛起而假装读书”。说这话被人耻笑，被笑的往往不是前半截，而是这后半截。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <div class="source" id="政治学-国际关系">
+        <div class="source-header">
+            <h2 class="source-title">政治学-国际关系</h2>
+            <div class="source-meta">
+                <span class="category">政治学-国际关系</span>
+                <span class="meta-item">共 1 篇文章</span>
+            </div>
+        </div>
+        <div class="source-content">            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">天下共主</h3>
+                    <div class="source-meta">                        <span class="meta-item">
+                            <a href="https://www.zhihu.com/question/264449909/answer/1459850863" class="zhihu-link" target="_blank">🔗 知乎链接</a>
+                        </span>                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【5 - 社会科学】\570 - 政治\578 - 国际关系\天下共主.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 800</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">政治学-国际关系</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">天下观</span> <span class="tag">历史感</span> <span class="tag">百年树人</span> <span class="tag">国际关系</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">教育成果</span> <span class="tag">历史耐心</span> <span class="tag">百年树人</span> <span class="tag">天下共主</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">很多亲生的小兔崽子都要在很多很多年后，才会在内心感谢自己的父母。其中有很多还埋在心里，不肯承认。有的则再也没有找到机会说出来。而这些感激的产生，还要以教育成功为前提。感激，并不是利益输出的结果，而是教育的结果。</div>                    <div class="original-content">
+                        <h1>天下共主</h1>
+<a href="https://www.zhihu.com/question/264449909/answer/1459850863" target="_blank">非洲人民大多真的很感激中国吗？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: [编辑于 2020-09-13]</blockquote>
+<blockquote>Link: [[王天下]] [[掐脖子的水电站]] [[所谓国籍]]</blockquote>
+<blockquote>Category: #【答集】/04-社科答集</blockquote>
+<blockquote>Tag: #5-社会科学/2-政治学/2g-国际关系/国际关系总论</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p>很多亲生的小兔崽子都要在很多很多年后，才会在内心感谢自己的父母。</p>
+<p>其中有很多还埋在心里，不肯承认。有的则再也没有找到机会说出来。</p>
+<p>而这些感激的产生，还要以教育成功为前提。</p>
+<strong>感激，并不是利益输出的结果，而是教育的结果。</strong>
+<p>中国是一个极其特殊的国家——她有极其强烈的历史感。</p>
+<p>从秦朝天下一统，大修驰道、广建长城开始，有天下之志的中原王朝考虑问题就开始以<strong>百年</strong>为单位。恐怕中国完全有准备用一百年时间让非洲明白——中国的帮助是非洲走出这六百年长夜的唯一真正希望。</p>
+<p>鸡叫以前，彼得也有三次不认主。不要说非洲，对所有的国家、哪怕现在是友好的、乃至铁杆分，都要有将来会多次关系起伏的心理准备。真正牢固的关系，不但要靠耳鬓厮磨的亲密，也要靠分手时的反思。</p>
+<p>有时甚至后者才是真正算数的。</p>
+<p>没有耐心，一有反复就悲观绝望的人，毕竟没有资格为现在的中国掌舵。</p>
+<strong>十年树木，百年树人。</strong>
+<strong>一百年后，再谈感激。</strong>
+<p>ps：</p>
+<p>盎格鲁撒克逊人、苏联人的覆辙，有什么资格拿来预测中国的结果？</p>
+<p>他们根本不知道什么叫天下共主。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <div class="source" id="经济学-贸易">
+        <div class="source-header">
+            <h2 class="source-title">经济学-贸易</h2>
+            <div class="source-meta">
+                <span class="category">经济学-贸易</span>
+                <span class="meta-item">共 1 篇文章</span>
+            </div>
+        </div>
+        <div class="source-content">            <div class="source">
+                <div class="source-header">
+                    <h3 class="source-title">全球化</h3>
+                    <div class="source-meta">                        <span class="meta-item"><strong>文件:</strong> D:\yy\Sth-Matters\【文章目录】\【5 - 社会科学】\550 - 经济\558 - 贸易\全球化.md</span>
+                        <span class="meta-item"><strong>字数:</strong> 1800</span>
+                        <span class="meta-item"><strong>分类:</strong> <span class="category">经济学-贸易</span></span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>标签:</strong> <span class="tag">全球化</span> <span class="tag">家国情怀</span> <span class="tag">商业规律</span> <span class="tag">市场经济</span>                        </span>
+                    </div>
+                    <div class="source-meta">
+                        <span class="meta-item"><strong>关键概念:</strong> <span class="tag">市场经济规律</span> <span class="tag">家国情怀</span> <span class="tag">商业现实</span> <span class="tag">全球贸易</span>                        </span>
+                    </div>
+                </div>
+                <div class="source-content">
+                    <div class="content-preview">这个规律在商业界如同万有引力定律在物理界一样不可抗拒，不受任何人的意志影响。除非消灭商品经济这种现象，否则它就必须按照这个规则行事，哪怕CEO们个人很有家国情怀、献身精神也没有用——市场和消费者是无情的。</div>                    <div class="original-content">
+                        <h1>全球化</h1>
+<a href="https://www.zhihu.com/question/387274891/answer/1164595638" target="_blank">如何看待逆全球化？</a>
+<blockquote>Author: #Anonymity</blockquote>
+<blockquote>Last update: [编辑于 2022-01-23]</blockquote>
+<blockquote>Link: [[全球化]] [[全球化与失业]] [[中国人的全球化]]</blockquote>
+<blockquote>Category: #【答集】/13-百年未有之变局</blockquote>
+<blockquote>Tag: #5-社会科学/3-经济学/3d-经贸</blockquote>
+<blockquote>评论区:</blockquote>
+<blockquote>泛讨论:</blockquote>
+<p>要说明全球化的问题，首先要说明白到底什么是全球化。</p>
+<strong>所谓的全球化，一言以蔽之，是指采集全球最好的原料、雇佣全球最好的人力、应用全球最好的技术、生产全球最多人需要的产品、卖到全球一切可以卖到的地方。</strong>
+<p>本质上，所谓的全球化就是“商品经济最大化”。如果我们有一天殖民太阳系，那么这概念就会变成“太阳系化”。</p>
+<p>先把这定义立在这里，再看这问题的结论。</p>
+<p>最根本的问题是，有没有什么力量可以阻止全球化？</p>
+<p>这实际上是在问有没有什么力量能让商人放弃上面这一系列的诉求，让他们基于某种原因不要追求最极限的利润和最大的经济规模。</p>
+<p>如果这个力量是来自于某种人类的集体主动干预，那么问题来了——这种干预必须保证均匀而统一的施加到所有的市场玩家身上。否则你把我限制了、却没限制他，他将举全球之力以压一隅。我原料不如他好、工人不如他便宜、市场不如他广阔、量不如它大，你这等于直接逼我死。你要限制我，以最起码的伦理，你也必须补贴我的损失。</p>
+<p>如果你不打算补贴我的损失，只是打算单纯的破坏我的竞争优势，剥夺我的市场空间，那么我只有两个选择——或者战，或者逃。</p>
+<p>所谓战，就是动员我所有的资源让你下台，甚至干脆把你肉体消灭。</p>
+<p>所谓逃，就是我换一个不像你这样做的国家去呆着。</p>
+<p>这个规律在商业界如同万有引力定律在物理界一样不可抗拒，不受任何人的意志影响。除非消灭商品经济这种现象，否则它就必须按照这个规则行事，哪怕CEO们个人很有家国情怀、献身精神也没有用——市场和消费者是无情的，你质次价高，不管你出于什么高尚的值得同情的理由（甚至包括“保护地球”这种），长期都不可接受。</p>
+<p>既然如此，那么全球化的基本规律就确定了——全球化就像空气，一定会进展到它自己能扩展到的极限才会止步。</p>
+<p>所以，问题就变成了“全球化已经到达它可以到达的极限了吗”？——只有全球化达到并超越了它应有的极限，才有可能向下回归到它的极限所在。</p>
+<p>这极限有两条，一条是物理极限——譬如全球化不可能扩展到无人居住的星球。物理极限是全球化的铜墙铁壁，是不可能超过的。</p>
+<p>第二条线则是多种因素围成的“软极限”，超过软极限，就会有力量把你往回拉，直到把你弹回去，到显著低于软极限，然后又回弹，弹到再次超过软极限，又被回拉……如此反复。</p>
+<p>并且这条软极限本身也是动态的。全球化指数在围着软极限上下波动的同时，也会不断的将软极限构成的篱笆今天触动一个桩子，明天触动一个桩子，不断的导致这条篱笆的变形。</p>
+<p>这样，就构成了全球化走向的复杂性。——它不是一个全球均一的趋势，而是一个在不同的地域、不同的行业、朝着不同方向、不同的维度不均匀的波动着的过程。</p>
+<p>它不像是一条波动的一维曲线，也不能用一个波动的二维平面来概括，也不能用浓淡不均匀的三维几率云来表示，甚至引入RGBA四元色来表达不均匀、不同色的三维着色空间也不足以形象的表达它的波动复杂性。</p>
+<p>因为它不均匀到了这样一种“一锅五颜六色疙瘩汤”的复杂状态，以至于按照不同的口径来统计就会得到不同的结论。所以，说它是会“全面推进”还是“全面逆转”，在它触碰到一个软极限的时候是很无意义的说法。</p>
+<p>比较有意义的，是要去理解影响各地区、各行业的局部全球化策略倾向的几大主要议题，去考虑这些主要议题的交叉反应，得出你自己的结论。</p>
+<p>也就是你应该基于什么样的规则，去判断你所处的地域、你所处的行业，接下来会是什么走向，而不是去讨论“全球的全球化总趋势”。</p>
+<p>因为“全球的全球化总趋势”首先是一个复杂到不可能有效讨论的话题，其次也是一个其实与你自己的切身处境几乎无关的问题——除非存在一种“全球发展指数基金”给你买卖，否则这对你是没有意义的话题。全世界上涨，你这里跌，你也是跌。</p>
+<p>那么，问题就转化成了全球化的软极限到底几个关键议题。每个地区，每个行业都要受到这几个关键议题的影响，视其情势的态势来判断具体的涨落。</p>
+<p>第一个主要议题，就是<strong>全球化收益区域内再分配</strong>的挑战。</p>
+<p>通俗的讲，全球化高度有利于进出口部门，但对该部门之外的人利益较小。</p>
+<p>注意，不见得是“没有利益”，而是利益较小，就已经制造了问题。在全球化之前形成的政治平衡，在全球化之后平衡点就会迁移。平衡点迁移，一定会导致走向新平衡的波动变化。这个说起来轻描淡写，但这背后是大量没有预见性的企业的倒闭、不合时宜的政党的垮台、多少世家大族的轰然倒地、各种暴发户幸运儿的崛起、令人瞠目结舌的一夜变色。这是一种痛苦的、消耗大量社会资本的过程。</p>
+<p>但是社会资本是无主的、是没有人能有效捍卫的，而商业资本是有主的，其主人会不惜一切代价为之斗争的。</p>
+<p>所以，客观上，全球化有一种“将全民享有的社会资本没收，将其倾斜到部分密切参与全球化的阶层，并且还在物质上给予其丰厚奖励”的客观效应。</p>
+<p>形象的说，原来村里十一个人，有10人每月盈余50，一人盈余500，两边恰好平衡。全球化来了，村子整体增加了1000，却是这个人一人独得800，剩下每人各得20。虽然剩下的人从50到了70，但是那位富翁却从500到了1300。</p>
+<p>理论上，只需要等待这份超额利润刺激更多的村民勇于冒险，大胆走出国门去积极争夺本地区参与全球化的平等机会，从而把那位富翁所独占的水源摊平。但是现实是这份魄力背后需要的风险承担能力和信息准备，远非月余70的村民们所能普遍承担——更不用说这些富翁已经抢先一步占住了战略优势位置。</p>
+<p>市场竞争在此失灵，于是村民们只能眼睁睁的看着能纵横四海的富翁们一天比一天占据全村财富的更大份额，以至于所有人都只能靠向他提供服务来保住饭碗。</p>
+<p>政治版图和经济地位都在向富翁倾斜，已经不能靠市场竞争扭转回来。这个问题到了一定的限度，就会触发非经济手段的抑制全球化的能量。</p>
+<p>本质上，所谓“中美贸易战”，并不是发生在中国和美国之间，而是发生在美国的全球化掉队者和弄潮儿之间。是美国的村民们在骚扰和打击美国的富翁们的商业关键环节，尝试强迫他们将吃到嘴的利益吐出来让大家分享。</p>
+<p>看似在攻击中国，实际上中国所在环节的成本是刚性的、需求也是刚性的，由这种骚扰和打击所造成的成本，几乎完全是在由美国的富翁们承受。</p>
+<p>他们将工厂“迁出中国”，迁到越南，则越南也会受到这种攻击，就是这种斗争的明证。</p>
+<strong>不能解决全球化利润的区域内广泛分配问题，全球化就不会获得进一步扩大的许可。</strong>
+<p>这才是全球化受阻的根本原因。</p>
+<p>富翁们不可能轻易就范。即使他们愿意妥协也做好了妥协的准备，也必须使这个过程变得足够痛苦不堪才能将这个妥协付诸实施。否则如此轻松就获得了利益，则这种“闹事有钱拿”的的事伊于胡底？尤其是，这毕竟是一种典型的反资本主义的行为，如果让这种行为获得奖赏，那么资本家们将会面对一个更加严肃的问题——这个国家是否还可以继续视为资本家的祖国？</p>
+<p>可以妥协、也不妨妥协，但却没有无制度和伦理后患的妥协的逻辑。这就像其实土匪绑票要的不多——也就一两千块，远比请保镖便宜——你可以给、也愿意给，但是却苦于没有给钱而无后患的方法一样。</p>
+<p>给了，无论以什么形式让对方得到净盈利，就不是一两千块的问题了，而是为对方开辟了一条新谋生之道。</p>
+<p>这个问题，从全球化一开始就在恶化，到现在才摊牌，已经是无法再拖延了。这才是全球化在全球都卡住的根源。</p>
+<p>而真正能解决这个问题的答案，其实摆在人们面前，但对资本主义国家太过于可怕，以至于必须另外找到别的出路——那就是全民所有制以及国有经济主体化。</p>
+<p>也就是<strong>在实质上由全民持有最有利润的优势产业，对外贸易所得利润用于全民普惠的基础建设，形成一种正循环</strong>。</p>
+<p>美国只是在尝试通过征收必然由富翁们来承担的超额贸易税的形式在本质上实现这个设计。</p>
+<p>这就是一种隐性的国有化。</p>
+<p>但美国人民最好不要对问题会这么简单的解决抱有过大的乐观。</p>
+<p>因为这个措施，会授予政府决定谁被国有化谁不会被国有化的巨大权力。这是一种政治对经济的霸权。而众所周知，就美国而言，富翁们才是最大的政治霸权势力。</p>
+<p>不考虑人的感情好恶，川普实际上的确可以算是美国村民的宋江。</p>
+<p>可惜宋江的下场并不美好。</p>
+<p>这也从另一个角度，说明了为什么中国是在全球化中最成功的玩家之一。恰恰是因为中国的全民所有制和国有经济主体的架构，相当微妙的缓和了全球化对中国的极化效应。并且中国也实现了政治权利与经济实力的脱钩化——毕竟无论多么庞大的私营企业，与央企集团相比也只是九牛一毛，更不用说它们也有不少国有股份——于是也在程度上对全球化会导致的权利失衡问题免疫。</p>
+<p>而面对这份“利润公平再分配”的难题，中国战略性的选择了将它转化为高铁、全面城市化、军事现代化、公立教育现代化、全民医疗和一带一路的战略性、全局性投资这些自然而然会惠及全民的投资，并通过这种宏大的“以工代赈”，实现了内部的按劳分配和底线保障领域的均沾。</p>
+<p>这意味着中国对于全球化必然的副作用有更强的免疫力，自然也意味着中国在全球化上几乎没有任何顾虑，可以大胆的展开一切进攻性的策略。</p>
+<p>实际上不只是中国如此，那些资源国有（或变相国有）的资源型国家，如果较好的控制住贪污问题，也会对全球化有更大的承受力。譬如卡塔尔、沙特、阿联酋、文莱（由皇室拥有国家关键资产并负责照顾国民）、新加坡（由精英集团管理国家资产并负责照顾国民）、日本、韩国（由财团拥有整个国家关键资产并负责照顾全体国民）这类国家，也反映了这个规律。</p>
+<p>全球化的第二个议题，就是地缘政治格局承受重压。</p>
+<p>全球化在改变国家的态势。每个国家的禀赋不同，在全球化中获得收益的能力也就不一样。这其实是在地球村里将美国村的问题重演了一遍。逻辑几乎完全相同，问题的平台上升了一个档次。</p>
+<p>在美国村，富翁们实在受不了还可以换一个村。但是在地球村这个层面，并无第二个地球村可以容纳这样的“各得其所”。</p>
+<p>你不能搬离地球，也不能脱离人类文明，这时候如果是地球村的村民对力量的失衡感到忧虑，富翁们要怎么选择呢？</p>
+<p>上面说过了——富翁们是愿意妥协也可以妥协的，真正的问题是妥协是以什么名义、通过什么路径去妥协。</p>
+<p>以我所见，这事只有一种处理手段——一面拥有足够的武力震慑，保证没有人敢于继续考虑靠“施压”、靠威胁获得让步的可行性；另一面主动的释放物质利益，换取社会资本，将全球化自带的消耗社会资本增加物质资产的效应对冲掉。</p>
+<p>这两条策略，是对在全球化中受益的全体国家整体有效。这些国家将团结起来，总体的实行这两个策略。</p>
+<p>非如此不可。</p>
+<p>“你与我产生了这种程度的争议，以至于你动了要对我动手来榨取利益以求取得再平衡的念头，而我也看到了的确应该要在一定程度上至少缓解这种对抗性张力的必要”——这种情势，在人类历史上在所有大大小小的舞台上反复上演过。对此历史已经反复的、称得上不厌其烦的说明了故事的结局——只能有一种最终的剧情，就是最后<strong>新的“生产力之王”首先将一切软硬武力威胁震慑住，使得对方的暴力尝试彻底失败，以至于无法在任何意义上将后续的利益分配理解为自己暴力的成果；然后在这种妄念消灭之后，胜利者主动的将部分利益重新分配。而这种再分配，必须是物质上的倾斜换取国际关系、国际秩序上的调整，而不是无条件的施舍。</strong></p>
+<strong>只有这种结果，是拥有最大稳定性的结果。它既没有奖励贪婪、懒惰与凶恶，也良性的遏制了两极分化的进一步恶化，从而熄灭了这两个推动局势继续改变的动力源。</strong>
+<p>直到实现这个结果之前，其他暂时的稳态都会因为这两个动力源仍然没有关机而进入新一轮内在张力积累，直到再次积累起来的张力把这暂时的稳态再次打破，将其推入指向这最终稳态的下一个中转站。反复循环，直到稳定到这个结局为止。</p>
+<p>很显然，中国已经看到了这个总的趋势，已经行动起来了。</p>
+<p>这就是为什么近年中国一方面在飞速的军事现代化和先进化，另一方面在突飞猛进的推进一带一路倡议和“人类命运共同体”的新利益分配框架。</p>
+<p>这就是在为所有全球化受惠国、所有国家的全球化受惠阶层打前锋，铺平尽快进入适应全球化的国际秩序最终稳态的最短通路。</p>
+<blockquote>“丘也闻有国有家者，不患寡而患不均，不患贫而患不安。盖均无贫，和无寡，安无倾。”</blockquote>
+<blockquote>——《<a href="https://link.zhihu.com/?target=https%3A//baike.baidu.com/item/%25E8%25AE%25BA%25E8%25AF%25AD" target="_blank">论语</a>·季氏》第十六</blockquote>
+<p>在另一方面，全球化受惠国还可以进一步的扩大门户开放和市场准入，允许世界各地对全球化不满的人们经由一定的努力有机会以个人身份来参与全球化的利益分享，也是对反全球化的集团性势力釜底抽薪的一种策略。</p>
+<p>这策略的原理有一个经典的实践，就是隋唐科举制——通过某种筛选机制将精英筛选出来变成利益阶层的一员，则足以令动乱的力量失去智力和组织资源，而削弱其实力。</p>
+<p>全球化是生产力的发展，反全球化是生产关系的诉求。</p>
+<p>生产关系可以在一时间延缓生产力的发展速度，但最终总是生产关系会自我调整到适应新的生产力。</p>
+<p>除非人类放弃对物质生活的无限追求，否则这是无可逆转的宏观规律。</p>
+<p>一直盯住这两个主要议题在各地区的进程，你就能看到全球化低潮和高潮交替的节奏，也能知道哪些信号预示着低潮的开始和结束，高潮的开始和结束。</p>
+<p>至于根据你自己看到的迹象作出什么样的判断，那就是各人要努力自己去做的功课了。</p>
+<hr>
+<p>有要求要谈一谈疫情对全球化的影响。</p>
+<p>很多人都在喊疫情会导致各国回迁各种产业，努力提高自给自足的水平，以防再次出现这种突发窘境。</p>
+<p>问题是，“回迁产业链可以预防突发窘境”的逻辑是什么？它在经济上的逻辑成立吗？</p>
+<p>这些产业既然自由流动到这些地方，当然是因为这样效率是最好的、成本是最低的。只要改变它的这个状态，它就将处在效率不够好、成本不够低的状态。</p>
+<p>它生产出的产品，一定会有更高的价格。</p>
+<p>这只有在中国自己因为某种原因肯定不会卖给你更便宜的产品的前提下，这种更高的成本才会变成实际上最低的成本。</p>
+<p>就算这些国家确信中国肯定会在疫情期间卡住某些国家的脖子来要挟，那么<strong>非疫情期间呢？中国也会故意在平时就不卖口罩给其他国家吗？</strong></p>
+<strong>如果仅仅只是担心非常时期会被卡脖子，那么回迁生产线显然是一个愚蠢的行为，远远不如在和平的非禁运时期建立战略储备。</strong>
+<p>平时日积月累的储备个十亿二十亿的口罩，不费吹灰之力，便宜量又足。别看数字看起来这么大，其实还装不满一个体育场。这才多大成本？</p>
+<p>真正解决问题的是建立这种战略储备，区别只是这个战略储备是自己建一条生产线来生产，还是平时从国外采购。这纯粹是一个如何做更便宜的问题。——而你怎么可能比中国便宜？</p>
+<p>于是选择回迁生产线来自行生产出这个储备所花费的额外金钱，算是什么呢？</p>
+<p>这是<strong>纯粹的浪费</strong>。</p>
+<p>第二种可能的好处，就是再次遇到疫情时万一储备耗尽则可以自己生产。</p>
+<p>但是这意味着这产能要有足够的规模来应付突发的巨量需求。这个巨大的产能规模，在没有疫情的漫长时期内怎么养活？</p>
+<p>一天不发生疫情，就要净亏一天——不靠大量补贴，这些产能生产出的产品是不能和中国的产品竞争的，毕竟成本更高。</p>
+<p>下次什么时候发生同样的疫情？又一个十七年后？大家赌气养着这支“以防万一”——其实其产品完全可以在平时廉价买到——的大军又一个十七年？</p>
+<p>头几年也许大家积极性很高，一致认为“非如此不可”。疫情过去还没满两年，就会有各种呼声表示“这很愚蠢”，“国民不应该继续养活着这群‘无能的蛀虫’ ”。</p>
+<p>这时候算算账，回迁生产线的成本完全沉没，只剩下一堆过时的设备可以廉价拍卖；花费了两年的补贴购买自己生产的高价口罩，成本超过向中国直接购买数倍。</p>
+<p>这是拿口罩举例，实际上什么抗生素、原料药、呼吸机、消毒液………几乎一切与抗疫有关的行业都一样。</p>
+<p>强行回迁，就只能靠财政收入养起来——一直养一直养，强迫本国居民以更高价格购买更差产品，帮着一起养，而且还要额外再交税补足仍然不足的部分。</p>
+<p>而且是在疫情过后经济萧条、国债负担沉重到利息都快扛不起、货币信用都快崩溃的前提下。</p>
+<p>而这必将挤占本来可以用来复苏和发展本国优势行业的资源，影响到本国区位优势的充分发挥。</p>
+<p>这种主张想要长期获得足够支持——就像中国当年下定决心要自力更生实现全面的国产替代一样——有一种绝对必要的前提，就是来自中国的坚决的、无情的、绝不妥协的、显然恶意的、无休无止的禁运。</p>
+<p>只要事实证明根本不存在这种恶意禁运，这种回撤的逻辑就整个失去了基本合理性。</p>
+<p>而且到最后多半亏得一沓糊涂而被迫放弃。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align: center; margin-top: 40px; padding: 20px; color: #666; font-size: 0.9em;">
+        <p>文档由 Claude Code 自动生成 | 基于 JSON 索引数据</p>
+    </footer>
+</body>
+</html>

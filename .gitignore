@@ -1,7 +1,31 @@
-
 # 忽略 Obsidian 配置文件
 .obsidian/app.json
 .obsidian/workspace.json
+
+# 插入常见的忽略规则
+# 忽略日志文件
+*.log
+logs/
+*.log.*
+logs/**/*
+# 忽略临时文件
+*.tmp
+*.temp
+tmp/
+temp/
+# pycache 文件
+__pycache__/
+*.pyc
+# 忽略编译生成的文件
+build/
+dist/
+out/
+bin/
+obj/
+# 忽略依赖包
+node_modules/
+vendor/
+
 
 # 忽略 macOS 系统文件
 .DS_Store
@@ -9,3 +33,10 @@
 
 # 忽略 iCloud 备份文件
 *.icloud
+
+# Refactor outputs and local configs
+/output/
+/knowledge_base/
+/config/email_config.json
+/src/__pycache__/
+/src/document_generator/__pycache__/

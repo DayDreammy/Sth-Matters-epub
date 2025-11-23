@@ -1,0 +1,557 @@
+{
+  "metadata": {
+    "topic": "知识库综合索引",
+    "search_date": "2025-08-30",
+    "total_sources": 4831,
+    "total_words": 6213883,
+    "description": "基于中国图书馆分类法的完整知识库索引系统",
+    "classification_system": "中国图书馆分类法",
+    "index_version": "1.0"
+  },
+  "sources": [
+    {
+      "id": 1,
+      "title": "精通儒释道",
+      "file_path": "【文章目录】/【1 - 哲学类】/120 - 中国哲学/精通儒释道.md",
+      "category": "哲学-中国哲学",
+      "tags": [
+        "中国哲学",
+        "儒释道",
+        "传统文化"
+      ],
+      "content_preview": "探讨儒家、释家、道家三家思想的精髓与现代价值",
+      "word_count": 24323,
+      "key_concepts": [
+        "儒家思想",
+        "佛教哲学",
+        "道家智慧",
+        "文化融合"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "5G技术与应用",
+      "file_path": "【文章目录】/【4 - 应用科学】/440 - 工程/445 - 市政工程 & 环境工程/5G/5G.md",
+      "category": "应用科学-工程技术",
+      "tags": [
+        "5G技术",
+        "通信工程",
+        "未来科技"
+      ],
+      "content_preview": "全面分析5G技术的原理、应用场景及未来发展趋势",
+      "word_count": 21572,
+      "key_concepts": [
+        "5G网络",
+        "物联网",
+        "远程医疗",
+        "智能城市"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "社会化过程",
+      "file_path": "【文章目录】/【5 - 社会科学】/520 - 教育/家庭教育/社会化.md",
+      "category": "社会科学-教育学",
+      "tags": [
+        "社会化",
+        "家庭教育",
+        "个人发展"
+      ],
+      "content_preview": "深入分析个体社会化过程中的关键因素和发展阶段",
+      "word_count": 18949,
+      "key_concepts": [
+        "社会适应",
+        "家庭教育",
+        "人格发展",
+        "社会规范"
+      ]
+    }
+  ],
+  "classification_tree": {
+    "【0 - 总类】": {
+      "code": "0",
+      "name": "总类",
+      "file_count": 25,
+      "subcategories": {
+        "000 - 特藏 - 致读者": {
+          "file_count": 16
+        },
+        "019 - 读书法": {
+          "file_count": 4
+        },
+        "029 - 私家藏书": {
+          "file_count": 1
+        },
+        "069 - 博物馆学": {
+          "file_count": 4
+        }
+      }
+    },
+    "【1 - 哲学类】": {
+      "code": "1",
+      "name": "哲学类",
+      "file_count": 1373,
+      "subcategories": {
+        "100 - 哲学总论": {
+          "file_count": 0
+        },
+        "120 - 中国哲学": {
+          "file_count": 0
+        },
+        "140 - 西洋哲学": {
+          "file_count": 0
+        },
+        "150 - 逻辑学": {
+          "file_count": 0
+        },
+        "160 - 形而上学": {
+          "file_count": 0
+        },
+        "170 - 心理学": {
+          "file_count": 0
+        },
+        "180 - 美学": {
+          "file_count": 0
+        },
+        "190 - 伦理学": {
+          "file_count": 0
+        }
+      }
+    },
+    "【3 - 自然科学】": {
+      "code": "3",
+      "name": "自然科学",
+      "file_count": 101,
+      "subcategories": {
+        "300 - 科学总论": {
+          "file_count": 0
+        },
+        "310 - 数学": {
+          "file_count": 0
+        },
+        "320 - 天文学": {
+          "file_count": 0
+        },
+        "330 - 物理学": {
+          "file_count": 0
+        },
+        "340 - 化学": {
+          "file_count": 0
+        },
+        "360 - 生物科学": {
+          "file_count": 0
+        },
+        "370 - 植物学": {
+          "file_count": 0
+        },
+        "380 - 动物学": {
+          "file_count": 0
+        },
+        "390 - 人类学": {
+          "file_count": 0
+        }
+      }
+    },
+    "【4 - 应用科学】": {
+      "code": "4",
+      "name": "应用科学",
+      "file_count": 359,
+      "subcategories": {
+        "400 - 应用科学总论": {
+          "file_count": 0
+        },
+        "410 - 医药": {
+          "file_count": 0
+        },
+        "420 - 家政": {
+          "file_count": 0
+        },
+        "430 - 农业": {
+          "file_count": 0
+        },
+        "440 - 工程": {
+          "file_count": 0
+        },
+        "460 - 化学工程": {
+          "file_count": 0
+        },
+        "470 - 制造": {
+          "file_count": 0
+        },
+        "480 - 商业": {
+          "file_count": 0
+        },
+        "490 - 商学": {
+          "file_count": 0
+        }
+      }
+    },
+    "【5 - 社会科学】": {
+      "code": "5",
+      "name": "社会科学",
+      "file_count": 810,
+      "subcategories": {
+        "510 - 统计": {
+          "file_count": 0
+        },
+        "520 - 教育": {
+          "file_count": 0
+        },
+        "530 - 礼俗": {
+          "file_count": 0
+        },
+        "540 - 社会学": {
+          "file_count": 0
+        },
+        "550 - 经济": {
+          "file_count": 0
+        },
+        "560 - 财政": {
+          "file_count": 0
+        },
+        "570 - 政治": {
+          "file_count": 0
+        },
+        "580 - 法律": {
+          "file_count": 0
+        },
+        "590 - 军事": {
+          "file_count": 0
+        }
+      }
+    },
+    "【6 - 中国史地】": {
+      "code": "6",
+      "name": "中国史地",
+      "file_count": 58,
+      "subcategories": {
+        "600 - 史地总论": {
+          "file_count": 0
+        },
+        "620 - 中国断代史": {
+          "file_count": 0
+        },
+        "630 - 中国文化史": {
+          "file_count": 0
+        },
+        "670 - 中国地方志": {
+          "file_count": 0
+        },
+        "680 - 中国地理类志": {
+          "file_count": 0
+        }
+      }
+    },
+    "【7 - 世界史地】": {
+      "code": "7",
+      "name": "世界史地",
+      "file_count": 186,
+      "subcategories": {
+        "710 - 世界史地": {
+          "file_count": 0
+        },
+        "730 - 亚洲史地": {
+          "file_count": 0
+        },
+        "740 - 欧洲史地": {
+          "file_count": 0
+        },
+        "750 - 美洲史地": {
+          "file_count": 0
+        },
+        "760 - 非洲史地": {
+          "file_count": 0
+        },
+        "770 - 大洋洲史地": {
+          "file_count": 0
+        },
+        "790 - 文物考古": {
+          "file_count": 0
+        }
+      }
+    },
+    "【8 - 语言文学类】": {
+      "code": "8",
+      "name": "语言文学类",
+      "file_count": 129,
+      "subcategories": {
+        "800 - 语言学总论": {
+          "file_count": 0
+        },
+        "810 - 文学总论": {
+          "file_count": 0
+        },
+        "820 - 中国文学": {
+          "file_count": 0
+        },
+        "870 - 西洋文学": {
+          "file_count": 0
+        },
+        "890 - 新闻学": {
+          "file_count": 0
+        }
+      }
+    },
+    "【9 - 艺术类】": {
+      "code": "9",
+      "name": "艺术类",
+      "file_count": 171,
+      "subcategories": {
+        "900 - 艺术总论": {
+          "file_count": 0
+        },
+        "910 - 音乐": {
+          "file_count": 0
+        },
+        "920 - 建筑艺术": {
+          "file_count": 0
+        },
+        "940 - 绘画 & 书法": {
+          "file_count": 0
+        },
+        "950 - 摄影 & 电脑艺术": {
+          "file_count": 0
+        },
+        "970 - 技艺": {
+          "file_count": 0
+        },
+        "980 - 戏剧": {
+          "file_count": 0
+        },
+        "990 - 游艺及休闲活动": {
+          "file_count": 0
+        }
+      }
+    },
+    "【10 - 专题类】": {
+      "code": "10",
+      "name": "专题类",
+      "file_count": 370,
+      "subcategories": {
+        "人工智能AI": {
+          "file_count": 0
+        },
+        "俄乌战争": {
+          "file_count": 0
+        },
+        "大过滤器": {
+          "file_count": 0
+        },
+        "新冠Covid": {
+          "file_count": 0
+        },
+        "杂论": {
+          "file_count": 0
+        }
+      }
+    }
+  },
+  "tag_tree": {
+    "_专题合集": {
+      "name": "专题合集",
+      "subcategories": {
+        "合集1-概念与定义": {
+          "count": 202
+        },
+        "合集2-一些推荐": {
+          "count": 75
+        },
+        "合集3-Covid疫情": {
+          "count": 55
+        },
+        "合集4-战争论": {
+          "count": 252
+        },
+        "合集6-个人信仰": {
+          "count": 151
+        }
+      }
+    },
+    "1-个人成长": {
+      "name": "个人成长",
+      "subcategories": {
+        "1-内在建设": {
+          "count": 221
+        },
+        "3-处世之道": {
+          "count": 378
+        },
+        "4-心理建设": {
+          "count": 111
+        },
+        "5-核心能力": {
+          "count": 545
+        }
+      }
+    },
+    "2-亲密关系": {
+      "name": "亲密关系",
+      "subcategories": {
+        "1-交往准则": {
+          "count": 482
+        },
+        "2-婚姻家庭": {
+          "count": 227
+        }
+      }
+    },
+    "3-家庭伦理": {
+      "name": "家庭伦理",
+      "subcategories": {
+        "2-亲子关系": {
+          "count": 159
+        },
+        "2c-为人父母": {
+          "count": 55
+        }
+      }
+    },
+    "4-职业发展": {
+      "name": "职业发展",
+      "subcategories": {
+        "1-态度伦理": {
+          "count": 135
+        },
+        "2-选择与规划": {
+          "count": 75
+        },
+        "3-职业分析": {
+          "count": 55
+        },
+        "4-职业道德": {
+          "count": 94
+        },
+        "6-经营策略": {
+          "count": 76
+        }
+      }
+    },
+    "5-社会科学": {
+      "name": "社会科学",
+      "subcategories": {
+        "1-社会学": {
+          "count": 57
+        },
+        "2-政治学": {
+          "count": 180
+        },
+        "4-军事学": {
+          "count": 48
+        }
+      }
+    },
+    "6-文化艺术": {
+      "name": "文化艺术",
+      "subcategories": {
+        "1-艺术总论": {
+          "count": 47
+        },
+        "2-语言文学": {
+          "count": 48
+        },
+        "3-影视与戏剧": {
+          "count": 47
+        },
+        "4-技艺": {
+          "count": 47
+        },
+        "5-文化娱乐": {
+          "count": 122
+        }
+      }
+    }
+  },
+  "statistics": {
+    "total_files": 4831,
+    "total_words": 6213883,
+    "average_words_per_file": 1286,
+    "classification_distribution": {
+      "哲学类": 38.2,
+      "社会科学": 22.6,
+      "应用科学": 10.0,
+      "艺术类": 4.8,
+      "世界史地": 5.2,
+      "语言文学": 3.6,
+      "自然科学": 2.8,
+      "中国史地": 1.6,
+      "总类": 0.7,
+      "专题类": 10.3
+    },
+    "file_size_distribution": {
+      "超大文件_5000+字": 83,
+      "大文件_2000-5000字": 643,
+      "中等文件_500-2000字": 3005,
+      "小文件_500字以下": 1100
+    },
+    "top_categories_by_file_count": [
+      {
+        "category": "哲学类",
+        "count": 1373
+      },
+      {
+        "category": "社会科学",
+        "count": 810
+      },
+      {
+        "category": "专题类",
+        "count": 370
+      },
+      {
+        "category": "应用科学",
+        "count": 359
+      },
+      {
+        "category": "艺术类",
+        "count": 171
+      }
+    ],
+    "top_tags": [
+      {
+        "tag": "个人成长",
+        "count": 1255
+      },
+      {
+        "tag": "处世之道",
+        "count": 378
+      },
+      {
+        "tag": "核心能力",
+        "count": 545
+      },
+      {
+        "tag": "交往准则",
+        "count": 482
+      },
+      {
+        "tag": "政治学",
+        "count": 180
+      }
+    ]
+  },
+  "search_capabilities": {
+    "file_level_search": true,
+    "content_level_search": true,
+    "tag_based_search": true,
+    "classification_search": true,
+    "semantic_search": true,
+    "multi_dimensional_search": true
+  },
+  "usage_guide": {
+    "deep_search_workflow": {
+      "phase1": "初始深度搜索 - 多角度搜索创建基础索引",
+      "phase2": "概念扩展 - 基于初始结果深化理解",
+      "phase3": "结果整合 - 合并搜索结果形成综合索引",
+      "phase4": "文档生成 - 生成多格式阅读文档"
+    },
+    "available_formats": [
+      "thematic",
+      "source_based",
+      "concepts",
+      "summary",
+      "html",
+      "epub"
+    ],
+    "generator_script": "_对话检索汇编/scripts/gen_reading_md.py",
+    "epub_generator": "_对话检索汇编/scripts/generate_epub_cli.py"
+  }
+}

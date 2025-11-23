@@ -1,0 +1,212 @@
+{
+  "search_metadata": {
+    "topic": "社会化",
+    "search_date": "2025-11-23",
+    "search_phase": "Phase 1 Deep Search",
+    "total_files_found": 63,
+    "search_strategies": [
+      "文件级搜索 - 扫描目录结构和中图法分类",
+      "文件名搜索 - 查找包含'社会化'关键词的文件",
+      "内容全文搜索 - 在Markdown文件中搜索社会化相关内容",
+      "标签搜索 - 利用标签系统查找相关内容",
+      "概念扩展搜索 - 搜索社会化相关概念（个体、群体、适应等）",
+      "结果整理与分析 - 创建JSON索引和相关性评分"
+    ]
+  },
+  "category_system": {
+    "chinese_library_classification": {
+      "main_categories": {
+        "1 - 哲学类": "哲学总论、中国哲学、西洋哲学、逻辑学、形而上学、心理学、美学、伦理学",
+        "3 - 自然科学": "科学总论、数学、天文学、物理学、化学、生物科学",
+        "4 - 应用科学": "应用科学总论、医药、家政、工程、农业",
+        "5 - 社会科学": "统计、教育、礼俗、社会学、经济、政治、法律、军事",
+        "6 - 中国史地": "史地总论、中国断代史、中国文化史、中国地方志",
+        "7 - 世界史地": "世界史地、亚洲史地、欧洲史地、美洲史地",
+        "8 - 语言文学类": "语言学总论、文学总论、中国文学、西洋文学、新闻学",
+        "9 - 艺术类": "艺术总论、音乐、建筑艺术、绘画、摄影、技艺、戏剧"
+      },
+      "socialization_relevant_paths": [
+        "【5 - 社会科学】/520 - 教育/家庭教育/社会化/",
+        "【5 - 社会科学】/540 - 社会学/",
+        "【1 - 哲学类】/190 - 伦理学/",
+        "【1 - 哲学类】/170 - 心理学/"
+      ]
+    }
+  },
+  "core_files": [
+    {
+      "file_path": "/home/yy/project/Sth-Matters/knowledge_base/【文章目录】/【5 - 社会科学】/520 - 教育/家庭教育/社会化/社会化.md",
+      "title": "社会化",
+      "author": "#Anonymity",
+      "category": "#【答集】/01-家族答集",
+      "tags": [
+        "#3-家庭伦理/2-亲子关系/2b-家庭教育",
+        "#_专题合集/合集6-个人信仰/A-Caritas/1-爱",
+        "#1-个人成长/5-核心能力/5i-旷野生存",
+        "#_专题合集/合集1-概念与定义"
+      ],
+      "word_count": 1668,
+      "relevance_score": 10,
+      "content_type": "核心定义",
+      "key_concepts": [
+        "真正的社会化 vs 本地化",
+        "超越具体意识形态的社会合作",
+        "不判断、宽容、信心和爱",
+        "人格成立基础上的有效合作"
+      ],
+      "source_link": "https://www.zhihu.com/question/21789164/answer/2524848159",
+      "summary": "区分了真正的社会化（适应社会本身）与虚假的社会化（本地化/公民化），强调社会化是在人格成立基础上的人与人之间的有效合作，重点是建立与意识形态未知、多元、对立人群的低成本可持续合作。",
+      "last_update": "编辑于 2022-06-12"
+    },
+    {
+      "file_path": "/home/yy/project/Sth-Matters/knowledge_base/【文章目录】/【5 - 社会科学】/540 - 社会学/542 - 社会问题/人口与老龄化/社会化抚养.md",
+      "title": "社会化抚养",
+      "author": "#Anonymity",
+      "category": "#【答集】/04-社科答集",
+      "tags": [
+        "#5-社会科学/1-社会学/1b-社会问题/人口问题"
+      ],
+      "word_count": 2018,
+      "relevance_score": 9,
+      "content_type": "社会问题分析",
+      "key_concepts": [
+        "社会化抚养的四大风险",
+        "思想多样性抑制",
+        "评价体系单一化",
+        "系统惯性危机",
+        "谦抑原则"
+      ],
+      "source_link": "https://www.zhihu.com/question/265857247/answer/1375936847",
+      "summary": "批判性分析社会化抚养概念，指出其四大风险：抑制思想多样性、对落后者不公正、导致系统惯性危机、可能成为社会灾难。强调社会化抚养只能作为家庭抚养失败的补充，不可作为进取策略。",
+      "last_update": "编辑于 2021-08-30"
+    },
+    {
+      "file_path": "/home/yy/project/Sth-Matters/knowledge_base/待归档/许仙社会.md",
+      "title": "许仙社会",
+      "author": "#Anonymity",
+      "category": "#【答集】/04-社科答集 #【答集】/01-家族答集 #【答集】/08-文艺答集",
+      "tags": [],
+      "word_count": 1776,
+      "relevance_score": 8,
+      "content_type": "社会批判分析",
+      "key_concepts": [
+        "正确的社会化 vs 去人格化",
+        "权力(right) vs 权力(power)",
+        "人格成立基础上的合作",
+        "pro power vs pro right",
+        "社会的自我纠正机制"
+      ],
+      "source_link": "https://www.zhihu.com/question/663604797/answer/3596468855",
+      "summary": "通过白蛇传分析许仙社会的缺陷，指出正确的社会化必须在人格成立基础上达成人与人的有效合作，而非无抗拒的奴役关系。强调要从自然规律获得权力，而非乞求权利。",
+      "last_update": "编辑于 2024-08-16"
+    },
+    {
+      "file_path": "/home/yy/project/Sth-Matters/knowledge_base/待归档/长不大的社会.md",
+      "title": "长不大的社会",
+      "author": "#Anonymity",
+      "category": "#【答集】/04-社科答集 #【答集】/01-家族答集",
+      "tags": [],
+      "word_count": 2290,
+      "relevance_score": 8,
+      "content_type": "社会心理分析",
+      "key_concepts": [
+        "社会自身的心理年龄",
+        "对非规范关系的本能摧残",
+        "自我实现的诅咒",
+        "顺从现状 vs 推动改变",
+        "社会的双重角色：成员与主人"
+      ],
+      "source_link": "https://www.zhihu.com/question/367810884/answer/3577859380",
+      "summary": "分析社会本身的未成熟状态，指出其对非规范关系（如继母继子、养子等）的残害。强调人的社会化不应简单顺从社会，而应有更高目标，警惕社会自身的问题并推动正确改变。",
+      "last_update": "编辑于 2024-07-30"
+    }
+  ],
+  "related_files": [
+    {
+      "file_path": "/home/yy/project/Sth-Matters/knowledge_base/待归档/涂鸦.md",
+      "title": "涂鸦",
+      "relevance_score": 7,
+      "summary": "强调教导子女完成正确的社会化是绝对的首要任务，正确社会化可避免社交风险、价值观反复、人格崩溃等问题。",
+      "key_points": ["社会化是首要任务", "避免社交风险", "抑制敌意激发好意"]
+    },
+    {
+      "file_path": "/home/yy/project/Sth-Matters/knowledge_base/待归档/拈花.md",
+      "title": "拈花",
+      "relevance_score": 7,
+      "summary": "强调强化社会化水平是重中之重，可带来选择伙伴、朋友、配偶、事业的主动权。",
+      "key_points": ["社会化水平是中心", "伦理厘清的重要性", "关系稳定的决定作用"]
+    },
+    {
+      "file_path": "/home/yy/project/Sth-Matters/knowledge_base/待归档/成性论.md",
+      "title": "成性论",
+      "relevance_score": 6,
+      "summary": "讨论国家层面的社会化标准，指出大国必须依赖精英合作，在文化上高度符合同等级社会化标准。",
+      "key_points": ["大国的社会化要求", "反社会性限制社会规模", "精英合作的重要性"]
+    }
+  ],
+  "key_concepts_extracted": {
+    "socialization_theory": [
+      "真正的社会化",
+      "虚假的社会化（本地化/公民化）",
+      "人格成立基础上的有效合作",
+      "超越具体意识形态",
+      "低成本可持续合作"
+    ],
+    "socialization_mechanisms": [
+      "不判断、宽容、信心和爱",
+      "权力(right) vs 权力(power)",
+      "规范内化",
+      "角色学习",
+      "价值传承"
+    ],
+    "socialization_types": [
+      "正确的社会化",
+      "去人格化",
+      "过度社会化",
+      "不足社会化",
+      "中国社会化",
+      "美国社会化"
+    ],
+    "socialization_factors": [
+      "家庭教育",
+      "学校教育",
+      "同伴影响",
+      "文化传统",
+      "社会规范",
+      "道德标准"
+    ],
+    "socialization_functions": [
+      "建立社会合作",
+      "避免社交风险",
+      "获得资源保护",
+      "实现个人成就",
+      "维护社会稳定"
+    ],
+    "socialization_criticisms": [
+      "对非规范关系的本能摧残",
+      "自我实现的诅咒",
+      "评价体系单一化",
+      "思想多样性抑制",
+      "系统惯性危机"
+    ]
+  },
+  "search_summary": {
+    "total_content_volume": "约15,000+ 字",
+    "core_authors": ["#Anonymity"],
+    "publication_timeline": "2021-2024年",
+    "main_themes": [
+      "正确社会化的定义与特征",
+      "社会化过程的批判性分析",
+      "家庭教育在社会化中的作用",
+      "社会自身问题的反思",
+      "社会化抚养的争议与风险"
+    ],
+    "knowledge_depth": "深层次理论探讨与实践分析",
+    "practical_applications": [
+      "家庭教育指导",
+      "社会政策反思",
+      "个人成长规划",
+      "心理问题预防"
+    ]
+  }
+}

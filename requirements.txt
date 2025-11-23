@@ -1,0 +1,3 @@
+gradio
+ebooklib
+beautifulsoup4

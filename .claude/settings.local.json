@@ -19,7 +19,14 @@
       "Bash(taskkill:*)",
       "Read(/D:\\d D:\\yy\\Sth-Matters\\_对话检索汇编/**)",
       "Bash(done)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git worktree:*)",
+      "Bash(git checkout:*)",
+      "Bash(find:*)",
+      "Bash(python3:*)",
+      "Bash(pip3 install:*)",
+      "Bash(echo:*)",
+      "Bash(/home/yy/project/Sth-Matters/_对话检索汇编/generated_docs/test_preview.html)"
     ],
     "deny": [],
     "ask": []
