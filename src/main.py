@@ -15,6 +15,7 @@ from datetime import datetime
 from rpa import DeepSearchRPA
 from email_client import EmailClient
 from quick_search import perform_quick_search
+from logger import get_logger, init_logging, log_search_start, log_search_complete, log_email_sent
 
 
 # set env
@@ -26,15 +27,33 @@ class KnowledgeSearchInterface:
     def __init__(self):
         self.base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
         self.output_dir = os.path.join(self.base_dir, "output")
+
+        # 初始化日志系统
+        init_logging(log_dir=os.path.join(self.base_dir, "logs"), log_level="INFO")
+        self.logger = get_logger("KnowledgeSearchInterface")
+        self.logger.info("KnowledgeSearchInterface 初始化完成")
+
         self.search_rpa = DeepSearchRPA(base_dir=self.base_dir)
         self.email_sender = EmailClient()
 
     def _send_email_and_get_report(self, topic: str, email: str, files: dict) -> str:
         """Helper function to send email and generate a report."""
+        self.logger.info(f"开始发送邮件: 主题='{topic}', 收件人='{email}', 文件数量={len(files)}")
+
         email_result = self.email_sender.send_documents(
             recipient_email=email.strip(),
             topic=topic.strip(),
             files=files
+        )
+
+        # 记录邮件发送结果
+        file_paths = list(files.values())
+        log_email_sent(
+            topic=topic.strip(),
+            email=email.strip(),
+            file_paths=file_paths,
+            success=email_result["success"],
+            error_msg=email_result.get("error") if not email_result["success"] else None
         )
 
         if email_result["success"]:
@@ -75,38 +94,70 @@ class KnowledgeSearchInterface:
 
     def deep_search_and_send(self, topic: str, email: str, progress=gr.Progress()):
         """Executes the DEEP search and send workflow."""
+        start_time = time.time()
+
+        # 记录搜索开始
+        log_search_start(topic.strip(), "深度搜索", email.strip())
+        self.logger.info(f"开始深度搜索: 主题='{topic.strip()}'")
+
         progress(0.1, desc="[深度搜索] 开始执行AI代理搜索...")
         search_result = self.search_rpa.run_complete_search(topic.strip())
 
         if not search_result["success"]:
             error_msg = search_result.get("error", "未知错误")
+            duration = time.time() - start_time
+            self.logger.error(f"深度搜索失败: 主题='{topic.strip()}', 错误='{error_msg}', 耗时={duration:.2f}秒")
+            log_search_complete(topic.strip(), "深度搜索", duration, 0, False, error_msg)
             return f"❌ [深度搜索] 失败: {error_msg}"
 
         progress(0.7, desc="[深度搜索] 文档生成完成，准备发送邮件...")
         files = search_result.get("files", {})
         if not files:
+            duration = time.time() - start_time
+            self.logger.warning(f"深度搜索完成但未找到生成的文档文件: 主题='{topic.strip()}', 耗时={duration:.2f}秒")
+            log_search_complete(topic.strip(), "深度搜索", duration, 0, True, "未找到生成的文档文件")
             return "⚠️ [深度搜索] 完成但未找到生成的文档文件"
 
         progress(0.8, desc="[深度搜索] 正在发送邮件...")
         report = self._send_email_and_get_report(topic, email, files)
         progress(1.0, desc="[深度搜索] 完成！")
+
+        # 记录搜索完成
+        duration = time.time() - start_time
+        self.logger.info(f"深度搜索完成: 主题='{topic.strip()}', 文件数量={len(files)}, 耗时={duration:.2f}秒")
+        log_search_complete(topic.strip(), "深度搜索", duration, len(files), True)
+
         return report
 
     def quick_search_and_send(self, topic: str, email: str, progress=gr.Progress()):
         """Executes the QUICK search and send workflow."""
+        start_time = time.time()
+
+        # 记录搜索开始
+        log_search_start(topic.strip(), "快速搜索", email.strip())
+        self.logger.info(f"开始快速搜索: 主题='{topic.strip()}'")
+
         progress(0.1, desc="[快速搜索] 开始执行关键词匹配...")
-        
+
         # Step 1: Perform quick search to get the index file
         search_result = perform_quick_search(topic.strip(), self.base_dir)
 
         if not search_result["success"]:
-            return f"❌ [快速搜索] 失败: {search_result.get('error', '未知错误')}"
-        
+            error_msg = search_result.get('error', '未知错误')
+            duration = time.time() - start_time
+            self.logger.error(f"快速搜索失败: 主题='{topic.strip()}', 错误='{error_msg}', 耗时={duration:.2f}秒")
+            log_search_complete(topic.strip(), "快速搜索", duration, 0, False, error_msg)
+            return f"❌ [快速搜索] 失败: {error_msg}"
+
         index_file_path = search_result.get("index_file_path")
         if not index_file_path:
+            duration = time.time() - start_time
+            self.logger.info(f"快速搜索完成，没有找到相关内容: 主题='{topic.strip()}', 耗时={duration:.2f}秒")
+            log_search_complete(topic.strip(), "快速搜索", duration, 0, True, "没有找到相关内容")
             return "✅ [快速搜索] 完成，没有找到相关内容。"
 
         progress(0.4, desc="[快速搜索] 索引生成，开始转换文档...")
+        self.logger.info(f"快速搜索索引文件已生成: {index_file_path}")
 
         # Step 2: Call document generators
         try:
@@ -123,18 +174,20 @@ class KnowledgeSearchInterface:
                 "-o", self.output_dir,
                 "-k", os.path.join(self.base_dir, "knowledge_base", "sth-matters")
             ]
-            
-            print(f"Executing: {' '.join(md_gen_cmd)}")
+
+            self.logger.debug(f"执行MD生成命令: {' '.join(md_gen_cmd)}")
             subprocess.run(md_gen_cmd, check=True, capture_output=True, text=True, encoding='utf-8')
-            
-            print(f"Executing: {' '.join(epub_gen_cmd)}")
+
+            self.logger.debug(f"执行EPUB生成命令: {' '.join(epub_gen_cmd)}")
             subprocess.run(epub_gen_cmd, check=True, capture_output=True, text=True, encoding='utf-8')
 
         except subprocess.CalledProcessError as e:
             error_message = f"文档生成脚本执行失败: {e.stderr}"
-            print(error_message)
+            duration = time.time() - start_time
+            self.logger.error(f"快速搜索文档生成失败: 主题='{topic.strip()}', 错误='{error_message}', 耗时={duration:.2f}秒")
+            log_search_complete(topic.strip(), "快速搜索", duration, 0, False, error_message)
             return f"❌ [快速搜索] {error_message}"
-        
+
         progress(0.7, desc="[快速搜索] 文档生成完成，准备发送邮件...")
 
         # Step 3: Find generated files
@@ -152,11 +205,20 @@ class KnowledgeSearchInterface:
                 found_files[file_type] = files[0]
 
         if not found_files:
+            duration = time.time() - start_time
+            self.logger.warning(f"快速搜索完成但未找到生成的文档文件: 主题='{topic.strip()}', 耗时={duration:.2f}秒")
+            log_search_complete(topic.strip(), "快速搜索", duration, 0, True, "未找到生成的文档文件")
             return "⚠️ [快速搜索] 完成但未找到生成的文档文件"
 
         progress(0.8, desc="[快速搜索] 正在发送邮件...")
         report = self._send_email_and_get_report(topic, email, found_files)
         progress(1.0, desc="[快速搜索] 完成！")
+
+        # 记录搜索完成
+        duration = time.time() - start_time
+        self.logger.info(f"快速搜索完成: 主题='{topic.strip()}', 文件数量={len(found_files)}, 耗时={duration:.2f}秒")
+        log_search_complete(topic.strip(), "快速搜索", duration, len(found_files), True)
+
         return report
 
     def dispatch_search(self, topic: str, email: str, search_type: str, progress=gr.Progress()):
@@ -242,7 +304,7 @@ def main():
     """主函数"""
     app = KnowledgeSearchInterface()
     interface = app.create_interface()
-    interface.launch(server_name="0.0.0.0", server_port=7899, share=False, show_error=True, show_api=True)
+    interface.launch(server_name="0.0.0.0", server_port=7900, share=False, show_error=True, show_api=True)
 
 if __name__ == "__main__":
     main()

@@ -14,6 +14,7 @@ from email import encoders
 from typing import Dict, List, Optional
 import json
 from datetime import datetime
+from logger import get_logger
 
 
 class EmailClient:
@@ -30,7 +31,11 @@ class EmailClient:
             self.config_file = os.path.join(base_dir, "config", "email_config.json")
         else:
             self.config_file = config_file
-        
+
+        # 初始化日志记录器
+        self.logger = get_logger("EmailClient")
+        self.logger.info(f"EmailClient 初始化完成，配置文件: {self.config_file}")
+
         self.config = self.load_config()
 
     def load_config(self) -> Dict:

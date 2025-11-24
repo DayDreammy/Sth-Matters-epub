@@ -12,6 +12,7 @@ import time
 import glob
 from pathlib import Path
 from typing import Optional, Dict, Any
+from logger import get_logger
 
 class DeepSearchRPA:
     def __init__(self, base_dir: str = None):
@@ -24,9 +25,13 @@ class DeepSearchRPA:
         self.output_dir = os.path.join(self.base_dir, "output")
         self.config_dir = os.path.join(self.base_dir, "config")
         self.kb_dir = os.path.join(self.base_dir, "knowledge_base")
-        
+
         # 确保输出目录存在
         os.makedirs(self.output_dir, exist_ok=True)
+
+        # 初始化日志记录器
+        self.logger = get_logger("DeepSearchRPA")
+        self.logger.info("DeepSearchRPA 初始化完成")
 
     def _find_claude_cli(self) -> Optional[str]:
         """
