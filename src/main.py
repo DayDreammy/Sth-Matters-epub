@@ -254,18 +254,18 @@ class KnowledgeSearchInterface:
             with gr.Tabs():
                 with gr.TabItem("🚀 开始搜索"):
                     with gr.Row():
-                        with gr.Column(scale=3):
+                        with gr.Column(scale=2):
                             topic_input = gr.Textbox(label="🔍 搜索主题", placeholder="例如：社会化、认知偏差、人工智能...", lines=2)
                             email_input = gr.Textbox(label="📧 邮箱地址", placeholder="your_email@example.com", type="email")
-                        with gr.Column(scale=2):
+
+                        with gr.Column(scale=1):
                             search_type_input = gr.Radio(
-                                ["深度搜索", "快速搜索"],
+                                ["快速搜索", "深度搜索"],
                                 label="⚙️ 搜索模式",
-                                value="深度搜索",
-                                info="深度搜索：AI代理执行，全面但耗时较长(3-5分钟)。快速搜索：关键词匹配，秒级响应但结果有限。"
+                                value="快速搜索",
+                                info="快速搜索：关键词匹配，秒级响应但结果有限。深度搜索：AI代理执行，全面但耗时较长(3-5分钟)。"
                             )
-                    
-                    submit_btn = gr.Button("🚀 开始执行并发送邮件", variant="primary", size="lg")
+                            submit_btn = gr.Button("🚀 开始执行并发送邮件", variant="primary", size="lg")
                     
                     result_output = gr.Markdown(value="💡 请输入主题和邮箱，然后点击开始按钮...", label="执行结果")
 
@@ -292,8 +292,8 @@ class KnowledgeSearchInterface:
 
             gr.Examples(
                 examples=[
-                    ["社会化", "example@email.com", "深度搜索"],
-                    ["认知偏差", "example@email.com", "快速搜索"],
+                    ["社会化", "example@email.com", "快速搜索"],
+                    ["认知偏差", "example@email.com", "深度搜索"],
                 ],
                 inputs=[topic_input, email_input, search_type_input],
                 label="📝 示例（请将邮箱改为您自己的）"
