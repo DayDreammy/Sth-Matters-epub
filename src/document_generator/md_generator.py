@@ -713,12 +713,7 @@ class MDDocumentGenerator:
                 output.append("""                        </span>
                     </div>
                 </div>
-                <div class="source-content">
-                    <div class="content-preview">""")
-
-                output.append(f"""{source['content_preview']}""")
-
-                output.append("""</div>""")
+                <div class="source-content">""")
 
                 # 读取原文内容
                 content = self._read_source_file(source['file_path'])
