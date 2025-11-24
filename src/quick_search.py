@@ -33,7 +33,7 @@ def perform_quick_search(topic: str, base_dir: str) -> Dict[str, Any]:
     Returns:
         A dictionary containing the search result status and the path to the index file.
     """
-    knowledge_base_dir = os.path.join(base_dir, "knowledge_base")
+    knowledge_base_dir = os.path.join(base_dir, "knowledge_base", "sth-matters")
     output_dir = os.path.join(base_dir, "output")
     os.makedirs(output_dir, exist_ok=True)
 
@@ -59,7 +59,7 @@ def perform_quick_search(topic: str, base_dir: str) -> Dict[str, Any]:
                 source_item = {
                     "id": len(search_results) + 1,
                     "title": title,
-                    "file_path": os.path.relpath(file_path, base_dir),
+                    "file_path": os.path.relpath(file_path, knowledge_base_dir),
                     "zhihu_link": zhihu_links[0] if zhihu_links else "", # Taking the first link
                     "category": "Quick Search Result",
                     "tags": [topic],

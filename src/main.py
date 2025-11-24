@@ -114,14 +114,14 @@ class KnowledgeSearchInterface:
                 "python", "src/document_generator/md_generator.py",
                 "-i", index_file_path,
                 "-o", self.output_dir,
-                "-k", os.path.join(self.base_dir, "knowledge_base"),
+                "-k", os.path.join(self.base_dir, "knowledge_base", "sth-matters"),
                 "-l", "all"
             ]
             epub_gen_cmd = [
                 "python", "src/document_generator/epub_cli.py",
                 "-i", index_file_path,
                 "-o", self.output_dir,
-                "-k", os.path.join(self.base_dir, "knowledge_base")
+                "-k", os.path.join(self.base_dir, "knowledge_base", "sth-matters")
             ]
             
             print(f"Executing: {' '.join(md_gen_cmd)}")
