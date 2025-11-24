@@ -798,27 +798,33 @@ class MDDocumentGenerator:
         output.append("\n")
 
         # 关系网络
-        relationships = self.index_data['relationships']
-        output.append("## 概念关系\n\n")
-        output.append("### 核心概念\n")
-        for concept in relationships['core_concepts']:
-            output.append(f"- {concept}\n")
-        output.append("\n")
+        relationships = self.index_data.get('relationships', {})
+        if relationships:
+            output.append("## 概念关系\n\n")
 
-        output.append("### 相关主题\n")
-        for topic in relationships['related_topics']:
-            output.append(f"- {topic}\n")
-        output.append("\n")
+            if 'core_concepts' in relationships:
+                output.append("### 核心概念\n")
+                for concept in relationships['core_concepts']:
+                    output.append(f"- {concept}\n")
+                output.append("\n")
 
-        output.append("### 实践应用\n")
-        for app in relationships['practical_applications']:
-            output.append(f"- {app}\n")
-        output.append("\n")
+            if 'related_topics' in relationships:
+                output.append("### 相关主题\n")
+                for topic in relationships['related_topics']:
+                    output.append(f"- {topic}\n")
+                output.append("\n")
 
-        output.append("### 批判观点\n")
-        for viewpoint in relationships['critical_viewpoints']:
-            output.append(f"- {viewpoint}\n")
-        output.append("\n")
+            if 'practical_applications' in relationships:
+                output.append("### 实践应用\n")
+                for app in relationships['practical_applications']:
+                    output.append(f"- {app}\n")
+                output.append("\n")
+
+            if 'critical_viewpoints' in relationships:
+                output.append("### 批判观点\n")
+                for viewpoint in relationships['critical_viewpoints']:
+                    output.append(f"- {viewpoint}\n")
+                output.append("\n")
 
         return ''.join(output)
 
