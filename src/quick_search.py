@@ -42,9 +42,30 @@ def perform_quick_search(topic: str, base_dir: str) -> Dict[str, Any]:
 
     print(f"Starting quick search for topic: '{topic}' in '{knowledge_base_dir}'")
 
+    # Define exclusion list
+    def should_exclude_file(file_path, knowledge_base_dir):
+        """Check if file should be excluded from search"""
+        # Get relative path from knowledge base
+        rel_path = os.path.relpath(file_path, knowledge_base_dir)
+
+        # Exclude files and directories starting with .
+        path_parts = rel_path.split(os.sep)
+        for part in path_parts:
+            if part.startswith('.'):
+                return True
+
+        # Exclude specific README.md file in root of knowledge base
+        if rel_path == "README.md":
+            return True
+
+        return False
+
     search_results = []
     # Using glob to recursively find all markdown files
     for file_path in glob.glob(os.path.join(knowledge_base_dir, '**', '*.md'), recursive=True):
+        # Skip excluded files
+        if should_exclude_file(file_path, knowledge_base_dir):
+            continue
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
