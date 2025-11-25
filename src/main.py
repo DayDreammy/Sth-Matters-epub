@@ -20,7 +20,10 @@ from logger import get_logger, init_logging, log_search_start, log_search_comple
 
 # set env
 os.environ["ANTHROPIC_BASE_URL"] = "https://open.bigmodel.cn/api/anthropic"
-os.environ["ANTHROPIC_AUTH_TOKEN"] = "3b222275909a41df8eb8553503ab3300.rJZMbCswT0DXgqph"
+# Get auth token from environment variable
+if "ANTHROPIC_AUTH_TOKEN" not in os.environ:
+    raise ValueError("ANTHROPIC_AUTH_TOKEN environment variable is not set")
+os.environ["ANTHROPIC_AUTH_TOKEN"] = os.environ["ANTHROPIC_AUTH_TOKEN"]
 
 
 class KnowledgeSearchInterface:
