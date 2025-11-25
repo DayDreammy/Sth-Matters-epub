@@ -28,12 +28,47 @@ class ColoredFormatter(logging.Formatter):
     }
     RESET = '\033[0m'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 检查是否支持颜色输出
+        self.use_color = self._supports_color()
+
+    def _supports_color(self):
+        """检测当前终端是否支持ANSI颜色"""
+        # 检查环境变量
+        if os.environ.get('NO_COLOR'):
+            return False
+        if os.environ.get('FORCE_COLOR'):
+            return True
+
+        # 检查是否为TTY终端
+        if not hasattr(sys.stdout, 'isatty') or not sys.stdout.isatty():
+            return False
+
+        # 检查TERM环境变量
+        term = os.environ.get('TERM', '')
+        if 'color' in term or term in ('xterm', 'xterm-256color', 'screen', 'tmux'):
+            return True
+
+        return False
+
     def format(self, record):
-        # 添加颜色
-        if hasattr(record, 'levelname') and record.levelname in self.COLORS:
+        # 只有在支持颜色的终端才添加颜色
+        if self.use_color and hasattr(record, 'levelname') and record.levelname in self.COLORS:
+            # 保存原始levelname
+            original_levelname = record.levelname
+            # 添加颜色
             record.levelname = f"{self.COLORS[record.levelname]}{record.levelname}{self.RESET}"
 
-        return super().format(record)
+            # 格式化日志
+            formatted = super().format(record)
+
+            # 恢复原始levelname，避免影响其他handler
+            record.levelname = original_levelname
+
+            return formatted
+        else:
+            return super().format(record)
 
 
 class JSONFormatter(logging.Formatter):
