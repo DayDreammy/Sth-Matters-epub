@@ -168,12 +168,14 @@ class DeepSearchRPA:
         """
         print(f"等待文档生成，最多等待 {wait_time/60:.0f} 分钟...")
 
-        # 可能的文件模式
+        # 可能的文件模式 (按优先级排序，source_based优先于thematic)
         file_patterns = [
             f"*{topic}*.epub",
+            f"*{topic}*source_based_*.md",  # 优先选择source_based文档
             f"*{topic}*.md",
             f"*{topic}*.html",
             "*_epub_*.epub",
+            "*_source_based_*.md",          # 优先选择source_based文档
             "*_thematic_*.md",
             "*_concepts_*.md",
             "*_summary_*.md",

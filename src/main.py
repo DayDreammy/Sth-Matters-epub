@@ -196,7 +196,7 @@ class KnowledgeSearchInterface:
         # Step 3: Find generated files
         time.sleep(1) # Allow a moment for files to be fully written
         file_patterns = {
-            'md': f"*{topic}*_thematic_文档.md",
+            'md': f"*{topic}*_source_based_文档.md",
             'html': f"*{topic}*_html_文档.html",
             'epub': f"*{topic}*.epub"
         }
