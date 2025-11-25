@@ -38,14 +38,14 @@ class MDDocumentGenerator:
 
         # AI可能生成相对于知识库根目录的路径，我们直接拼接
         full_path = os.path.join(self.kb_dir, file_path)
-        
+
         if os.path.exists(full_path):
             try:
                 with open(full_path, 'r', encoding='utf-8') as f:
                     return f.read()
             except Exception as e:
                 return f"读取文件时出错: {full_path}, 错误: {e}"
-        
+
         return f"无法找到文件: {full_path}"
 
     def _markdown_to_html(self, markdown_text: str) -> str:
@@ -254,7 +254,7 @@ class MDDocumentGenerator:
                     # Fallback to reading from file_path for deep_search compatibility
                     content = self._read_source_file(source['file_path'])
                     output.append(content)
-                
+
                 output.append("\n\n---\n\n")
                 # --- MODIFICATION END ---
 
@@ -266,7 +266,7 @@ class MDDocumentGenerator:
 
         # 文档头部
         metadata = self.index_data['metadata']
-        output.append(f"# {metadata['topic']} - 来源分组阅读文档\n")
+        output.append(f"# {metadata['topic']} - 主题阅读\n")
         output.append(
             f"**生成日期**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         output.append(f"**主题**: {metadata['topic']}\n")
@@ -283,17 +283,11 @@ class MDDocumentGenerator:
 
         # 生成各文件内容
         for file_path, sources in file_groups.items():
-            output.append(f"## 文件: {os.path.basename(file_path)}\n\n")
 
-            for source in sources:
-                output.append(self._format_source_header(source))
-
-                # 读取原文内容
-                content = self._read_source_file(file_path)
-                output.append(content)
-                output.append("\n\n")
-
-            output.append("---\n\n")
+            # 读取原文内容（只读取一次）
+            content = self._read_source_file(file_path)
+            output.append(content)
+            output.append("\n\n---\n\n")
 
         return ''.join(output)
 
@@ -601,8 +595,8 @@ class MDDocumentGenerator:
         <h2>文档信息</h2>
         <div class="source-meta">
             <span class="meta-item"><strong>生成日期:</strong> """+datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"""</span>
-            <span class="meta-item"><strong>主题:</strong> """+ metadata['topic']+"""</span>
-            <span class="meta-item"><strong>来源数量:</strong> """+ str(metadata['total_sources'])+"""</span>
+            <span class="meta-item"><strong>主题:</strong> """ + metadata['topic']+"""</span>
+            <span class="meta-item"><strong>来源数量:</strong> """ + str(metadata['total_sources'])+"""</span>
         </div>
     </div>""")
 
