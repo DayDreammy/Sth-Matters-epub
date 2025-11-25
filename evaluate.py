@@ -97,8 +97,8 @@ def run_quick_search_evaluation():
     print("="*40)
 
     # --- 配置 ---
-    test_topic = "社会化" # 确保这个主题在知识库中存在
-    test_email = "eval@example.com"
+    test_topic = "AI" # 确保这个主题在知识库中存在
+    test_email = "1781051483@qq.com"
     project_root = os.path.dirname(__file__)
     output_dir = os.path.join(project_root, "output")
 

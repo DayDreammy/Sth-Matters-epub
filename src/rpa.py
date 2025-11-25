@@ -14,11 +14,13 @@ from pathlib import Path
 from typing import Optional, Dict, Any
 from logger import get_logger
 
+
 class DeepSearchRPA:
     def __init__(self, base_dir: str = None):
         if base_dir is None:
             # 项目根目录是src目录的上两级
-            self.base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+            self.base_dir = os.path.abspath(
+                os.path.join(os.path.dirname(__file__), ".."))
         else:
             self.base_dir = base_dir
 
@@ -125,13 +127,15 @@ class DeepSearchRPA:
             print(f"Claude CLI 执行完成，返回码: {result.returncode}")
 
             if result.stdout:
-                print("标准输出:", result.stdout[:500] + "..." if len(result.stdout) > 500 else result.stdout)
+                print(
+                    "标准输出:", result.stdout[:500] + "..." if len(result.stdout) > 500 else result.stdout)
 
             if result.stderr:
-                print("错误输出:", result.stderr[:500] + "..." if len(result.stderr) > 500 else result.stderr)
+                print(
+                    "错误输出:", result.stderr[:500] + "..." if len(result.stderr) > 500 else result.stderr)
 
             # 等待文件生成
-            time.sleep(5)
+            time.sleep(1)
 
             return {
                 "success": result.returncode == 0,
@@ -172,13 +176,9 @@ class DeepSearchRPA:
         file_patterns = [
             f"*{topic}*.epub",
             f"*{topic}*source_based_*.md",  # 优先选择source_based文档
-            f"*{topic}*.md",
             f"*{topic}*.html",
             "*_epub_*.epub",
             "*_source_based_*.md",          # 优先选择source_based文档
-            "*_thematic_*.md",
-            "*_concepts_*.md",
-            "*_summary_*.md",
             "*_html_*.html"
         ]
 
@@ -201,10 +201,10 @@ class DeepSearchRPA:
                             print(f"找到 {file_type} 文件: {latest_file}")
 
             # 如果找到了主要文件类型，提前返回
-            if 'epub' in found_files or 'md' in found_files:
+            if 'epub' in found_files and 'md' in found_files and 'html' in found_files:
                 break
 
-            time.sleep(2)
+            time.sleep(1)
 
         print(f"总共找到 {len(found_files)} 个文件")
         return found_files
@@ -242,6 +242,7 @@ class DeepSearchRPA:
             "files": generated_files,
             "output_dir": self.output_dir
         }
+
 
 if __name__ == "__main__":
     # 测试代码

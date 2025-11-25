@@ -26,7 +26,13 @@
       "Bash(python3:*)",
       "Bash(pip3 install:*)",
       "Bash(echo:*)",
-      "Bash(/home/yy/project/Sth-Matters/_对话检索汇编/generated_docs/test_preview.html)"
+      "Bash(/home/yy/project/Sth-Matters/_对话检索汇编/generated_docs/test_preview.html)",
+      "Bash(lsof:*)",
+      "Bash(/dev/null)",
+      "Bash(kill:*)",
+      "Bash(~/.bashrc)",
+      "Bash(source:*)",
+      "Bash(export:*)"
     ],
     "deny": [],
     "ask": []
