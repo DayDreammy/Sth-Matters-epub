@@ -281,8 +281,22 @@ class MDDocumentGenerator:
                 file_groups[file_path] = []
             file_groups[file_path].append(source)
 
+        # 生成目录
+        output.append("## 📚 目录\n\n")
+        for i, (file_path, sources) in enumerate(file_groups.items(), 1):
+            # 提取标题
+            title = self._extract_title_from_content(file_path) or os.path.splitext(os.path.basename(file_path))[0]
+            output.append(f"{i}. [{title}](#{self._generate_anchor(title)})\n")
+        output.append("\n---\n\n")
+
         # 生成各文件内容
         for file_path, sources in file_groups.items():
+            # 提取标题作为小标题
+            title = self._extract_title_from_content(file_path) or os.path.splitext(os.path.basename(file_path))[0]
+            output.append(f"## {title}\n\n")
+
+            # 添加文件路径信息
+            output.append(f"**文件路径**: `{file_path}`\n\n")
 
             # 读取原文内容（只读取一次）
             content = self._read_source_file(file_path)
@@ -290,6 +304,30 @@ class MDDocumentGenerator:
             output.append("\n\n---\n\n")
 
         return ''.join(output)
+
+    def _extract_title_from_content(self, file_path: str) -> Optional[str]:
+        """从文件内容中提取第一个#标题"""
+        try:
+            full_path = os.path.join(self.kb_dir, file_path)
+            if os.path.exists(full_path):
+                with open(full_path, 'r', encoding='utf-8') as f:
+                    lines = f.readlines()
+                    for line in lines:
+                        line = line.strip()
+                        if line.startswith('# '):
+                            return line[2:].strip()
+        except Exception:
+            pass
+        return None
+
+    def _generate_anchor(self, title: str) -> str:
+        """生成markdown锚点链接"""
+        # 移除特殊字符，只保留字母、数字、中文和空格
+        anchor = re.sub(r'[^\w\s\u4e00-\u9fff]', '', title)
+        # 替换空格为下划线
+        anchor = re.sub(r'\s+', '_', anchor)
+        # 转换为小写
+        return anchor.lower()
 
     def generate_concepts_document(self) -> str:
         """生成按关键概念组织的文档"""
