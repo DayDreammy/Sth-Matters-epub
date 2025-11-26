@@ -295,8 +295,14 @@ class MDDocumentGenerator:
             title = self._extract_title_from_content(file_path) or os.path.splitext(os.path.basename(file_path))[0]
             output.append(f"## {title}\n\n")
 
-            # 添加文件路径信息
-            output.append(f"**文件路径**: `{file_path}`\n\n")
+            # 添加文件路径信息 - 转换为相对路径
+            relative_file_path = file_path
+            if relative_file_path.startswith('sth-matters/'):
+                relative_file_path = relative_file_path[len('sth-matters/'):]
+            elif '/' in relative_file_path:
+                relative_file_path = os.path.basename(relative_file_path)
+
+            output.append(f"**文件路径**: `{relative_file_path}`\n\n")
 
             # 读取原文内容（只读取一次）
             content = self._read_source_file(file_path)
@@ -724,7 +730,14 @@ class MDDocumentGenerator:
                             <a href="{source['zhihu_link']}" class="zhihu-link" target="_blank">🔗 知乎链接</a>
                         </span>""")
 
-                output.append(f"""                        <span class="meta-item"><strong>文件:</strong> {source['file_path']}</span>
+                # Convert absolute file path to relative path from knowledge base root
+                relative_file_path = source['file_path']
+                if relative_file_path.startswith('sth-matters/'):
+                    relative_file_path = relative_file_path[len('sth-matters/'):]
+                elif '/' in relative_file_path:
+                    relative_file_path = os.path.basename(relative_file_path)
+
+                output.append(f"""                        <span class="meta-item"><strong>文件:</strong> {relative_file_path}</span>
                         <span class="meta-item"><strong>字数:</strong> {source['word_count']}</span>
                         <span class="meta-item"><strong>分类:</strong> <span class="category">{category_name}</span></span>
                     </div>
