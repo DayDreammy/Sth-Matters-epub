@@ -36,8 +36,13 @@ class MDDocumentGenerator:
         if not self.include_source_content:
             return "（已跳过原始文件内容）"
 
-        # AI可能生成相对于知识库根目录的路径，我们直接拼接
-        full_path = os.path.join(self.kb_dir, file_path)
+  # 处理文件路径：如果已经包含knowledge_base前缀，则直接使用；否则拼接
+        if file_path.startswith('knowledge_base/'):
+            # 路径已经包含knowledge_base前缀，直接使用
+            full_path = file_path
+        else:
+            # 路径是相对的，需要拼接知识库目录
+            full_path = os.path.join(self.kb_dir, file_path)
 
         if os.path.exists(full_path):
             try:
@@ -314,7 +319,14 @@ class MDDocumentGenerator:
     def _extract_title_from_content(self, file_path: str) -> Optional[str]:
         """从文件内容中提取第一个#标题"""
         try:
-            full_path = os.path.join(self.kb_dir, file_path)
+            # 处理文件路径：如果已经包含knowledge_base前缀，则直接使用；否则拼接
+            if file_path.startswith('knowledge_base/'):
+                # 路径已经包含knowledge_base前缀，直接使用
+                full_path = file_path
+            else:
+                # 路径是相对的，需要拼接知识库目录
+                full_path = os.path.join(self.kb_dir, file_path)
+
             if os.path.exists(full_path):
                 with open(full_path, 'r', encoding='utf-8') as f:
                     lines = f.readlines()
