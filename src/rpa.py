@@ -159,7 +159,7 @@ class DeepSearchRPA:
                 "returncode": -2
             }
 
-    def find_generated_files(self, topic: str, wait_time: int = 180) -> Dict[str, str]:
+    def find_generated_files(self, topic: str, wait_time: int = 60) -> Dict[str, str]:
         """
         查找生成的文档文件
 

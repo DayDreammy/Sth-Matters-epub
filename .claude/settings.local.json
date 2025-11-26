@@ -32,7 +32,13 @@
       "Bash(kill:*)",
       "Bash(~/.bashrc)",
       "Bash(source:*)",
-      "Bash(export:*)"
+      "Bash(export:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git merge:*)",
+      "Bash(git branch:*)",
+      "Bash(mysql:*)",
+      "Bash(systemctl status:*)",
+      "Bash(service:*)"
     ],
     "deny": [],
     "ask": []

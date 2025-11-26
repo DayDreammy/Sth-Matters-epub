@@ -107,7 +107,7 @@ class KnowledgeSearchInterface:
         log_search_start(topic.strip(), "深度搜索", email.strip())
         self.logger.info(f"开始深度搜索: 主题='{topic.strip()}'")
 
-        progress(0.1, desc="[深度搜索] 开始执行AI代理搜索...")
+        progress(0.1, desc="深度搜索任务已提交，您可以安全的关闭浏览器了...")
         search_result = self.search_rpa.run_complete_search(topic.strip())
 
         if not search_result["success"]:

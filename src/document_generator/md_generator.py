@@ -290,15 +290,17 @@ class MDDocumentGenerator:
         output.append("## 📚 目录\n\n")
         for i, (file_path, sources) in enumerate(file_groups.items(), 1):
             # 提取标题
-            title = self._extract_title_from_content(file_path) or os.path.splitext(os.path.basename(file_path))[0]
+            title = self._extract_title_from_content(
+                file_path) or os.path.splitext(os.path.basename(file_path))[0]
             output.append(f"{i}. [{title}](#{self._generate_anchor(title)})\n")
         output.append("\n---\n\n")
 
         # 生成各文件内容
         for file_path, sources in file_groups.items():
             # 提取标题作为小标题
-            title = self._extract_title_from_content(file_path) or os.path.splitext(os.path.basename(file_path))[0]
-            output.append(f"## {title}\n\n")
+            title = self._extract_title_from_content(
+                file_path) or os.path.splitext(os.path.basename(file_path))[0]
+            # output.append(f"## {title}\n\n")
 
             # 添加文件路径信息 - 转换为相对路径
             relative_file_path = file_path
@@ -307,12 +309,12 @@ class MDDocumentGenerator:
             elif '/' in relative_file_path:
                 relative_file_path = os.path.basename(relative_file_path)
 
-            output.append(f"**文件路径**: `{relative_file_path}`\n\n")
+            # output.append(f"**文件路径**: `{relative_file_path}`\n\n")
 
             # 读取原文内容（只读取一次）
             content = self._read_source_file(file_path)
             output.append(content)
-            output.append("\n\n---\n\n")
+            output.append("\n\n\n\n")
 
         return ''.join(output)
 
@@ -745,7 +747,8 @@ class MDDocumentGenerator:
                 # Convert absolute file path to relative path from knowledge base root
                 relative_file_path = source['file_path']
                 if relative_file_path.startswith('sth-matters/'):
-                    relative_file_path = relative_file_path[len('sth-matters/'):]
+                    relative_file_path = relative_file_path[len(
+                        'sth-matters/'):]
                 elif '/' in relative_file_path:
                     relative_file_path = os.path.basename(relative_file_path)
 
