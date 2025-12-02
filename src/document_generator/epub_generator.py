@@ -186,7 +186,8 @@ class EPUBDocumentGenerator:
 
     def _create_chapter_content(self, source: Dict[str, Any]) -> str:
         """创建章节内容"""
-        content = self._read_source_file(source['file_path'])
+        file_path = source.get('file_path') or source.get('path')
+        content = self._read_source_file(file_path) if file_path else ""
         html_content = self._markdown_to_html(content)
 
         # 创建章节HTML
@@ -301,7 +302,7 @@ class EPUBDocumentGenerator:
         </head>
         <body>
             <div class="source-info">
-                <h2>{html.escape(os.path.splitext(os.path.basename(source['file_path']))[0])}</h2>
+                <h2>{html.escape(os.path.splitext(os.path.basename(file_path or source.get('title', 'source')))[0])}</h2>
             </div>
             <div class="content">
                 {html_content}
@@ -318,16 +319,19 @@ class EPUBDocumentGenerator:
         book = epub.EpubBook()
 
         # 设置元数据
-        metadata = self.index_data['metadata']
-        total_words = sum(s["word_count"] for s in self.index_data["sources"])
+        metadata = self.index_data.get('metadata', {})
+        sources = self.index_data.get("sources", [])
+        total_words = sum(s.get("word_count", 0) for s in sources)
+        total_sources = metadata.get("total_sources", len(sources))
+        topic = metadata.get("topic", "主题")
 
         book.set_identifier(
             f'socialization-{datetime.now().strftime("%Y%m%d-%H%M%S")}')
-        book.set_title(f'{metadata["topic"]} - 知识文档合集')
+        book.set_title(f'{topic} - 知识文档合集')
         book.set_language('zh-CN')
         book.add_author('Claude Code')
         book.add_metadata(
-            'DC', 'description', f'{metadata["topic"]}主题的深度知识合集，包含{metadata["total_sources"]}篇精选文章，总字数约{total_words}字。涵盖核心理论、批判分析、家庭教育、人格发展等多个维度，是理解社会化概念的完整知识体系。')
+            'DC', 'description', f'{topic}主题的深度知识合集，包含{total_sources}篇精选文章，总字数约{total_words}字。涵盖核心理论、批判分析、家庭教育、人格发展等多个维度，是理解社会化概念的完整知识体系。')
         book.add_metadata('DC', 'publisher', 'Claude Code')
         book.add_metadata('DC', 'date', datetime.now().strftime('%Y-%m-%d'))
         book.add_metadata('DC', 'subject', '社会化,家庭教育,人格发展,伦理学,社会学')
@@ -341,7 +345,7 @@ class EPUBDocumentGenerator:
                           'Social Sciences, Education, Psychology')
 
         # 创建封面页面
-        total_words = sum(s["word_count"] for s in self.index_data["sources"])
+        total_words = sum(s.get("word_count", 0) for s in sources)
         cover_html = f"""
         <html>
         <head>
@@ -409,7 +413,7 @@ class EPUBDocumentGenerator:
             </style>
         </head>
         <body>
-            <h1>{metadata["topic"]}</h1>
+            <h1>{topic}</h1>
             <div class="subtitle">深度知识文档合集</div>
             <div class="description">
                 涵盖核心理论、批判分析、家庭教育、人格发展等多个维度的完整知识体系
@@ -417,7 +421,7 @@ class EPUBDocumentGenerator:
             <div class="info">
                 <div class="stat">
                     <span><span class="stat-icon">📚</span> 来源数量</span>
-                    <span>{metadata["total_sources"]} 篇</span>
+                    <span>{total_sources} 篇</span>
                 </div>
                 <div class="stat">
                     <span><span class="stat-icon">📝</span> 总字数</span>
@@ -425,7 +429,7 @@ class EPUBDocumentGenerator:
                 </div>
                 <div class="stat">
                     <span><span class="stat-icon">📂</span> 分类数量</span>
-                    <span>{len(set(s["category"] for s in self.index_data["sources"]))} 个</span>
+                    <span>{len(set(s.get("category") for s in sources if s.get("category")))} 个</span>
                 </div>
                 <div class="stat">
                     <span><span class="stat-icon">📅</span> 生成日期</span>
@@ -492,11 +496,9 @@ class EPUBDocumentGenerator:
 
         # 按分类分组
         category_groups = {}
-        for source in self.index_data['sources']:
-            category = source['category']
-            if category not in category_groups:
-                category_groups[category] = []
-            category_groups[category].append(source)
+        for source in self.index_data.get('sources', []):
+            category = source.get('category', 'uncategorized')
+            category_groups.setdefault(category, []).append(source)
 
         category_names = {
             'core_theory': '核心理论',
@@ -575,6 +577,3 @@ class EPUBDocumentGenerator:
         except Exception as e:
             print(f"生成EPUB文件时发生错误: {e}")
             raise
-
-
-

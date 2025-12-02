@@ -19,7 +19,44 @@ class MDDocumentGenerator:
         self.index_file_path = index_file_path
         self.kb_dir = kb_dir
         self.index_data = self._load_index()
+        self.total_sources = self._get_total_sources()
         self.include_source_content = True  # 默认包含原始内容
+
+    def _get_total_sources(self) -> int:
+        """Return total sources count with a safe fallback."""
+        metadata = self.index_data.get('metadata', {})
+        sources = self.index_data.get('sources', [])
+        return metadata.get('total_sources') or len(sources)
+
+    @staticmethod
+    def _get_source_path(source: Dict[str, Any]) -> str:
+        """Return a usable path field from source."""
+        return source.get('file_path') or source.get('path') or ""
+
+    @staticmethod
+    def _get_category(source: Dict[str, Any]) -> str:
+        """Return category with a fallback."""
+        return source.get('category') or 'uncategorized'
+
+    @staticmethod
+    def _get_word_count(source: Dict[str, Any]) -> int:
+        """Return word count with a numeric fallback."""
+        return source.get('word_count') or 0
+
+    @staticmethod
+    def _get_tags(source: Dict[str, Any]) -> List[str]:
+        """Return tags list with fallback."""
+        return source.get('tags') or []
+
+    @staticmethod
+    def _get_key_concepts(source: Dict[str, Any]) -> List[str]:
+        """Return key concepts list with fallback."""
+        return source.get('key_concepts') or []
+
+    @staticmethod
+    def _get_preview(source: Dict[str, Any]) -> str:
+        """Return preview/summary text with a safe fallback."""
+        return source.get('content_preview') or source.get('summary') or ""
 
     def _load_index(self) -> Dict[str, Any]:
         """加载JSON索引文件"""
@@ -195,8 +232,9 @@ class MDDocumentGenerator:
     def _format_source_header(self, source: Dict[str, Any]) -> str:
         """格式化来源标题头部"""
         # 从文件路径中提取原标题（去除扩展名）
+        file_path = self._get_source_path(source)
         original_title = os.path.splitext(
-            os.path.basename(source['file_path']))[0]
+            os.path.basename(file_path))[0] if file_path else source.get('title', '来源')
 
         header = f"### {original_title}\n\n"
 
@@ -212,13 +250,13 @@ class MDDocumentGenerator:
         output.append(
             f"**生成日期**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         output.append(f"**主题**: {metadata['topic']}\n")
-        output.append(f"**来源数量**: {metadata['total_sources']}\n")
+        output.append(f"**来源数量**: {self.total_sources}\n")
         output.append("---\n\n")
 
         # 按分类分组
         category_groups = {}
         for source in self.index_data['sources']:
-            category = source['category']
+            category = self._get_category(source)
             if category not in category_groups:
                 category_groups[category] = []
             category_groups[category].append(source)
@@ -256,8 +294,10 @@ class MDDocumentGenerator:
                     # Prefer the full_content passed directly from quick_search
                     output.append(source['full_content'])
                 else:
-                    # Fallback to reading from file_path for deep_search compatibility
-                    content = self._read_source_file(source['file_path'])
+                    # Fallback to reading from source file for deep_search compatibility
+                    content = self._read_source_file(
+                        self._get_source_path(source)
+                    )
                     output.append(content)
 
                 output.append("\n\n---\n\n")
@@ -275,13 +315,13 @@ class MDDocumentGenerator:
         output.append(
             f"**生成日期**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         output.append(f"**主题**: {metadata['topic']}\n")
-        output.append(f"**来源数量**: {metadata['total_sources']}\n")
+        output.append(f"**来源数量**: {self.total_sources}\n")
         output.append("---\n\n")
 
         # 按文件路径分组
         file_groups = {}
         for source in self.index_data['sources']:
-            file_path = source['file_path']
+            file_path = self._get_source_path(source)
             if file_path not in file_groups:
                 file_groups[file_path] = []
             file_groups[file_path].append(source)
@@ -299,7 +339,7 @@ class MDDocumentGenerator:
         for file_path, sources in file_groups.items():
             # 提取标题作为小标题
             title = self._extract_title_from_content(
-                file_path) or os.path.splitext(os.path.basename(file_path))[0]
+                file_path) or os.path.splitext(os.path.basename(file_path))[0] if file_path else "未命名来源"
             # output.append(f"## {title}\n\n")
 
             # 添加文件路径信息 - 转换为相对路径
@@ -359,13 +399,13 @@ class MDDocumentGenerator:
         output.append(
             f"**生成日期**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         output.append(f"**主题**: {metadata['topic']}\n")
-        output.append(f"**来源数量**: {metadata['total_sources']}\n")
+        output.append(f"**来源数量**: {self.total_sources}\n")
         output.append("---\n\n")
 
         # 提取所有关键概念
         all_concepts = {}
         for source in self.index_data['sources']:
-            for concept in source['key_concepts']:
+            for concept in self._get_key_concepts(source):
                 if concept not in all_concepts:
                     all_concepts[concept] = []
                 all_concepts[concept].append(source)
@@ -375,17 +415,23 @@ class MDDocumentGenerator:
             output.append(f"## {concept}\n\n")
 
             for source in sources:
+                file_path = self._get_source_path(source)
                 original_title = os.path.splitext(
-                    os.path.basename(source['file_path']))[0]
+                    os.path.basename(file_path))[0] if file_path else source.get('title', '来源')
                 output.append(f"### {original_title}\n\n")
-                output.append(
-                    f"**来源**: `{os.path.basename(source['file_path'])}`\n")
-                output.append(f"**字数**: {source['word_count']}\n")
+                if file_path:
+                    output.append(
+                        f"**来源**: `{os.path.basename(file_path)}`\n")
+                output.append(f"**字数**: {self._get_word_count(source)}\n")
                 if source.get('zhihu_link'):
                     output.append(
                         f"**知乎链接**: [{source['title']}]({source['zhihu_link']})\n")
                 output.append("\n")
-                output.append(f"> {source['content_preview']}\n\n")
+                preview = self._get_preview(source)
+                if preview:
+                    output.append(f"> {preview}\n\n")
+                else:
+                    output.append("> （无摘要）\n\n")
 
             output.append("---\n\n")
 
@@ -654,16 +700,17 @@ class MDDocumentGenerator:
         <div class="source-meta">
             <span class="meta-item"><strong>生成日期:</strong> """+datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"""</span>
             <span class="meta-item"><strong>主题:</strong> """ + metadata['topic']+"""</span>
-            <span class="meta-item"><strong>来源数量:</strong> """ + str(metadata['total_sources'])+"""</span>
+            <span class="meta-item"><strong>来源数量:</strong> """ + str(self.total_sources)+"""</span>
         </div>
     </div>""")
 
         # 统计信息
-        total_words = sum(s['word_count'] for s in self.index_data['sources'])
+        total_words = sum(self._get_word_count(s)
+                          for s in self.index_data['sources'])
         output.append("""
     <div class="stats">
         <div class="stat-card">
-            <div class="stat-number">"""+str(metadata['total_sources'])+"""</div>
+            <div class="stat-number">"""+str(self.total_sources)+"""</div>
             <div class="stat-label">来源数量</div>
         </div>
         <div class="stat-card">
@@ -671,7 +718,7 @@ class MDDocumentGenerator:
             <div class="stat-label">总字数</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">"""+str(len(set(s['category'] for s in self.index_data['sources'])))+"""</div>
+            <div class="stat-number">"""+str(len(set(self._get_category(s) for s in self.index_data['sources'])))+"""</div>
             <div class="stat-label">分类数量</div>
         </div>
     </div>""")
@@ -685,7 +732,7 @@ class MDDocumentGenerator:
         # 按分类生成目录
         category_groups = {}
         for source in self.index_data['sources']:
-            category = source['category']
+            category = self._get_category(source)
             if category not in category_groups:
                 category_groups[category] = []
             category_groups[category].append(source)
@@ -745,7 +792,7 @@ class MDDocumentGenerator:
                         </span>""")
 
                 # Convert absolute file path to relative path from knowledge base root
-                relative_file_path = source['file_path']
+                relative_file_path = self._get_source_path(source)
                 if relative_file_path.startswith('sth-matters/'):
                     relative_file_path = relative_file_path[len(
                         'sth-matters/'):]
@@ -753,13 +800,13 @@ class MDDocumentGenerator:
                     relative_file_path = os.path.basename(relative_file_path)
 
                 output.append(f"""                        <span class="meta-item"><strong>文件:</strong> {relative_file_path}</span>
-                        <span class="meta-item"><strong>字数:</strong> {source['word_count']}</span>
+                        <span class="meta-item"><strong>字数:</strong> {self._get_word_count(source)}</span>
                         <span class="meta-item"><strong>分类:</strong> <span class="category">{category_name}</span></span>
                     </div>
                     <div class="source-meta">
                         <span class="meta-item"><strong>标签:</strong>""")
 
-                for tag in source['tags']:
+                for tag in self._get_tags(source):
                     output.append(f""" <span class="tag">{tag}</span>""")
 
                 output.append("""                        </span>
@@ -767,7 +814,7 @@ class MDDocumentGenerator:
                     <div class="source-meta">
                         <span class="meta-item"><strong>关键概念:</strong>""")
 
-                for concept in source['key_concepts']:
+                for concept in self._get_key_concepts(source):
                     output.append(f""" <span class="tag">{concept}</span>""")
 
                 output.append("""                        </span>
@@ -776,7 +823,7 @@ class MDDocumentGenerator:
                 <div class="source-content">""")
 
                 # 读取原文内容
-                content = self._read_source_file(source['file_path'])
+                content = self._read_source_file(self._get_source_path(source))
                 if content.startswith("无法读取文件"):
                     output.append(f"""                    <div class="original-content" style="color: #666; font-style: italic;">
                         {content}
@@ -816,25 +863,25 @@ class MDDocumentGenerator:
         output.append(
             f"**生成日期**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         output.append(f"**主题**: {metadata['topic']}\n")
-        output.append(f"**来源数量**: {metadata['total_sources']}\n")
+        output.append(f"**来源数量**: {self.total_sources}\n")
         output.append("---\n\n")
 
         # 统计信息
         output.append("## 统计信息\n\n")
-        output.append(f"- **总来源数**: {metadata['total_sources']}\n")
+        output.append(f"- **总来源数**: {self.total_sources}\n")
         output.append(
-            f"- **分类数量**: {len(set(s['category'] for s in self.index_data['sources']))}\n")
+            f"- **分类数量**: {len(set(self._get_category(s) for s in self.index_data['sources']))}\n")
         output.append(
-            f"- **总字数**: {sum(s['word_count'] for s in self.index_data['sources'])}\n\n")
+            f"- **总字数**: {sum(self._get_word_count(s) for s in self.index_data['sources'])}\n\n")
 
         # 分类统计
         category_stats = {}
         for source in self.index_data['sources']:
-            category = source['category']
+            category = self._get_category(source)
             if category not in category_stats:
                 category_stats[category] = {'count': 0, 'words': 0}
             category_stats[category]['count'] += 1
-            category_stats[category]['words'] += source['word_count']
+            category_stats[category]['words'] += self._get_word_count(source)
 
         output.append("## 分类统计\n\n")
         for category, stats in category_stats.items():
@@ -846,7 +893,7 @@ class MDDocumentGenerator:
         output.append("## 关键概念\n\n")
         all_concepts = set()
         for source in self.index_data['sources']:
-            all_concepts.update(source['key_concepts'])
+            all_concepts.update(self._get_key_concepts(source))
 
         for concept in sorted(all_concepts):
             output.append(f"- {concept}\n")

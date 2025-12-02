@@ -36,7 +36,6 @@ vendor/
 
 # Refactor outputs and local configs
 /output/
-/knowledge_base/
 /config/email_config.json
 /src/__pycache__/
 /src/document_generator/__pycache__/

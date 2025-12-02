@@ -336,7 +336,7 @@ def main():
     """主函数"""
     app = KnowledgeSearchInterface()
     interface = app.create_interface()
-    interface.launch(server_name="0.0.0.0", server_port=7900,
+    interface.launch(server_name="0.0.0.0", server_port=7901,
                      share=False, show_error=True, show_api=True)
 
 

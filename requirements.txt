@@ -1,3 +1,4 @@
 gradio
 ebooklib
 beautifulsoup4
+pytest
