@@ -38,7 +38,8 @@
       "Bash(git branch:*)",
       "Bash(mysql:*)",
       "Bash(systemctl status:*)",
-      "Bash(service:*)"
+      "Bash(service:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []

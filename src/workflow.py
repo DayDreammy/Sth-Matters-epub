@@ -22,17 +22,18 @@ ClaudeInvoker = Callable[[str, str], RunnerResult]
 def build_deep_search_prompt(topic: str) -> str:
     """Construct the deep-search prompt aligning with refactor.md."""
     return (
-        "@config/ai_prompt.md and perform the Deep Search for topic: "
-        f"'{topic}'. Focus on Phase 1 (Exploration) and Phase 2 (Synthesis). "
+        "@config/ai_prompt.md and perform the Deep Search for user's question: "
+        f"'{topic}'."
         "Save the knowledge index JSON to output/[topic]_index.json as STRICT valid JSON (escape all quotes inside strings). "
         "On the very last line, print the absolute path to that JSON wrapped in triple brackets. "
-        "Do not run Python generators."
+        "Do not Read context.md and Do not run Python generators."
     )
 
 
 def extract_index_path(stdout: str) -> str:
     """Extract [[[ /abs/path ]]] marker from Claude stdout."""
-    match = re.search(r"\[\[\[\s*(.*?)\s*\]\]\]\s*$", stdout.strip(), re.MULTILINE)
+    match = re.search(r"\[\[\[\s*(.*?)\s*\]\]\]\s*$",
+                      stdout.strip(), re.MULTILINE)
     if not match:
         raise ValueError("未找到索引文件路径标记 ([[[ ... ]]]).")
     return match.group(1).strip()
@@ -63,7 +64,8 @@ def find_generated_documents(output_dir: str, topic: str) -> Dict[str, str]:
         return found
 
     for file_type, pattern in patterns.items():
-        matches = sorted(base_path.glob(pattern), key=os.path.getmtime, reverse=True)
+        matches = sorted(base_path.glob(pattern),
+                         key=os.path.getmtime, reverse=True)
         if matches:
             found[file_type] = str(matches[0])
     return found
@@ -150,7 +152,8 @@ def run_deep_search_workflow(
     if claude_invoker is None:
         if not claude_path:
             raise FileNotFoundError("未找到 Claude CLI 路径。")
-        claude_invoker = lambda pr, cwd: call_claude(
+
+        def claude_invoker(pr, cwd): return call_claude(
             pr, cwd, claude_path, runner=generator_runner
         )
 

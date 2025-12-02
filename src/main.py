@@ -283,7 +283,7 @@ class KnowledgeSearchInterface:
                     with gr.Row():
                         with gr.Column(scale=2):
                             topic_input = gr.Textbox(
-                                label="🔍 搜索主题", placeholder="例如：（快速搜索）社会化、认知偏差、（深度搜索）有人相信冥冥之中注定的天意吗？...", lines=2)
+                                label="🔍 搜索主题或您想要提问的问题", placeholder="例如：（快速搜索）社会化、认知偏差、（深度搜索）有人相信冥冥之中注定的天意吗？...", lines=2)
                             email_input = gr.Textbox(
                                 label="📧 邮箱地址", placeholder="your_email@example.com", type="email")
 
@@ -336,7 +336,7 @@ def main():
     """主函数"""
     app = KnowledgeSearchInterface()
     interface = app.create_interface()
-    interface.launch(server_name="0.0.0.0", server_port=7901,
+    interface.launch(server_name="0.0.0.0", server_port=7900,
                      share=False, show_error=True, show_api=True)
 
 
