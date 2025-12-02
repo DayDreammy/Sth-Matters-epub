@@ -19,8 +19,38 @@ class EPUBDocumentGenerator:
     def __init__(self, index_file_path: str, kb_dir: str):
         """初始化EPUB生成器"""
         self.index_file_path = index_file_path
-        self.kb_dir = kb_dir
+        self.kb_dir = os.path.abspath(kb_dir)
         self.index_data = self._load_index()
+
+    @staticmethod
+    def _get_source_path(source: Dict[str, Any]) -> str:
+        """Return path/file_path with fallback."""
+        return source.get("file_path") or source.get("path") or ""
+
+    def _resolve_source_path(self, file_path: str) -> str:
+        """Normalize source path to an absolute path under kb_dir."""
+        if not file_path:
+            return ""
+
+        # Normalize separators
+        normalized = os.path.normpath(file_path.strip())
+
+        # If already absolute, keep as-is
+        if os.path.isabs(normalized):
+            return normalized
+
+        # Drop duplicated knowledge base prefix if present
+        parts = normalized.split(os.sep)
+        if parts and parts[0] in ("knowledge_base", "knowledgebase"):
+            parts = parts[1:]
+
+        # Handle cases where path already starts with kb basename (e.g., sth-matters/...)
+        kb_basename = os.path.basename(self.kb_dir.rstrip(os.sep))
+        if parts and parts[0] == kb_basename:
+            parts = parts[1:]
+
+        resolved = os.path.join(self.kb_dir, *parts)
+        return os.path.normpath(resolved)
 
     def _load_index(self) -> Dict[str, Any]:
         """加载JSON索引文件"""
@@ -34,9 +64,8 @@ class EPUBDocumentGenerator:
 
     def _read_source_file(self, file_path: str) -> str:
         """读取源文件内容"""
-        # AI可能生成相对于知识库根目录的路径，我们直接拼接
-        full_path = os.path.join(self.kb_dir, file_path)
-        
+        full_path = self._resolve_source_path(file_path)
+
         if os.path.exists(full_path):
             try:
                 with open(full_path, 'r', encoding='utf-8') as f:
@@ -186,7 +215,7 @@ class EPUBDocumentGenerator:
 
     def _create_chapter_content(self, source: Dict[str, Any]) -> str:
         """创建章节内容"""
-        file_path = source.get('file_path') or source.get('path')
+        file_path = self._get_source_path(source)
         content = self._read_source_file(file_path) if file_path else ""
         html_content = self._markdown_to_html(content)
 
